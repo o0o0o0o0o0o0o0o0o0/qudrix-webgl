@@ -9,6 +9,7 @@ export default class Qudrix01
     constructor()
     {
         this.experience = new Experience()
+        this.time = this.experience.time
 
         this.loader = new Loaders()
 
@@ -16,11 +17,14 @@ export default class Qudrix01
         this.roofDefault = new THREE.Group()
         this.roofBioclimaticPergola = new THREE.Group()
         this.attachment = new THREE.Group()
+        this.test = new THREE.Group()
 
         this.instance.add(
             this.roofDefault,
             this.roofBioclimaticPergola,
-            this.attachment)
+            this.attachment,
+            this.test
+        )
 
         this.loadQudrix01()
         this.loadRoof01()
@@ -33,7 +37,8 @@ export default class Qudrix01
 
         this.roofDebug()
 
-
+        this.mixer
+        // this.loadTest()
     }
 
     loadQudrix01()
@@ -61,6 +66,7 @@ export default class Qudrix01
                     if (child.name === 'roof_fixed_aluminium_slats')
                     {
                         this.roofDefault.add(child)
+                        this.roofDefault.scale.set(0, 0, 0)
                     }
 
                     // hide unnessesary roof
@@ -114,12 +120,14 @@ export default class Qudrix01
             '/3D/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
             (gltf) =>
             {
-                console.log(gltf);
+                // console.log(gltf);
                 this.roofBioclimaticPergola.add(gltf.scene)
 
             }
         )
+
     }
+
 
     addWalls()
     {
@@ -200,5 +208,42 @@ export default class Qudrix01
             this.debug.attachmentFolder.add(this.functions, 'addAttachment').name('addAttachment')
             this.debug.attachmentFolder.add(this.functions, 'removeAttachment').name('removeAttachment')
         }
+    }
+
+    loadTest()
+    {
+        this.loader.gltf.load(
+            '/3D/animation_test.gltf',
+            (gltf) =>
+            {
+                // console.log(gltf);
+                this.test.add(gltf.scene)
+                gltf.scene.scale.set(0.02, 0.02, 0.02)
+                console.log(gltf);
+                // console.log(this.test);
+
+                this.animation = {}
+                this.animation.mixer = new THREE.AnimationMixer(gltf)
+                this.animation.actions = {}
+
+                this.animation.actions.idle = this.animation.mixer.clipAction(gltf.animations[0])
+
+                this.animation.actions.current = this.animation.actions.idle
+                // this.animation.actions.current.play()
+
+            }
+        )
+    }
+
+
+
+    update()
+    {
+        // console.log(this.animation.mixer);
+        // this.mixer.update(this.time.delta)
+
+
+        // console.log('update the qudrix01');
+
     }
 }

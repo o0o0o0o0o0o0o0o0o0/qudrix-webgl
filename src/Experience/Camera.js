@@ -1,6 +1,8 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
+import gsap from 'gsap'
+
 
 import Experience from './Experience'
 
@@ -87,32 +89,102 @@ export default class Camera
 
         this.functions.default = () =>
         {
-            this.instance.position.set(13.1199, 5.7499, 13.13)
-            this.instance.rotation.set(-0.4127, 0.7412, 0.2874)
+            // this.instance.position.set(13.1199, 5.7499, 13.13)
+            // this.instance.rotation.set(-0.4127, 0.7412, 0.2874)
+            gsap.to(this.instance.position, {
+                x: 13.1199,
+                y: 5.7499,
+                z: 13.13,
+                ease: "power3.inOut",
+                duration: 0.75
+            })
+            gsap.to(this.instance.rotation, {
+                x: -0.4127,
+                y: 0.7412,
+                z: 0.2874,
+                ease: "power3.inOut",
+                duration: 0.75
+            })
         }
 
         this.functions.side01 = () =>
         {
-            this.instance.position.set(0, 1, 13.5)
-            this.instance.rotation.set(0.078, 0.009, 0.0007)
+            // this.instance.position.set(0, 1, 13.5)
+            // this.instance.rotation.set(0.078, 0.009, 0.0007)
+            gsap.to(this.instance.position, {
+                x: 0,
+                y: 1,
+                z: 13.5,
+                ease: "power3.inOut",
+                duration: 1
+            })
+            gsap.to(this.instance.rotation, {
+                x: 0.078,
+                y: 0.009,
+                z: 0.0007,
+                ease: "power3.inOut",
+                duration: 1
+            })
         }
 
         this.functions.side02 = () =>
         {
-            this.instance.position.set(-13.497, 1, 0.22)
-            this.instance.rotation.set(-1.356, -1.4942, -1.3557)
+            // this.instance.position.set(-13.497, 1, 0.22)
+            // this.instance.rotation.set(-1.356, -1.4942, -1.3557)
+            gsap.to(this.instance.position, {
+                x: -13.497,
+                y: 1,
+                z: 0.22,
+                ease: "power3.inOut",
+                duration: 1
+            })
+            gsap.to(this.instance.rotation, {
+                x: -1.356,
+                y: -1.4942,
+                z: -1.3557,
+                ease: "power3.inOut",
+                duration: 1
+            })
         }
 
         this.functions.side03 = () =>
         {
-            this.instance.position.set(0.399, 1, -13.5)
-            this.instance.rotation.set(-3.0667, 0.0295, 3.139)
+            // this.instance.position.set(0.399, 1, -13.5)
+            // this.instance.rotation.set(-3.0667, 0.0295, 3.139)
+            gsap.to(this.instance.position, {
+                x: 0.399,
+                y: 1,
+                z: -13.5,
+                ease: "power3.inOut",
+                duration: 1
+            })
+            gsap.to(this.instance.rotation, {
+                x: -3.0667,
+                y: 0.0295,
+                z: 3.139,
+                ease: "power3.inOut",
+                duration: 1
+            })
         }
 
         this.functions.side04 = () =>
         {
-            this.instance.position.set(13.497, 1, 0.22)
-            this.instance.rotation.set(-1.8489, 1.493, 1.8497)
+            // this.instance.position.set(13.497, 1, 0.22)
+            // this.instance.rotation.set(-1.8489, 1.493, 1.8497)
+            gsap.to(this.instance.position, {
+                x: 13.497,
+                y: 1,
+                z: 0.22,
+                ease: "power3.inOut",
+                duration: 1
+            })
+            gsap.to(this.instance.rotation, {
+                x: -1.8489,
+                y: 1.493,
+                z: 1.8497,
+                ease: "power3.inOut",
+                duration: 1
+            })
         }
 
     }
