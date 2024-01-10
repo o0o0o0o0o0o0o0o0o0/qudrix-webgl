@@ -13,6 +13,7 @@ export default class Debug
             this.ui = new dat.GUI()
 
             this.roofFolder = this.ui.addFolder('roof')
+            this.pergolaQ27Accessories = this.ui.addFolder('pergolaQ27 Accessories').close()
             this.attachmentFolder = this.ui.addFolder('attachment')
             this.sidesFolder = this.ui.addFolder('Sides')
         }

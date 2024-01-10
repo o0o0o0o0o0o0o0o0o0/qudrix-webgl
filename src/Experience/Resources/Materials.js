@@ -16,6 +16,17 @@ export default class Materials
             side: THREE.DoubleSide,
         })
 
+        this.glass = new THREE.MeshPhysicalMaterial({
+            metalness: 0.8,
+            roughness: 0.2,
+            transmission: 0.8,
+            thickness: 0.1,
+            transparent: true,
+            emissive: new THREE.Color(0x0C1414),
+            opacity: 0.8,
+        })
+
+
     }
 
 
