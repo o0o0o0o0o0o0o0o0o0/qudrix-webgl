@@ -18,7 +18,7 @@ export default class Camera
         this.setInstance()
         this.setControl()
 
-        this.cameraDebug()
+        // this.cameraDebug()
 
     }
 

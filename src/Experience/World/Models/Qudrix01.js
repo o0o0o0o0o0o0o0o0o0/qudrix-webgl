@@ -4,7 +4,11 @@ import Materials from '../../Resources/Materials'
 
 import Experience from '../../Experience'
 
-let mixer
+import Roof from './Q01/Roof'
+import Side01 from './Q01/Side01'
+import Side02 from './Q01/Side02'
+import Side03 from './Q01/Side03'
+import Side04 from './Q01/Side04'
 
 export default class Qudrix01
 {
@@ -16,59 +20,56 @@ export default class Qudrix01
 
         this.materials = new Materials()
 
+        // Debug
+        this.debug = this.experience.debug
+
         this.instance = new THREE.Group()
 
-        // Base
+        /**
+         * Base
+         */
         this.base = new THREE.Group()
+        this.instance.add(this.base)
+        this.loadBase()
 
-        // Roof
-        this.roof = new THREE.Group()
-        this.roofSolidPanels = new THREE.Group()
-        this.roofMirrorGlass = new THREE.Group()
-        this.roofPergolaQ25 = new THREE.Group()
-        this.roofPergolaQ27 = new THREE.Group()
-        this.roofAccessories = new THREE.Group()
-        this.roof.add(
-            this.roofSolidPanels,
-            this.roofMirrorGlass,
-            this.roofPergolaQ25,
-            this.roofPergolaQ27,
-            this.roofAccessories
-        )
-
-        this.roofAccessoriesStatus = false
-
-        this.mixerPergolaQ25 = null
-        this.mixerPergolaQ27 = null
-        this.mixerRoofAccessories = null
-
-
-
-        this.attachment = new THREE.Group()
-
-        this.instance.add(
-            this.base,
-            this.roof,
-
-        )
-
-        this.loadQudrix01()
-        this.loadRoofPergolaQ25()
-        this.loadRoofPergolaQ27()
-        this.loadRoofAccessories()
-
-
-
-        this.wallsMaterials = new THREE.MeshBasicMaterial()
-
-        this.roofStatus = 'default'
-
+        /**
+         * Roof
+         */
+        this.roof = new Roof()
+        this.instance.add(this.roof.instance)
         this.roofDebug()
 
+        /**
+         * Sides
+         */
+        this.sides = new THREE.Group()
+        this.instance.add(this.sides)
 
+        this.side01 = new Side01()
+        this.side02 = new Side02()
+        this.side03 = new Side03()
+        this.side04 = new Side04()
+        this.sides.add(
+            this.side01.instance,
+            this.side02.instance,
+            this.side03.instance,
+            this.side04.instance,
+        )
+
+        this.side01.instance.rotation.y = 0
+        this.side02.instance.rotation.y = - Math.PI / 2
+        this.side03.instance.rotation.y = Math.PI
+        this.side04.instance.rotation.y = Math.PI / 2
+
+        this.sidesDebug()
+
+        /**
+         * Attachment
+         */
+        this.attachment = new THREE.Group()
     }
 
-    loadQudrix01()
+    loadBase()
     {
         this.loader.gltf.load(
             '/3D/qudrix-webgl_q1.glb',
@@ -76,7 +77,6 @@ export default class Qudrix01
             {
                 // console.log(gltf);
                 const children = [...gltf.scene.children]
-
                 for (const child of children)
                 {
                     /**
@@ -90,264 +90,88 @@ export default class Qudrix01
                         child.castShadow = true
                         child.receiveShadow = true
                     }
-
-                    /**
-                     * Add Roof
-                     */
-
-                    // Add roof solid panel
-                    if (child.name === 'roof_fixed_aluminium_slats')
-                    {
-                        this.roofSolidMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            child.material
-                        )
-
-                        this.roofSolidMesh.copy(child)
-                        this.roofSolidPanels.add(this.roofSolidMesh)
-                        const scale = 1
-                        this.roofSolidMesh.scale.set(scale, scale, scale)
-
-                        this.roofSolidMesh.castShadow = true
-                        this.roofSolidMesh.receiveShadow = true
-                    }
-
-                    // Add roof mirror glass
-                    if (child.name === 'roof_fixed_aluminium_slats')
-                    {
-                        this.roofMirrorMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            child.material
-                        )
-
-                        this.roofMirrorMesh.copy(child)
-                        this.roofMirrorMesh.material = this.materials.glass
-                        // this.roofMirrorMesh.material = new THREE.MeshBasicMaterial()
-                        this.roofMirrorGlass.add(this.roofMirrorMesh)
-                        const scale = 0
-                        this.roofMirrorGlass.scale.set(scale, scale, scale)
-
-                        this.roofMirrorGlass.castShadow = true
-                        this.roofMirrorGlass.receiveShadow = true
-                    }
-
-
-
                 }
             }
         )
-    }
-
-    loadRoofPergolaQ25()
-    {
-        this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
-            (gltf) =>
-            {
-                this.roofPergolaQ25.add(gltf.scene)
-                this.roofPergolaQ25.scale.set(0, 0, 0)
-
-                this.mixerPergolaQ25 = new THREE.AnimationMixer(gltf.scene)
-                this.actionPergolaQ25 = this.mixerPergolaQ25.clipAction(gltf.animations[0])
-                // console.log(this.actionPergolaQ25);
-                this.actionPergolaQ25.timeScale = 1
-                this.actionPergolaQ25.play()
-
-                // Set up event listener for the finished event
-                this.actionPergolaQ25.clampWhenFinished = true;
-                this.actionPergolaQ25.loop = THREE.LoopOnce;
-
-                // gltf's children hierarchy
-                const objects = this.roofPergolaQ25.children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
-
-
-
-
-            }
-        )
-    }
-
-    loadRoofPergolaQ27()
-    {
-        this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
-            (gltf) =>
-            {
-                this.roofPergolaQ27.add(gltf.scene)
-                this.roofPergolaQ27.scale.set(0, 0, 0)
-
-                this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
-                this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
-                // console.log(this.actionPergolaQ27);
-                this.actionPergolaQ27.timeScale = 1
-                this.actionPergolaQ27.play()
-
-                // Set up event listener for the finished event
-                this.actionPergolaQ27.clampWhenFinished = true;
-                this.actionPergolaQ27.loop = THREE.LoopOnce;
-
-                // gltf's children hierarchy
-                const objects = this.roofPergolaQ27.children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
-
-
-
-            }
-        )
-    }
-
-    loadRoofAccessories()
-    {
-        this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_automatic-sunscreen.glb',
-            (gltf) =>
-            {
-                // console.log(gltf.scene);
-                this.roofAccessories.add(gltf.scene)
-
-                this.roofAccessories.position.set(0, 1.3, -1.5)
-                this.roofAccessories.scale.set(0, 0, 0) //(1, 1.1, 1)
-                gltf.scene.rotation.y = Math.PI / 2
-                this.roofAccessories.rotation.x = Math.PI / 2
-
-
-                this.mixerRoofAccessories = new THREE.AnimationMixer(gltf.scene)
-                this.actionRoofAccessories = this.mixerRoofAccessories.clipAction(gltf.animations[0])
-                // console.log(this.actionRoofAccessories);
-                this.actionRoofAccessories.timeScale = 1
-                this.actionRoofAccessories.play()
-
-
-                this.actionRoofAccessories.clampWhenFinished = true;
-                this.actionRoofAccessories.loop = THREE.LoopOnce;
-                // this.actionRoofAccessories.loop = THREE.LoopPingPong;
-
-                // console.log(this.roofAccessories.children[0].children[0].children[0].children);
-                const objects = this.roofAccessories.children[0].children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
-
-
-
-            }
-        )
-    }
-
-
-    setRoofFunctions()
-    {
-        this.roofFunctions = {}
-
-        this.roofFunctions.addRoofSolidPanels = () =>
-        {
-            this.roofSolidPanels.scale.set(1, 1, 1)
-            this.roofMirrorGlass.scale.set(0, 0, 0)
-            this.roofPergolaQ25.scale.set(0, 0, 0)
-            this.roofPergolaQ27.scale.set(0, 0, 0)
-            this.roofAccessories.scale.set(0, 0, 0)
-
-            this.debug.pergolaQ27Accessories.close()
-        }
-
-        this.roofFunctions.addRoofMirrorGlass = () =>
-        {
-            this.roofSolidPanels.scale.set(0, 0, 0)
-            this.roofMirrorGlass.scale.set(1, 1, 1)
-            this.roofPergolaQ25.scale.set(0, 0, 0)
-            this.roofPergolaQ27.scale.set(0, 0, 0)
-            this.roofAccessories.scale.set(0, 0, 0)
-
-            this.debug.pergolaQ27Accessories.close()
-        }
-
-        this.roofFunctions.addRoofPergolaQ25 = () =>
-        {
-            this.roofSolidPanels.scale.set(0, 0, 0)
-            this.roofMirrorGlass.scale.set(0, 0, 0)
-            this.roofPergolaQ25.scale.set(1, 1, 1)
-            this.roofPergolaQ27.scale.set(0, 0, 0)
-            this.roofAccessories.scale.set(0, 0, 0)
-
-            this.actionPergolaQ25.reset()
-            this.debug.pergolaQ27Accessories.close()
-        }
-        this.roofFunctions.addRoofPergolaQ27 = () =>
-        {
-            this.roofSolidPanels.scale.set(0, 0, 0)
-            this.roofMirrorGlass.scale.set(0, 0, 0)
-            this.roofPergolaQ25.scale.set(0, 0, 0)
-            this.roofPergolaQ27.scale.set(1, 1, 1)
-            if (!this.roofAccessoriesStatus) this.roofAccessories.scale.set(0, 0, 0)
-            if (this.roofAccessoriesStatus) this.roofAccessories.scale.set(1, 1.1, 1)
-
-
-            this.actionPergolaQ27.reset()
-            this.debug.pergolaQ27Accessories.open()
-        }
-
-        this.roofFunctions.removeAccessories = () =>
-        {
-            this.roofAccessories.scale.set(0, 0, 0)
-            this.roofAccessoriesStatus = false
-        }
-
-        this.roofFunctions.addAccessories = () =>
-        {
-            this.roofAccessories.scale.set(1, 1.1, 1)
-            this.actionRoofAccessories.reset()
-
-            this.roofAccessoriesStatus = true
-        }
-
     }
 
     roofDebug()
     {
-        this.setRoofFunctions()
+        this.roof.setFunctions()
 
-        // Debug
-        this.debug = this.experience.debug
         if (this.debug.active)
         {
-            this.debug.roofFolder.add(this.roofFunctions, 'addRoofSolidPanels').name('SolidPanels')
-            this.debug.roofFolder.add(this.roofFunctions, 'addRoofMirrorGlass').name('MirrorGlass')
-            this.debug.roofFolder.add(this.roofFunctions, 'addRoofPergolaQ25').name('PergolaQ25')
-            this.debug.roofFolder.add(this.roofFunctions, 'addRoofPergolaQ27').name('PergolaQ27')
+            this.debug.roofFolder.add(this.roof.functions, 'addRoofSolidPanels').name('SolidPanels')
+            this.debug.roofFolder.add(this.roof.functions, 'addRoofMirrorGlass').name('MirrorGlass')
+            this.debug.roofFolder.add(this.roof.functions, 'addRoofPergolaQ25').name('PergolaQ25')
+            this.debug.roofFolder.add(this.roof.functions, 'addRoofPergolaQ27').name('PergolaQ27')
 
-            this.debug.pergolaQ27Accessories.add(this.roofFunctions, 'removeAccessories').name('No Accessories')
-            this.debug.pergolaQ27Accessories.add(this.roofFunctions, 'addAccessories').name('Add Sunshade')
+            this.debug.pergolaQ27Accessories.add(this.roof.functions, 'removeAccessories').name('No Accessories')
+            this.debug.pergolaQ27Accessories.add(this.roof.functions, 'addAccessories').name('Add Sunshade')
         }
     }
 
+    sidesDebug()
+    {
+
+        this.side01.setFunctions()
+        this.side02.setFunctions()
+        this.side03.setFunctions()
+        this.side04.setFunctions()
+
+        if (this.debug.active)
+        {
+            // Side01
+            this.debug.side01Folder.add(this.side01.functions, 'addSliderDoor').name('SliderDoor')
+            this.debug.side01Folder.add(this.side01.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side01Folder.add(this.side01.functions, 'addGlassWindow').name('GlassWindow')
+            this.debug.side01Folder.add(this.side01.functions, 'addGuillotineWindow').name('GuillotineWindow')
+            this.debug.side01Folder.add(this.side01.functions, 'addPortalDoor').name('PortalDoor')
+            this.debug.side01Folder.add(this.side01.functions, 'addAccordionDoor').name('AccordionDoor')
+            this.debug.side01Folder.add(this.side01.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
+
+            // Side02
+            this.debug.side02Folder.add(this.side02.functions, 'addSliderDoor').name('SliderDoor')
+            this.debug.side02Folder.add(this.side02.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side02Folder.add(this.side02.functions, 'addGlassWindow').name('GlassWindow')
+            this.debug.side02Folder.add(this.side02.functions, 'addGuillotineWindow').name('GuillotineWindow')
+            this.debug.side02Folder.add(this.side02.functions, 'addPortalDoor').name('PortalDoor')
+            this.debug.side02Folder.add(this.side02.functions, 'addAccordionDoor').name('AccordionDoor')
+            this.debug.side02Folder.add(this.side02.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
+
+            // Side03
+            this.debug.side03Folder.add(this.side03.functions, 'addSliderDoor').name('SliderDoor')
+            this.debug.side03Folder.add(this.side03.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side03Folder.add(this.side03.functions, 'addGlassWindow').name('GlassWindow')
+            this.debug.side03Folder.add(this.side03.functions, 'addGuillotineWindow').name('GuillotineWindow')
+            this.debug.side03Folder.add(this.side03.functions, 'addPortalDoor').name('PortalDoor')
+            this.debug.side03Folder.add(this.side03.functions, 'addAccordionDoor').name('AccordionDoor')
+            this.debug.side03Folder.add(this.side03.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
+
+            // Side04
+            this.debug.side04Folder.add(this.side04.functions, 'addSliderDoor').name('SliderDoor')
+            this.debug.side04Folder.add(this.side04.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side04Folder.add(this.side04.functions, 'addGlassWindow').name('GlassWindow')
+            this.debug.side04Folder.add(this.side04.functions, 'addGuillotineWindow').name('GuillotineWindow')
+            this.debug.side04Folder.add(this.side04.functions, 'addPortalDoor').name('PortalDoor')
+            this.debug.side04Folder.add(this.side04.functions, 'addAccordionDoor').name('AccordionDoor')
+            this.debug.side04Folder.add(this.side04.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
+
+        }
+    }
+
+    updateSides()
+    {
+        this.side01.update()
+        this.side02.update()
+        this.side03.update()
+        this.side04.update()
+    }
 
 
     update()
     {
-
-        if (this.mixerPergolaQ25)
-        {
-            this.mixerPergolaQ25.update(this.time.delta * 0.0005)
-        }
-        if (this.mixerPergolaQ27)
-        {
-            this.mixerPergolaQ27.update(this.time.delta * 0.0005)
-        }
-        if (this.mixerRoofAccessories)
-        {
-            this.mixerRoofAccessories.update(this.time.delta * 0.0005)
-        }
-
+        this.roof.update()
+        this.updateSides()
     }
 }
