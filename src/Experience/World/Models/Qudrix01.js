@@ -2,6 +2,7 @@ import * as THREE from 'three'
 import Loaders from '../../Utils/Loaders'
 import Materials from '../../Resources/Materials'
 
+
 import Experience from '../../Experience'
 
 import Roof from './Q01/Roof'
@@ -10,10 +11,17 @@ import Side02 from './Q01/Side02'
 import Side03 from './Q01/Side03'
 import Side04 from './Q01/Side04'
 
+const CONFIG = await import('./CONFIG.json', {
+    with: { type: "json" },
+});
+// console.log(CONFIG.size['element-name']);
+
 export default class Qudrix01
 {
     constructor()
     {
+        // console.log(CONFIG);
+
         this.experience = new Experience()
         this.time = this.experience.time
         this.loader = new Loaders()
@@ -35,7 +43,7 @@ export default class Qudrix01
         /**
          * Roof
          */
-        this.roof = new Roof()
+        this.roof = new Roof(CONFIG)
         this.instance.add(this.roof.instance)
         this.roofDebug()
 
@@ -105,7 +113,6 @@ export default class Qudrix01
             this.debug.roofFolder.add(this.roof.functions, 'addRoofMirrorGlass').name('MirrorGlass')
             this.debug.roofFolder.add(this.roof.functions, 'addRoofPergolaQ25').name('PergolaQ25')
             this.debug.roofFolder.add(this.roof.functions, 'addRoofPergolaQ27').name('PergolaQ27')
-
             this.debug.pergolaQ27Accessories.add(this.roof.functions, 'removeAccessories').name('No Accessories')
             this.debug.pergolaQ27Accessories.add(this.roof.functions, 'addAccessories').name('Add Sunshade')
         }
@@ -175,3 +182,4 @@ export default class Qudrix01
         this.updateSides()
     }
 }
+

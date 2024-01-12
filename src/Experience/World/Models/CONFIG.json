@@ -1,0 +1,39 @@
+{
+    "size": {
+      "element-name": "Q1"
+    },
+  
+    "roof": {
+      "element-name": "MirrorGlass"
+    },
+  
+    "sides": {
+      "side-01": {
+        "element-name": "Panel Wall"
+      },
+  
+      "side-02": {
+        "element-name": "Panel Wall"
+      },
+  
+      "side-03": {
+        "element-name": "Panel Wall"
+      },
+  
+      "side-04": {
+        "element-name": "Panel Wall"
+      }
+    },
+  
+    "attachment": {
+      "element-name": ""
+    },
+  
+    "light": {
+      "element-name": ""
+    },
+  
+    "floor": {
+      "element-name": "Laminate"
+    }
+  }

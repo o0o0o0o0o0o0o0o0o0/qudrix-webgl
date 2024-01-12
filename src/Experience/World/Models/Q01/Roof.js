@@ -6,7 +6,7 @@ import Experience from '../../../Experience'
 
 export default class Roof
 {
-    constructor()
+    constructor(CONFIG)
     {
         this.experience = new Experience()
         this.time = this.experience.time
@@ -35,6 +35,8 @@ export default class Roof
         )
         this.roofAccessoriesStatus = false
 
+
+
         /**
          * Roof Animations
          */
@@ -43,76 +45,22 @@ export default class Roof
         this.mixerRoofAccessories = null
 
         /**
+         * Check Config
+         */
+
+
+        /**
          * Load Roof
          */
-        this.loadQudrix01()
-        this.loadRoofPergolaQ25()
-        this.loadRoofPergolaQ27()
+        this.loadQudrix01(CONFIG)
+        this.loadRoofPergolaQ25(CONFIG)
+        this.loadRoofPergolaQ27(CONFIG)
         this.loadRoofAccessories()
-        // this.roofDebug()
+
+
     }
 
-    loadQudrix01()
-    {
-        this.loader.gltf.load(
-            '/3D/qudrix-webgl_q1.glb',
-            (gltf) =>
-            {
-                // console.log(gltf);
-                const children = [...gltf.scene.children]
-
-                for (const child of children)
-                {
-                    /**
-                    * Add Base
-                    */
-                    if (child.name === 'base' ||
-                        child.name === 'floor')
-                    {
-                        this.base.add(child)
-
-                        child.castShadow = true
-                        child.receiveShadow = true
-                    }
-
-                    /**
-                     * Add Roof
-                     */
-
-                    // Add roof solid panel + add roof mirror glass
-                    if (child.name === 'roof_fixed_aluminium_slats')
-                    {
-                        const material = child.material
-                        this.roofSolidMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            material
-                        )
-                        this.roofMirrorMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            material
-                        )
-
-                        // Solid
-                        this.roofSolidMesh.copy(child)
-                        this.roofSolidPanels.add(this.roofSolidMesh)
-                        this.roofSolidMesh.scale.set(1, 1, 1)
-                        this.roofSolidMesh.castShadow = true
-                        this.roofSolidMesh.receiveShadow = true
-
-                        // Mirror
-                        this.roofMirrorMesh.copy(child)
-                        this.roofMirrorMesh.material = this.materials.glass
-                        this.roofMirrorGlass.add(this.roofMirrorMesh)
-                        this.roofMirrorGlass.scale.set(0, 0, 0)
-                        this.roofMirrorGlass.castShadow = true
-                        this.roofMirrorGlass.receiveShadow = true
-                    }
-                }
-            }
-        )
-    }
-
-    loadQudrix01()
+    loadQudrix01(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/qudrix-webgl_q1.glb',
@@ -143,31 +91,35 @@ export default class Roof
                         // Solid
                         this.roofSolidMesh.copy(child)
                         this.roofSolidPanels.add(this.roofSolidMesh)
-                        this.roofSolidMesh.scale.set(1, 1, 1)
                         this.roofSolidMesh.castShadow = true
                         this.roofSolidMesh.receiveShadow = true
+                        // Check CONFIG
+                        if (CONFIG.roof['element-name'] === 'SolidPanels') { this.roofSolidPanels.scale.set(1, 1, 1) }
+                        else { this.roofSolidPanels.scale.set(0, 0, 0) }
 
                         // Mirror
                         this.roofMirrorMesh.copy(child)
                         this.roofMirrorMesh.material = this.materials.glass
                         this.roofMirrorGlass.add(this.roofMirrorMesh)
-                        this.roofMirrorGlass.scale.set(0, 0, 0)
                         this.roofMirrorGlass.castShadow = true
                         this.roofMirrorGlass.receiveShadow = true
+                        // Check CONFIG
+                        if (CONFIG.roof['element-name'] === 'MirrorGlass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
+                        else { this.roofMirrorGlass.scale.set(0, 0, 0) }
+
                     }
                 }
             }
         )
     }
 
-    loadRoofPergolaQ25()
+    loadRoofPergolaQ25(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
             (gltf) =>
             {
                 this.roofPergolaQ25.add(gltf.scene)
-                this.roofPergolaQ25.scale.set(0, 0, 0)
 
                 this.mixerPergolaQ25 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ25 = this.mixerPergolaQ25.clipAction(gltf.animations[0])
@@ -187,6 +139,10 @@ export default class Roof
                     child.castShadow = true
                 }
 
+                // Check CONFIG
+                if (CONFIG.roof['element-name'] === 'PergolaQ25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
+                else { this.roofPergolaQ25.scale.set(0, 0, 0) }
+
 
 
 
@@ -194,14 +150,13 @@ export default class Roof
         )
     }
 
-    loadRoofPergolaQ27()
+    loadRoofPergolaQ27(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q27.glb',
             (gltf) =>
             {
                 this.roofPergolaQ27.add(gltf.scene)
-                this.roofPergolaQ27.scale.set(0, 0, 0)
 
                 this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
@@ -220,6 +175,10 @@ export default class Roof
                     child.receiveShadow = true
                     child.castShadow = true
                 }
+
+                // Check CONFIG
+                if (CONFIG.roof['element-name'] === 'PergolaQ27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
+                else { this.roofPergolaQ27.scale.set(0, 0, 0) }
 
 
 
@@ -346,5 +305,8 @@ export default class Roof
         {
             this.mixerRoofAccessories.update(this.time.delta * 0.0005)
         }
+
     }
+
+
 }
