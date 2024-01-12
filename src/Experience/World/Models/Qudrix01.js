@@ -11,7 +11,7 @@ import Side02 from './Q01/Side02'
 import Side03 from './Q01/Side03'
 import Side04 from './Q01/Side04'
 
-const CONFIG = await import('./CONFIG.json', {
+const CONFIG = await import('../../../CONFIG.json', {
     with: { type: "json" },
 });
 // console.log(CONFIG.size['element-name']);
