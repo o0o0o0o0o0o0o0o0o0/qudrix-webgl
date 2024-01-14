@@ -3,6 +3,7 @@ import Loaders from '../../../Utils/Loaders'
 import Materials from '../../../Resources/Materials'
 
 import Experience from '../../../Experience'
+import Animation from '../../../Utils/Animation'
 
 export default class Side02
 {
@@ -10,6 +11,7 @@ export default class Side02
     {
         this.experience = new Experience()
         this.time = this.experience.time
+        this.animation = new Animation()
         this.debug = this.experience.debug
 
         this.loader = new Loaders()
@@ -134,12 +136,8 @@ export default class Side02
                 this.mixerSliderDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionSliderDoor = this.mixerSliderDoor.clipAction(gltf.animations[0])
                 // console.log(this.actionSliderDoor);
-                this.actionSliderDoor.timeScale = 1
-                this.actionSliderDoor.play()
 
-                // Set up event listener for the finished event
-                this.actionSliderDoor.clampWhenFinished = true;
-                this.actionSliderDoor.loop = THREE.LoopOnce;
+                this.animation.reverse(this.actionSliderDoor, 1.5)
 
             }
         )
@@ -173,13 +171,9 @@ export default class Side02
 
                 this.mixerPortalDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionPortalDoor = this.mixerPortalDoor.clipAction(gltf.animations[0])
-                // console.log(this.actionPortalDoor);
-                this.actionPortalDoor.timeScale = 1
-                this.actionPortalDoor.play()
 
-                // Set up event listener for the finished event
-                this.actionPortalDoor.clampWhenFinished = true;
-                this.actionPortalDoor.loop = THREE.LoopOnce;
+                this.animation.reverse(this.actionPortalDoor, 1.5)
+
 
             }
         )
@@ -215,13 +209,9 @@ export default class Side02
 
                 this.mixerGuillotineWindow = new THREE.AnimationMixer(gltf.scene)
                 this.actionGuillotineWindow = this.mixerGuillotineWindow.clipAction(gltf.animations[0])
-                // console.log(this.actionGuillotineWindow);
-                this.actionGuillotineWindow.timeScale = 1
-                this.actionGuillotineWindow.play()
 
-                // Set up event listener for the finished event
-                this.actionGuillotineWindow.clampWhenFinished = true;
-                this.actionGuillotineWindow.loop = THREE.LoopOnce;
+                this.animation.reverse(this.actionGuillotineWindow, 1.5)
+
 
             }
         )
@@ -260,13 +250,9 @@ export default class Side02
 
                 this.mixerAccordionDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionAccordionDoor = this.mixerAccordionDoor.clipAction(gltf.animations[0])
-                // console.log(this.actionAccordionDoor);
-                this.actionAccordionDoor.timeScale = 1
-                this.actionAccordionDoor.play()
 
-                // Set up event listener for the finished event
-                this.actionAccordionDoor.clampWhenFinished = true;
-                this.actionAccordionDoor.loop = THREE.LoopOnce;
+                this.animation.reverse(this.actionAccordionDoor, 1.5)
+
 
             }
         )
@@ -286,7 +272,8 @@ export default class Side02
             this.accordionDoor.scale.set(0, 0, 0)
             this.smartGlassWindow.scale.set(0, 0, 0)
 
-            this.actionSliderDoor.reset()
+            this.animation.reverse(this.actionSliderDoor, 1.5)
+
         }
 
         this.functions.addSolidWall = () =>
@@ -321,7 +308,8 @@ export default class Side02
             this.accordionDoor.scale.set(0, 0, 0)
             this.smartGlassWindow.scale.set(0, 0, 0)
 
-            this.actionGuillotineWindow.reset()
+            this.animation.play(this.actionGuillotineWindow, 1.5)
+
         }
 
         this.functions.addPortalDoor = () =>
@@ -334,7 +322,8 @@ export default class Side02
             this.accordionDoor.scale.set(0, 0, 0)
             this.smartGlassWindow.scale.set(0, 0, 0)
 
-            this.actionPortalDoor.reset()
+            this.animation.reverse(this.actionPortalDoor, 1.5)
+
         }
 
         this.functions.addAccordionDoor = () =>
@@ -347,7 +336,8 @@ export default class Side02
             this.accordionDoor.scale.set(1, 1, 1)
             this.smartGlassWindow.scale.set(0, 0, 0)
 
-            this.actionAccordionDoor.reset()
+            this.animation.reverse(this.actionAccordionDoor, 1.5)
+
         }
 
         this.functions.addSmartGlassWindow = () =>
@@ -361,9 +351,8 @@ export default class Side02
             this.smartGlassWindow.scale.set(1, 1, 1)
         }
 
-
-
     }
+
 
     update()
     {

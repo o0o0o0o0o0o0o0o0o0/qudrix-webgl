@@ -3,6 +3,7 @@ import Loaders from '../../../Utils/Loaders'
 import Materials from '../../../Resources/Materials'
 
 import Experience from '../../../Experience'
+import Animation from '../../../Utils/Animation'
 
 export default class Roof
 {
@@ -10,6 +11,7 @@ export default class Roof
     {
         this.experience = new Experience()
         this.time = this.experience.time
+        this.animation = new Animation()
         this.debug = this.experience.debug
 
         this.loader = new Loaders()
@@ -123,13 +125,7 @@ export default class Roof
 
                 this.mixerPergolaQ25 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ25 = this.mixerPergolaQ25.clipAction(gltf.animations[0])
-                // console.log(this.actionPergolaQ25);
-                this.actionPergolaQ25.timeScale = 1
-                this.actionPergolaQ25.play()
-
-                // Set up event listener for the finished event
-                this.actionPergolaQ25.clampWhenFinished = true;
-                this.actionPergolaQ25.loop = THREE.LoopOnce;
+                this.animation.reverse(this.actionPergolaQ25, 1.5)
 
                 // gltf's children hierarchy
                 const objects = this.roofPergolaQ25.children[0].children[0].children
@@ -160,13 +156,8 @@ export default class Roof
 
                 this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
-                // console.log(this.actionPergolaQ27);
-                this.actionPergolaQ27.timeScale = 1.5
-                this.actionPergolaQ27.play()
+                this.animation.reverse(this.actionPergolaQ27, 1.5)
 
-                // Set up event listener for the finished event
-                this.actionPergolaQ27.clampWhenFinished = true;
-                this.actionPergolaQ27.loop = THREE.LoopOnce;
 
                 // gltf's children hierarchy
                 const objects = this.roofPergolaQ27.children[0].children[0].children
@@ -203,14 +194,7 @@ export default class Roof
 
                 this.mixerRoofAccessories = new THREE.AnimationMixer(gltf.scene)
                 this.actionRoofAccessories = this.mixerRoofAccessories.clipAction(gltf.animations[0])
-                // console.log(this.actionRoofAccessories);
-                this.actionRoofAccessories.timeScale = 1
-                this.actionRoofAccessories.play()
-
-
-                this.actionRoofAccessories.clampWhenFinished = true;
-                this.actionRoofAccessories.loop = THREE.LoopOnce;
-                // this.actionRoofAccessories.loop = THREE.LoopPingPong;
+                this.animation.play(this.actionRoofAccessories, 1.5)
 
                 // console.log(this.roofAccessories.children[0].children[0].children[0].children);
                 const objects = this.roofAccessories.children[0].children[0].children[0].children
@@ -258,7 +242,7 @@ export default class Roof
             this.roofPergolaQ27.scale.set(0, 0, 0)
             this.roofAccessories.scale.set(0, 0, 0)
 
-            this.actionPergolaQ25.reset()
+            this.animation.reverse(this.actionPergolaQ25, 1.5)
             this.debug.pergolaQ27Accessories.close()
         }
         this.functions.addRoofPergolaQ27 = () =>
@@ -271,7 +255,7 @@ export default class Roof
             if (this.roofAccessoriesStatus) this.roofAccessories.scale.set(1, 1.1, 1)
 
 
-            this.actionPergolaQ27.reset()
+            this.animation.reverse(this.actionPergolaQ27, 1.5)
             this.debug.pergolaQ27Accessories.open()
         }
 
@@ -279,16 +263,34 @@ export default class Roof
         {
             this.roofAccessories.scale.set(0, 0, 0)
             this.roofAccessoriesStatus = false
+            this.roofPergolaQ27Opacity(this.roofPergolaQ27, false)
+
         }
 
         this.functions.addAccessories = () =>
         {
             this.roofAccessories.scale.set(1, 1.1, 1)
-            this.actionRoofAccessories.reset()
+            this.animation.play(this.actionRoofAccessories, 1.5)
 
             this.roofAccessoriesStatus = true
+            this.roofPergolaQ27Opacity(this.roofPergolaQ27, true)
+
         }
 
+    }
+
+    roofPergolaQ27Opacity(roofPergolaQ27, status)
+    {
+        const roofPergolaQ27Array = roofPergolaQ27.children[0].children[0].children
+        for (const child of roofPergolaQ27Array)
+        {
+            if (child.isMesh)
+            {
+                child.material.transparent = status
+                if (status) child.material.opacity = 0.7
+                if (!status) child.material.opacity = 1
+            }
+        }
     }
 
     update()
