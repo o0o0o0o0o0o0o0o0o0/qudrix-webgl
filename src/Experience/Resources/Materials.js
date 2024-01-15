@@ -3,10 +3,20 @@ import Loaders from '../Utils/Loaders'
 
 import Textures from './Texture'
 
+
+
 export default class Materials
 {
     constructor()
     {
+
+        this.wallPhysicMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0x161616, //0x161616
+            metalness: 0,
+            roughness: 0.45
+        })
+
+
         this.textures = new Textures()
         this.loader = new Loaders()
 

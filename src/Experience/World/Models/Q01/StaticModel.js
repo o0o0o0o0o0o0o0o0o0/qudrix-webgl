@@ -20,6 +20,12 @@ export default class StaticModel
         this.instance = new THREE.Group()
 
         /**
+         * Base
+         */
+
+        this.base = new THREE.Group()
+
+        /**
          * Roof
          */
         this.roofSolidPanels = new THREE.Group()
@@ -51,6 +57,22 @@ export default class StaticModel
 
                 for (const child of children)
                 {
+
+                    /**
+                    * Add Base
+                    */
+                    if (child.name === 'base' ||
+                        child.name === 'floor')
+                    {
+                        this.base.add(child)
+
+                        child.castShadow = true
+                        child.receiveShadow = true
+
+                        // console.log(child.material);
+                        child.material = this.materials.wallPhysicMaterial
+                    }
+
                     /**
                      * Add Roof
                      */
@@ -127,12 +149,39 @@ export default class StaticModel
 
                     if (child.name === 'attach_bioclimactic_pergola_Q27')
                     {
+
+                        // console.log(child);
                         this.attachment.add(child.children[0])
                     }
+
+                    // Material attachment
+                    gltf.scene.traverse((object) =>
+                    {
+                        if (object.isMesh && object.name === 'attach_bioclimactic_pergola_Q27_base')
+                        {
+                            // console.log(object.material.name);
+                            object.material = this.materials.wallPhysicMaterial
+                        }
+                    })
 
 
                 }
             }
         )
+    }
+
+    setFunctions()
+    {
+        this.functions = {}
+
+        this.functions.blackColor = () =>
+        {
+            this.materials.wallPhysicMaterial.color = new THREE.Color(0x161616)
+        }
+
+        this.functions.creamColor = () =>
+        {
+            this.materials.wallPhysicMaterial.color = new THREE.Color(0xF2EFE4)
+        }
     }
 }

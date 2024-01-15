@@ -5,7 +5,8 @@ import Materials from '../../../Resources/Materials'
 import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
-import StaticModel from './StaticModel'
+// import StaticModel from './StaticModel'
+import Qudrix01 from '../Qudrix01'
 
 export default class Attachment
 {
@@ -19,12 +20,13 @@ export default class Attachment
         this.loader = new Loaders()
         this.materials = new Materials()
 
-        this.staticModel = new StaticModel(CONFIG)
+        // this.staticModel = new StaticModel(CONFIG)
+        this.qudrix01 = new Qudrix01()
 
         /**
          * Attachment
          */
-        this.instance = this.staticModel.attachment
+        this.instance = this.qudrix01.staticModel.attachment
         this.instance.scale.set(0, 0, 0)
 
         this.automaticAwing = new THREE.Group()
