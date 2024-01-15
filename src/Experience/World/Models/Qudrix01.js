@@ -14,10 +14,15 @@ import Side03 from './Q01/Side03'
 import Side04 from './Q01/Side04'
 import Attachment from './Q01/Attachment'
 
-const CONFIG = await import('../../../CONFIG.json', {
-    with: { type: "json" },
-});
-// console.log(CONFIG.size['element-name']);
+// let CONFIG = await import('../../../CONFIG.json', {
+//     with: { type: "json" },
+// });
+
+import data from '../../../CONFIG.json'
+const CONFIG = data
+
+console.log(data);
+
 
 let instance = null
 
