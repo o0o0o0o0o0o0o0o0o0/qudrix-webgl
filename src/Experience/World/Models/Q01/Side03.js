@@ -5,9 +5,12 @@ import Materials from '../../../Resources/Materials'
 import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
+import StaticModel from './StaticModel'
+
+
 export default class Side03
 {
-    constructor()
+    constructor(CONFIG)
     {
         this.experience = new Experience()
         this.time = this.experience.time
@@ -17,15 +20,18 @@ export default class Side03
         this.loader = new Loaders()
         this.materials = new Materials()
 
+        this.staticModel = new StaticModel(CONFIG)
+
         this.instance = new THREE.Group()
 
+        this.glassWindow = this.staticModel.glassWindow
+        this.solidWall = this.staticModel.solidWall
+        this.smartGlassWindow = this.staticModel.smartGlassWindow
         this.sliderDoor = new THREE.Group()
         this.portalDoor = new THREE.Group()
-        this.glassWindow = new THREE.Group()
         this.guillotineWindow = new THREE.Group()
         this.accordionDoor = new THREE.Group()
-        this.solidWall = new THREE.Group()
-        this.smartGlassWindow = new THREE.Group()
+
 
         this.instance.add(
             this.sliderDoor,
@@ -48,7 +54,7 @@ export default class Side03
         /**
          * Load Sides
          */
-        this.loadQudrix01() //load from the main file
+        // this.loadQudrix01() //load from the main file
         this.loadSliderDoor()
         this.loadPortalDoor()
         this.loadGuillotineWindow()

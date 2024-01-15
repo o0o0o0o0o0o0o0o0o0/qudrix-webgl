@@ -10,6 +10,7 @@ import Side01 from './Q01/Side01'
 import Side02 from './Q01/Side02'
 import Side03 from './Q01/Side03'
 import Side04 from './Q01/Side04'
+import Attachment from './Q01/Attachment'
 
 const CONFIG = await import('../../../CONFIG.json', {
     with: { type: "json" },
@@ -53,10 +54,10 @@ export default class Qudrix01
         this.sides = new THREE.Group()
         this.instance.add(this.sides)
 
-        this.side01 = new Side01()
-        this.side02 = new Side02()
-        this.side03 = new Side03()
-        this.side04 = new Side04()
+        this.side01 = new Side01(CONFIG)
+        this.side02 = new Side02(CONFIG)
+        this.side03 = new Side03(CONFIG)
+        this.side04 = new Side04(CONFIG)
         this.sides.add(
             this.side01.instance,
             this.side02.instance,
@@ -74,7 +75,10 @@ export default class Qudrix01
         /**
          * Attachment
          */
-        this.attachment = new THREE.Group()
+        this.attachment = new Attachment(CONFIG)
+        this.instance.add(this.attachment.instance)
+
+        this.attachmentDebug()
     }
 
     loadBase()
@@ -167,6 +171,19 @@ export default class Qudrix01
         }
     }
 
+    attachmentDebug()
+    {
+        this.attachment.setFunctions()
+
+        if (this.debug.active)
+        {
+            // Attachment
+            this.debug.attachmentFolder.add(this.attachment.functions, 'addAutomaticAwing').name('AutomaticAwing')
+            this.debug.attachmentFolder.add(this.attachment.functions, 'addBioclimacticPergola').name('BioclimacticPergola')
+            this.debug.attachmentFolder.add(this.attachment.functions, 'removeAttachment').name('removeAttachment')
+        }
+    }
+
     updateSides()
     {
         this.side01.update()
@@ -180,6 +197,7 @@ export default class Qudrix01
     {
         this.roof.update()
         this.updateSides()
+        this.attachment.update()
     }
 }
 

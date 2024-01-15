@@ -5,6 +5,8 @@ import Materials from '../../../Resources/Materials'
 import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
+import StaticModel from './StaticModel'
+
 export default class Roof
 {
     constructor(CONFIG)
@@ -17,13 +19,15 @@ export default class Roof
         this.loader = new Loaders()
         this.materials = new Materials()
 
+        this.staticModel = new StaticModel(CONFIG)
+
         this.instance = new THREE.Group()
 
         /**
          * Roof
          */
-        this.roofSolidPanels = new THREE.Group()
-        this.roofMirrorGlass = new THREE.Group()
+        this.roofSolidPanels = this.staticModel.roofSolidPanels
+        this.roofMirrorGlass = this.staticModel.roofMirrorGlass
         this.roofPergolaQ25 = new THREE.Group()
         this.roofPergolaQ27 = new THREE.Group()
         this.roofAccessories = new THREE.Group()
@@ -54,65 +58,11 @@ export default class Roof
         /**
          * Load Roof
          */
-        this.loadQudrix01(CONFIG)
         this.loadRoofPergolaQ25(CONFIG)
         this.loadRoofPergolaQ27(CONFIG)
         this.loadRoofAccessories()
 
 
-    }
-
-    loadQudrix01(CONFIG)
-    {
-        this.loader.gltf.load(
-            '/3D/qudrix-webgl_q1.glb',
-            (gltf) =>
-            {
-                // console.log(gltf);
-                const children = [...gltf.scene.children]
-
-                for (const child of children)
-                {
-                    /**
-                     * Add Roof
-                     */
-
-                    // Add roof solid panel + add roof mirror glass
-                    if (child.name === 'roof_fixed_aluminium_slats')
-                    {
-                        const material = child.material
-                        this.roofSolidMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            material
-                        )
-                        this.roofMirrorMesh = new THREE.Mesh(
-                            new THREE.PlaneGeometry(1, 1, 1, 1),
-                            material
-                        )
-
-                        // Solid
-                        this.roofSolidMesh.copy(child)
-                        this.roofSolidPanels.add(this.roofSolidMesh)
-                        this.roofSolidMesh.castShadow = true
-                        this.roofSolidMesh.receiveShadow = true
-                        // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'SolidPanels') { this.roofSolidPanels.scale.set(1, 1, 1) }
-                        else { this.roofSolidPanels.scale.set(0, 0, 0) }
-
-                        // Mirror
-                        this.roofMirrorMesh.copy(child)
-                        this.roofMirrorMesh.material = this.materials.glass
-                        this.roofMirrorGlass.add(this.roofMirrorMesh)
-                        this.roofMirrorGlass.castShadow = true
-                        this.roofMirrorGlass.receiveShadow = true
-                        // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'MirrorGlass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
-                        else { this.roofMirrorGlass.scale.set(0, 0, 0) }
-
-                    }
-                }
-            }
-        )
     }
 
     loadRoofPergolaQ25(CONFIG)
@@ -138,9 +88,6 @@ export default class Roof
                 // Check CONFIG
                 if (CONFIG.roof['element-name'] === 'PergolaQ25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
                 else { this.roofPergolaQ25.scale.set(0, 0, 0) }
-
-
-
 
             }
         )
@@ -312,3 +259,61 @@ export default class Roof
 
 
 }
+
+
+
+
+
+
+// loadQudrix01(CONFIG)
+// {
+//     this.loader.gltf.load(
+//         '/3D/qudrix-webgl_q1.glb',
+//         (gltf) =>
+//         {
+//             // console.log(gltf);
+//             const children = [...gltf.scene.children]
+
+//             for (const child of children)
+//             {
+//                 /**
+//                  * Add Roof
+//                  */
+
+//                 // Add roof solid panel + add roof mirror glass
+//                 if (child.name === 'roof_fixed_aluminium_slats')
+//                 {
+//                     const material = child.material
+//                     this.roofSolidMesh = new THREE.Mesh(
+//                         new THREE.PlaneGeometry(1, 1, 1, 1),
+//                         material
+//                     )
+//                     this.roofMirrorMesh = new THREE.Mesh(
+//                         new THREE.PlaneGeometry(1, 1, 1, 1),
+//                         material
+//                     )
+
+//                     // Solid
+//                     this.roofSolidMesh.copy(child)
+//                     this.roofSolidPanels.add(this.roofSolidMesh)
+//                     this.roofSolidMesh.castShadow = true
+//                     this.roofSolidMesh.receiveShadow = true
+//                     // Check CONFIG
+//                     if (CONFIG.roof['element-name'] === 'SolidPanels') { this.roofSolidPanels.scale.set(1, 1, 1) }
+//                     else { this.roofSolidPanels.scale.set(0, 0, 0) }
+
+//                     // Mirror
+//                     this.roofMirrorMesh.copy(child)
+//                     this.roofMirrorMesh.material = this.materials.glass
+//                     this.roofMirrorGlass.add(this.roofMirrorMesh)
+//                     this.roofMirrorGlass.castShadow = true
+//                     this.roofMirrorGlass.receiveShadow = true
+//                     // Check CONFIG
+//                     if (CONFIG.roof['element-name'] === 'MirrorGlass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
+//                     else { this.roofMirrorGlass.scale.set(0, 0, 0) }
+
+//                 }
+//             }
+//         }
+//     )
+// }

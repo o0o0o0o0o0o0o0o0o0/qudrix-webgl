@@ -19,7 +19,7 @@ export default class Debug
             this.side02Folder = this.sidesFolder.addFolder('Side 02').close()
             this.side03Folder = this.sidesFolder.addFolder('Side 03').close()
             this.side04Folder = this.sidesFolder.addFolder('Side 04').close()
-            this.attachmentFolder = this.ui.addFolder('attachment').close()
+            this.attachmentFolder = this.ui.addFolder('attachment').open()
 
         }
     }
