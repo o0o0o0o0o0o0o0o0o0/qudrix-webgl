@@ -21,7 +21,8 @@ export default class Qudrix01
 {
     constructor()
     {
-        // console.log(CONFIG);
+
+        console.log(CONFIG);
 
         this.experience = new Experience()
         this.time = this.experience.time
