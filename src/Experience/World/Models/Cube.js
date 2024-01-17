@@ -11,15 +11,15 @@ export default class Cube
 
         this.experience = new Experience()
 
-        this.materials = new Materials()
+        this.materials = this.experience.materials
 
         // Parameters
-        this.side = 3
+        this.side = 0.25
 
         // Set cube
         this.instance = new THREE.Mesh(
             new THREE.BoxGeometry(this.side, this.side, this.side),
-            this.materials.basic
+            new THREE.MeshStandardMaterial({color: 0x505050})
         )
         this.instance.receiveShadow = true
         this.instance.castShadow = true

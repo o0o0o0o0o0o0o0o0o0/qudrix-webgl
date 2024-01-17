@@ -14,14 +14,12 @@ import Side03 from './Q01/Side03'
 import Side04 from './Q01/Side04'
 import Attachment from './Q01/Attachment'
 
-// let CONFIG = await import('../../../CONFIG.json', {
-//     with: { type: "json" },
-// });
-
 import data from '../../../CONFIG.json'
 const CONFIG = data
 
-console.log(data);
+// let CONFIG = await import('../../../CONFIG.json', {
+//     with: { type: "json" },
+// });
 
 
 let instance = null
@@ -39,10 +37,11 @@ export default class Qudrix01
         instance = this
 
         this.experience = new Experience()
+
         this.time = this.experience.time
         this.loader = new Loaders()
 
-        this.materials = new Materials()
+        this.materials = this.experience.materials
         this.staticModel = new StaticModel(CONFIG)
 
         // Debug
@@ -51,11 +50,36 @@ export default class Qudrix01
         this.instance = new THREE.Group()
 
         /**
+         * Ground
+         */
+        this.loadGround()
+        this.shadowCatcherDebug()
+
+
+        /**
+         * Cube
+         */
+
+        this.cube = new THREE.Group()
+        // this.instance.add(this.cube)
+        this.loadCube()
+
+        /**
+         * Sphere
+         */
+
+        this.sphere = new THREE.Mesh(
+            new THREE.SphereGeometry(30, 30, 16, 16),
+            this.materials.bg
+        )
+        this.instance.add(this.sphere)
+
+        /**
          * Base
          */
         this.base = this.staticModel.base
         this.instance.add(this.base)
-        // this.loadBase()
+
 
         /**
          * Roof
@@ -86,6 +110,7 @@ export default class Qudrix01
         this.side03.instance.rotation.y = Math.PI
         this.side04.instance.rotation.y = Math.PI / 2
 
+
         this.sidesDebug()
 
         /**
@@ -103,28 +128,60 @@ export default class Qudrix01
         this.colorDebug()
     }
 
-    loadBase()
+    loadGround()
+    {
+        this.ground = new THREE.Mesh(
+            new THREE.PlaneGeometry(25, 25, 1, 1),
+            this.materials.ground
+        )
+        this.ground.rotation.x = - Math.PI / 2
+        this.instance.add(this.ground)
+
+        if (CONFIG.attachment['element-name'] === 'None') { this.materials.ground.map = this.materials.textures.groundBake }
+        else { this.materials.ground.map = this.materials.textures.groundAttachmentBake }
+
+        this.shadowCatcher = new THREE.Mesh(
+            new THREE.PlaneGeometry(25, 25, 1, 1),
+            this.materials.floorShadow
+        )
+        this.shadowCatcher.scale.set(0, 0, 0)
+        this.shadowCatcher.rotation.x = -Math.PI / 2
+        this.shadowCatcher.position.y = 0.1
+        this.instance.add(this.shadowCatcher)
+        this.shadowCatcher.receiveShadow = true
+
+        this.shadowCatcherStatus = {
+            shadows: false
+        }
+    }
+
+    shadowCatcherDebug()
+    {
+        if (this.debug.active)
+        {
+            this.debug.rendererFolder.add(this.shadowCatcherStatus, 'shadows').name('shadows').onChange((value) =>
+            {
+                if (this.shadowCatcherStatus.shadows) {
+                    this.shadowCatcher.scale.set(1, 1, 1)
+                }
+                if (!this.shadowCatcherStatus.shadows) {
+                    this.shadowCatcher.scale.set(0, 0, 0)
+                }
+            })
+        }
+    }
+
+    loadCube()
     {
         this.loader.gltf.load(
-            '/3D/qudrix-webgl_q1.glb',
+            '/3D/cube.glb',
             (gltf) =>
             {
-                // console.log(gltf);
-                const children = [...gltf.scene.children]
-                for (const child of children)
-                {
-                    /**
-                    * Add Base
-                    */
-                    if (child.name === 'base' ||
-                        child.name === 'floor')
-                    {
-                        this.base.add(child)
+                this.cube.add(gltf.scene)
+                gltf.scene.scale.set(0.1, 0.1, 0.1)
+                gltf.scene.children[0].children[0].children[0].children[0].material = this.materials.cube
+                gltf.scene.position.y += 0
 
-                        child.castShadow = true
-                        child.receiveShadow = true
-                    }
-                }
             }
         )
     }

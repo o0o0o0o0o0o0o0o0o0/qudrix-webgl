@@ -13,12 +13,14 @@ export default class Attachment
     constructor(CONFIG)
     {
         this.experience = new Experience()
+         
         this.time = this.experience.time
         this.animation = new Animation()
+        this.renderer = this.experience.renderer
         this.debug = this.experience.debug
 
         this.loader = new Loaders()
-        this.materials = new Materials()
+        this.materials = this.experience.materials
 
         // this.staticModel = new StaticModel(CONFIG)
         this.qudrix01 = new Qudrix01()
@@ -55,11 +57,39 @@ export default class Attachment
             (gltf) =>
             {
                 this.automaticAwing.add(gltf.scene)
-                this.automaticAwing.scale.set(0, 0, 0)
+                
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
+
+                        obj.castShadow = true
+                        obj.receiveShadow = true
+
+                        if (obj.material.name === 'Golden silk fabric') {
+                            obj.material = this.materials.roofWhite
+                        }
+                        else {
+                            obj.material = this.materials.wallBlack
+                        }
+                       
+                    }
+                })
+
+                // this.automaticAwing.scale.set(0, 0, 0)
 
                 this.mixerAutomaticAwing = new THREE.AnimationMixer(gltf.scene)
                 this.actionAutomaticAwing = this.mixerAutomaticAwing.clipAction(gltf.animations[0])
                 this.animation.reverse(this.actionAutomaticAwing, 1.5)
+
+                if (CONFIG.attachment['element-name'] === "Automatic Awing")
+                {
+                    this.automaticAwing.scale.set(1, 1, 1)
+                    this.instance.scale.set(1, 1, 1)
+                }
+                else
+                {
+                    this.automaticAwing.scale.set(0, 0, 0)
+                    // this.instance.scale.set(0, 0, 0)
+                }
 
             }
         )
@@ -72,11 +102,29 @@ export default class Attachment
             (gltf) =>
             {
                 this.bioclimacticPergola.add(gltf.scene)
-                this.bioclimacticPergola.scale.set(0, 0, 0)
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
+                        obj.castShadow = true
+                        obj.receiveShadow = true
+                        obj.material = this.materials.roofWhite
+                    }
+                })
+                // this.bioclimacticPergola.scale.set(0, 0, 0)
 
                 this.mixerBioclimacticPergola = new THREE.AnimationMixer(gltf.scene)
                 this.actionBioclimacticPergola = this.mixerBioclimacticPergola.clipAction(gltf.animations[0])
-                this.animation.reverse(this.actionBioclimacticPergola, 1.5)
+                this.animation.play(this.actionBioclimacticPergola, 1.5)
+
+                if (CONFIG.attachment['element-name'] === "Bioclimatic pergola Q27")
+                {
+                    this.bioclimacticPergola.scale.set(1, 1, 1)
+                    this.instance.scale.set(1, 1, 1)
+                }
+                else
+                {
+                    this.bioclimacticPergola.scale.set(0, 0, 0)
+                    // this.instance.scale.set(0, 0, 0)
+                }
 
             }
         )
@@ -93,6 +141,8 @@ export default class Attachment
             this.bioclimacticPergola.scale.set(0, 0, 0)
 
             this.animation.reverse(this.actionAutomaticAwing, 1.5)
+
+            this.materials.ground.map = this.materials.textures.groundAttachmentBake
         }
 
         this.functions.addBioclimacticPergola = () =>
@@ -101,7 +151,10 @@ export default class Attachment
             this.automaticAwing.scale.set(0, 0, 0)
             this.bioclimacticPergola.scale.set(1, 1, 1)
 
-            this.animation.reverse(this.actionBioclimacticPergola, 1.5)
+            this.animation.play(this.actionBioclimacticPergola, 1.5)
+
+            this.materials.ground.map = this.materials.textures.groundAttachmentBake
+
         }
 
         this.functions.removeAttachment = () =>
@@ -109,6 +162,10 @@ export default class Attachment
             this.instance.scale.set(0, 0, 0)
             this.automaticAwing.scale.set(0, 0, 0)
             this.bioclimacticPergola.scale.set(0, 0, 0)
+
+            this.materials.ground.map = this.materials.textures.groundBake
+
+
         }
     }
 

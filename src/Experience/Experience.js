@@ -9,6 +9,7 @@ import Renderer from './Renderer';
 import World from './World/World';
 
 import Textures from './Resources/Texture';
+import Materials from './Resources/Materials';
 
 let instance = null
 
@@ -29,6 +30,7 @@ export default class Experience
         this.debug = new Debug()
 
         this.textures = new Textures()
+        this.materials = new Materials()
 
         this.sizes = new Sizes()
         this.time = new Time()
@@ -39,7 +41,7 @@ export default class Experience
         this.world = new World()
 
         this.axesHelper = new THREE.AxesHelper(5)
-        this.scene.add(this.axesHelper)
+        // this.scene.add(this.axesHelper)
 
         this.setEnvMap()
 
@@ -58,10 +60,12 @@ export default class Experience
 
     setEnvMap()
     {
-        this.scene.background = this.textures.environmentMap
-        this.scene.environment = this.textures.environmentMap
-        this.scene.backgroundBlurriness = 0.12
-        this.scene.backgroundIntensity = 1.5
+        // this.scene.background = this.textures.environmentMap
+        this.scene.background = new THREE.Color(0x888988)
+        this.scene.environment = this.textures.bg
+
+        this.scene.backgroundBlurriness = 0
+        this.scene.backgroundIntensity = 2
     }
 
     resize()

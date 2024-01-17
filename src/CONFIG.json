@@ -4,29 +4,29 @@
     },
   
     "roof": {
-      "element-name": "MirrorGlass"
+      "element-name": "Bioclimatic pergola Q27"
     },
   
     "sides": {
       "side-01": {
-        "element-name": "Panel Wall"
+        "element-name": "Glass Window"
       },
   
       "side-02": {
-        "element-name": "Panel Wall"
+        "element-name": "Portal door"
       },
   
       "side-03": {
-        "element-name": "Panel Wall"
+        "element-name": "Solid Panels"
       },
   
       "side-04": {
-        "element-name": "Panel Wall"
+        "element-name": "Solid Panels"
       }
     },
   
     "attachment": {
-      "element-name": ""
+      "element-name": "Bioclimatic pergola Q27"
     },
   
     "light": {

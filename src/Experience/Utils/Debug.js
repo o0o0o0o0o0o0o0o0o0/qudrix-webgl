@@ -12,6 +12,11 @@ export default class Debug
         {
             this.ui = new dat.GUI()
 
+            this.rendererFolder = this.ui.addFolder('renderer').open().show()
+            this.ambientLightFolder = this.ui.addFolder('ambient').open().hide()
+            this.directionalLightFolder = this.ui.addFolder('directional').open().hide()
+            this.areaLightFolder = this.ui.addFolder('areaLight').open().hide()
+
             this.roofFolder = this.ui.addFolder('roof')
             this.pergolaQ27Accessories = this.ui.addFolder('pergolaQ27 Accessories').close()
             this.sidesFolder = this.ui.addFolder('Sides').open()

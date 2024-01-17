@@ -26,15 +26,19 @@ export default class World
         // Add lights
         this.scene.add(
             this.lights.directional,
-            this.lights.ambient
             // this.lights.directionalHelper,
-            // this.lights.directionalCameraHelper,
+            // this.lights.directionalCameraShadowHelper,
+            this.lights.ambient,
+            this.lights.areaLight.key,
+            // this.lights.areaLight.keyHelper,
+            this.lights.areaLight.top,
+            // this.lights.areaLight.topHelper,
         )
 
         // Add models
         this.scene.add(
-            // this.cube.instance,
-            this.floor.instance,
+            this.cube.instance,
+            // this.floor.instance,
             this.qudrix01.instance,
 
         )

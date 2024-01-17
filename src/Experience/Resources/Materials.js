@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import Loaders from '../Utils/Loaders'
 
 import Textures from './Texture'
 
@@ -10,43 +9,76 @@ export default class Materials
     constructor()
     {
 
-        this.wallPhysicMaterial = new THREE.MeshPhysicalMaterial({
+        this.textures = new Textures()
+
+        this.wallBlack = new THREE.MeshStandardMaterial({
             color: 0x161616, //0x161616
             metalness: 0,
-            roughness: 0.45
+            roughness: 0.45,
+            side: THREE.DoubleSide
         })
 
-
-        this.textures = new Textures()
-        this.loader = new Loaders()
-
-        this.basic = new THREE.MeshStandardMaterial({
-            metalness: 0.45,
-            roughness: 0.65,
+        this.roofWhite = new THREE.MeshStandardMaterial({
+            color: 0x6E6E6E, 
+            metalness: 0.0,
+            roughness: 0.45,
             side: THREE.DoubleSide,
+            name: 'roofWhite'
         })
 
         this.glass = new THREE.MeshPhysicalMaterial({
-            metalness: 0.8,
-            roughness: 0.2,
-            transmission: 0.8,
-            thickness: 0.1,
+            metalness: 1,
+            roughness: 0.1,
+            transmission: 50,
+            thickness: 5,
             transparent: true,
-            emissive: new THREE.Color(0x0C1414),
-            opacity: 0.8,
+            // emissive: new THREE.Color(0x0C1414),
+            opacity: 0.2,
+            side: THREE.BackSide,
+            envMap: this.textures.bricksColor,
+            envMapIntensity: 1,
+            ior: 1.5,
+            normalMap: this.textures.paintedBricksNormalGL,
+            normalScale: new THREE.Vector2(10, 10)
+         
+        })
+
+
+        this.glassWindow = new THREE.MeshPhysicalMaterial({
+            metalness: 0.7,
+            roughness: 0.5,
+            transmission: 1,
+            thickness: 2,
+            transparent: true,
+            // emissive: new THREE.Color(0x0C1414),
+            opacity: 0.5,
+            side: THREE.DoubleSide,
+            // envMap: this.textures.bricksColor,
+            // envMapIntensity: 1,
+            ior: 5,
+            normalMap: this.textures.woodSidingNormalGL,
+            normalScale: new THREE.Vector2(0.4, 0.4)
+        
+        })
+
+    
+
+        this.ground = new THREE.MeshBasicMaterial({
+            map: this.textures.groundBake
+        })
+
+        this.bg = new THREE.MeshBasicMaterial({
+            map: this.textures.bg,
             side: THREE.DoubleSide
         })
 
-        this.glassWindow = new THREE.MeshPhysicalMaterial({
-            metalness: 0.8,
-            roughness: 0.05,
-            transmission: 0.8,
-            thickness: 0.1,
-            transparent: true,
-            emissive: new THREE.Color(0x0C1414),
-            opacity: 0.5,
-            side: THREE.DoubleSide
+        this.floorShadow = new THREE.ShadowMaterial({
+            opacity: 0.25
         })
+
+
+
+
 
 
     }

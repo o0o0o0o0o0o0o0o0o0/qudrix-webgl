@@ -14,12 +14,13 @@ export default class Roof
     constructor(CONFIG)
     {
         this.experience = new Experience()
+         
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-        this.loader = new Loaders()
-        this.materials = new Materials()
+         this.loader = new Loaders()
+        this.materials = this.experience.materials
 
         this.qudrix01 = new Qudrix01()
 
@@ -75,20 +76,23 @@ export default class Roof
             {
                 this.roofPergolaQ25.add(gltf.scene)
 
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
+                        obj.material = this.materials.roofWhite
+
+                        obj.castShadow = true
+                        obj.receiveShadow = true
+                    }
+                })
+
                 this.mixerPergolaQ25 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ25 = this.mixerPergolaQ25.clipAction(gltf.animations[0])
                 this.animation.reverse(this.actionPergolaQ25, 1.5)
 
-                // gltf's children hierarchy
-                const objects = this.roofPergolaQ25.children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
+
 
                 // Check CONFIG
-                if (CONFIG.roof['element-name'] === 'PergolaQ25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
+                if (CONFIG.roof['element-name'] === 'Swivel Sliding pergola Q25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
                 else { this.roofPergolaQ25.scale.set(0, 0, 0) }
 
             }
@@ -103,21 +107,24 @@ export default class Roof
             {
                 this.roofPergolaQ27.add(gltf.scene)
 
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
+                        obj.material = this.materials.roofWhite
+
+                        obj.castShadow = true
+                        obj.receiveShadow = true
+                    }
+                })
+
                 this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
-                this.animation.reverse(this.actionPergolaQ27, 1.5)
+                this.animation.play(this.actionPergolaQ27, 1.5)
 
 
-                // gltf's children hierarchy
-                const objects = this.roofPergolaQ27.children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
+
 
                 // Check CONFIG
-                if (CONFIG.roof['element-name'] === 'PergolaQ27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
+                if (CONFIG.roof['element-name'] === 'Bioclimatic pergola Q27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
                 else { this.roofPergolaQ27.scale.set(0, 0, 0) }
 
 
@@ -129,29 +136,29 @@ export default class Roof
     loadRoofAccessories()
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_automatic-sunscreen.glb',
+            '/3D/Animation/qudrix-webgl_q1_roof_sunshade-dazzoni.glb',
             (gltf) =>
             {
                 // console.log(gltf.scene);
                 this.roofAccessories.add(gltf.scene)
 
-                this.roofAccessories.position.set(0, 1.3, -1.5)
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
+                        obj.castShadow = true
+                        obj.receiveShadow = true
+                    }
+                })
+
+                this.roofAccessories.position.set(0, -0.15, 0)
                 this.roofAccessories.scale.set(0, 0, 0) //(1, 1.1, 1)
-                gltf.scene.rotation.y = Math.PI / 2
-                this.roofAccessories.rotation.x = Math.PI / 2
+                // gltf.scene.rotation.y = Math.PI / 2
+                // this.roofAccessories.rotation.x = Math.PI / 2
 
 
                 this.mixerRoofAccessories = new THREE.AnimationMixer(gltf.scene)
                 this.actionRoofAccessories = this.mixerRoofAccessories.clipAction(gltf.animations[0])
                 this.animation.play(this.actionRoofAccessories, 1.5)
 
-                // console.log(this.roofAccessories.children[0].children[0].children[0].children);
-                const objects = this.roofAccessories.children[0].children[0].children[0].children
-                for (const child of objects)
-                {
-                    child.receiveShadow = true
-                    child.castShadow = true
-                }
 
             }
         )
@@ -204,7 +211,7 @@ export default class Roof
             if (this.roofAccessoriesStatus) this.roofAccessories.scale.set(1, 1.1, 1)
 
 
-            this.animation.reverse(this.actionPergolaQ27, 1.5)
+            this.animation.play(this.actionPergolaQ27, 1.5)
             this.debug.pergolaQ27Accessories.open()
         }
 
@@ -212,7 +219,7 @@ export default class Roof
         {
             this.roofAccessories.scale.set(0, 0, 0)
             this.roofAccessoriesStatus = false
-            this.roofPergolaQ27Opacity(this.roofPergolaQ27, false)
+            // this.roofPergolaQ27Opacity(this.roofPergolaQ27, false)
 
         }
 
@@ -222,7 +229,7 @@ export default class Roof
             this.animation.play(this.actionRoofAccessories, 1.5)
 
             this.roofAccessoriesStatus = true
-            this.roofPergolaQ27Opacity(this.roofPergolaQ27, true)
+            // this.roofPergolaQ27Opacity(this.roofPergolaQ27, true)
 
         }
 

@@ -1,11 +1,16 @@
 import * as THREE from 'three'
 
+import Experience from '../Experience'
+
 import Loaders from '../Utils/Loaders'
 
 export default class Textures
 {
     constructor()
     {
+
+        this.experience = new Experience()
+        
         this.loader = new Loaders()
 
         this.environmentMap = this.loader.cube.load([
@@ -16,6 +21,22 @@ export default class Textures
             '../../envMap/01/pz.png',
             '../../envMap/01/nz.png',
         ])
+
+        this.bg = this.loader.textures.load('../../textures/scene_00000.png')
+
+        // Ground
+        this.groundBake = this.loader.textures.load('../../textures/Ground/plane02_no_attachment_00000.png')
+        this.groundAttachmentBake = this.loader.textures.load('../../textures/Ground/plane02_00000.png')
+
+        // Cube
+        this.cubeBake = this.loader.textures.load('../../textures/Base/cube_0000.png')
+        this.cubeBake.colorSpace = THREE.SRGBColorSpace
+
+        // Base
+        this.baseQ1Black = this.loader.textures.load('../../textures/Base/base_v02_00000.png')
+        // this.baseQ1Black.colorSpace = THREE.ACESFilmicToneMapping
+        this.baseQ1Black.colorSpace = THREE.SRGBColorSpace
+        // this.baseQ1Black.colorSpace = THREE.LinearSRGBColorSpace
 
         // Bricks
         const bricks_x = 0.7
@@ -105,8 +126,8 @@ export default class Textures
         this.paintedPlasterRoughness.wrapT = THREE.RepeatWrapping
 
         // Painted Wall
-        const paintedWall_x = 1
-        const paintedWall_y = 1
+        const paintedWall_x = 0.1
+        const paintedWall_y = 0.1
         this.paintedWallColor = this.loader.textures.load('../../textures/PaintedPlaster009_1K-JPG/PaintedPlaster009_1K-JPG_Color.jpg')
         this.paintedWallColor.repeat.x = paintedWall_x
         this.paintedWallColor.repeat.y = paintedWall_y
@@ -134,8 +155,8 @@ export default class Textures
         this.paintedWallRoughness.wrapT = THREE.RepeatWrapping
 
         // Wood Siding
-        const woodSiding_x = 0.5
-        const woodSiding_y = 0.8
+        const woodSiding_x = 0.01
+        const woodSiding_y = 0.01
         this.woodSidingColor = this.loader.textures.load('../../textures/WoodSiding005_1K-JPG/WoodSiding005_1K-JPG_Color.jpg')
         this.woodSidingColor.repeat.x = woodSiding_x
         this.woodSidingColor.repeat.y = woodSiding_y

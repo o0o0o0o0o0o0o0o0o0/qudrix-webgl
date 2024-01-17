@@ -14,8 +14,10 @@ export default class StaticModel
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-        this.loader = new Loaders()
-        this.materials = new Materials()
+         
+         this.loader = new Loaders()
+        
+        this.materials = this.experience.materials
 
         this.instance = new THREE.Group()
 
@@ -70,7 +72,8 @@ export default class StaticModel
                         child.receiveShadow = true
 
                         // console.log(child.material);
-                        child.material = this.materials.wallPhysicMaterial
+                        child.material = this.materials.wallBlack
+                        // child.material = this.materials.baseQ1Black
                     }
 
                     /**
@@ -92,21 +95,23 @@ export default class StaticModel
 
                         // Solid
                         this.roofSolidMesh.copy(child)
+                        this.roofSolidMesh.material = this.materials.roofWhite
                         this.roofSolidPanels.add(this.roofSolidMesh)
                         this.roofSolidMesh.castShadow = true
                         this.roofSolidMesh.receiveShadow = true
+
                         // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'SolidPanels') { this.roofSolidPanels.scale.set(1, 1, 1) }
+                        if (CONFIG.roof['element-name'] === 'Solid Panels') { this.roofSolidPanels.scale.set(1, 1, 1) }
                         else { this.roofSolidPanels.scale.set(0, 0, 0) }
 
                         // Mirror
                         this.roofMirrorMesh.copy(child)
-                        this.roofMirrorMesh.material = this.materials.glass
+                        this.roofMirrorMesh.material = this.materials.glassWindow
                         this.roofMirrorGlass.add(this.roofMirrorMesh)
                         this.roofMirrorGlass.castShadow = true
                         this.roofMirrorGlass.receiveShadow = true
                         // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'MirrorGlass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
+                        if (CONFIG.roof['element-name'] === 'Mirror Glass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
                         else { this.roofMirrorGlass.scale.set(0, 0, 0) }
 
                     }
@@ -157,10 +162,14 @@ export default class StaticModel
                     // Material attachment
                     gltf.scene.traverse((object) =>
                     {
+                        if (object.isMesh) {
+                            object.receiveShadow = true
+                            object.castShadow = true
+                        }
                         if (object.isMesh && object.name === 'attach_bioclimactic_pergola_Q27_base')
                         {
                             // console.log(object.material.name);
-                            object.material = this.materials.wallPhysicMaterial
+                            object.material = this.materials.wallBlack
                         }
                     })
 
@@ -176,12 +185,12 @@ export default class StaticModel
 
         this.functions.blackColor = () =>
         {
-            this.materials.wallPhysicMaterial.color = new THREE.Color(0x161616)
+            this.materials.wallBlack.color = new THREE.Color(0x161616)
         }
 
         this.functions.creamColor = () =>
         {
-            this.materials.wallPhysicMaterial.color = new THREE.Color(0xF2EFE4)
+            this.materials.wallBlack.color = new THREE.Color(0xF2EFE4)
         }
     }
 }

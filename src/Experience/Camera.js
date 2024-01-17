@@ -15,6 +15,8 @@ export default class Camera
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
 
+       
+
         this.setInstance()
         this.setControl()
 
@@ -24,19 +26,37 @@ export default class Camera
 
     setInstance()
     {
-        this.instance = new THREE.PerspectiveCamera(35, this.sizes.width / this.sizes.height, 0.1, 1000)
+  
+        this.number = 8
+        this.aspect = this.sizes.width / this.sizes.height
+        this.instance = new THREE.OrthographicCamera(-this.number * this.aspect, this.number * this.aspect, this.number, -this.number, 0.1, 10000)
+        // this.instance.zoom = 10
         this.instance.position.set(
-            13.12,
-            5.75,
-            13.13
+            14,
+            9.5,
+            10
         )
         this.instance.rotation.set(
-            -0.36,
-            0.76,
-            0.25
+            -0.7,
+            0.8,
+            0.56
         )
         this.scene.add(this.instance)
 
+        this.minZoom = 0.48
+        this.maxZoom = 2.1
+
+
+
+    }
+
+    setZoom() {
+        if (this.instance.zoom <= this.minZoom) {
+            this.instance.zoom = this.minZoom
+        }
+        if (this.instance.zoom >= this.maxZoom) {
+            this.instance.zoom = this.maxZoom
+        }
     }
 
     setControl()
@@ -48,29 +68,28 @@ export default class Camera
         this.controls.maxDistance = 21
         this.controls.mouseButtons = {
             LEFT: THREE.MOUSE.ROTATE,
-            MIDDLE: THREE.MOUSE.DOLLY,
-            RIGHT: null //THREE.MOUSE.PAN
+            MIDDLE: null, //THREE.MOUSE.DOLLY
+            RIGHT:null //THREE.MOUSE.PAN, null
         }
+
+        this.target = new THREE.Vector3(0, 0, 0)
+        this.target.set(0, 1, 0)
+        this.controls.target.copy(this.target)
+        this.controls.update()
     }
 
-    setDebug()
-    {
-        // Debug
-        this.debug = this.experience.debug
-        if (this.debug.active)
-        {
-            this.debug.ui.add(this.instance.position, 'x', -50, 50, 0.01).name('camera.position.x')
-            this.debug.ui.add(this.instance.position, 'y', -50, 50, 0.01).name('camera.position.y')
-            this.debug.ui.add(this.instance.position, 'z', -50, 50, 0.01).name('camera.position.z')
-            this.debug.ui.add(this.instance.rotation, 'x', -Math.PI * 2, Math.PI * 2, 0.01).name('camera.rotation.x')
-            this.debug.ui.add(this.instance.rotation, 'y', -Math.PI * 2, Math.PI * 2, 0.01).name('camera.rotation.y')
-            this.debug.ui.add(this.instance.rotation, 'z', -Math.PI * 2, Math.PI * 2, 0.01).name('camera.rotation.z')
-        }
-    }
+
 
     resize()
     {
-        this.instance.aspect = this.sizes.width / this.sizes.height
+        // this.instance.aspect = this.sizes.width / this.sizes.height
+
+        this.aspect = this.sizes.width / this.sizes.height
+        this.instance.left = - this.number * this.aspect
+        this.instance.right = this.number * this.aspect
+        this.instance.top = this.number 
+        this.instance.bottom = -this.number 
+
         this.instance.updateProjectionMatrix()
     }
 
@@ -81,6 +100,10 @@ export default class Camera
         //     this.instance.position,
         //     this.instance.rotation
         // )
+        this.setZoom()
+
+   
+
     }
 
     setFunctions()

@@ -1,0 +1,39 @@
+{
+    "size": {
+      "element-name": "Q1" // "Q1", "Q2"
+    },
+  
+    "roof": {
+      "element-name": "MirrorGlass" // "Solid Panels", "Mirror Glass", "Bioclimatic pergola Q27", "Swivel Sliding pergola Q25"
+    },
+  
+    "sides": {
+      "side-01": {
+        "element-name": "Panel Wall" // "Slider Door", "Portal door", "Accordion Door", "Glass Window", "Solid Panels", "Guillotine Q2 Window", "Smart Glass Window"
+      },
+  
+      "side-02": {
+        "element-name": "Panel Wall"
+      },
+  
+      "side-03": {
+        "element-name": "Panel Wall"
+      },
+  
+      "side-04": {
+        "element-name": "Panel Wall"
+      }
+    },
+  
+    "attachment": {
+      "element-name": "Bioclimatic pergola Q27" // "None", "Bioclimatic pergola Q27", "Automatic Awing"
+    },
+  
+    "light": {
+      "element-name": "LED" // "LED", "RGB", "LED + RGB"
+    },
+  
+    "floor": {
+      "element-name": "Laminate"
+    }
+  }

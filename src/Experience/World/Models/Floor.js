@@ -8,7 +8,7 @@ export default class Floor
     constructor()
     {
         this.experience = new Experience()
-        this.materials = new Materials()
+        this.materials = this.experience.materials
 
         this.side = 100
 

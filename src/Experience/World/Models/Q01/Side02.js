@@ -1,3 +1,5 @@
+//rename Side02, side-02
+
 import * as THREE from 'three'
 import Loaders from '../../../Utils/Loaders'
 import Materials from '../../../Resources/Materials'
@@ -6,6 +8,7 @@ import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
 import Qudrix01 from '../Qudrix01'
+import StaticModel from './StaticModel'
 
 
 export default class Side02
@@ -17,16 +20,18 @@ export default class Side02
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-        this.loader = new Loaders()
-        this.materials = new Materials()
+         
+         this.loader = new Loaders()
+        this.materials = this.experience.materials
 
         this.qudrix01 = new Qudrix01()
+        this.staticModel = new StaticModel(CONFIG)
 
         this.instance = new THREE.Group()
 
-        this.glassWindow = this.qudrix01.staticModel.glassWindow
-        this.solidWall = this.qudrix01.staticModel.solidWall
-        this.smartGlassWindow = this.qudrix01.staticModel.smartGlassWindow
+        this.glassWindow = new THREE.Group()
+        this.solidWall = new THREE.Group()
+        this.smartGlassWindow = new THREE.Group()
         this.sliderDoor = new THREE.Group()
         this.portalDoor = new THREE.Group()
         this.guillotineWindow = new THREE.Group()
@@ -34,13 +39,13 @@ export default class Side02
 
 
         this.instance.add(
+            this.glassWindow,
+            this.solidWall,
+            this.smartGlassWindow,
             this.sliderDoor,
             this.portalDoor,
-            this.glassWindow,
             this.guillotineWindow,
             this.accordionDoor,
-            this.solidWall,
-            this.smartGlassWindow
         )
 
         /**
@@ -54,16 +59,17 @@ export default class Side02
         /**
          * Load Sides
          */
-        // this.loadQudrix01() //load from the main file
-        this.loadSliderDoor()
-        this.loadPortalDoor()
-        this.loadGuillotineWindow()
-        this.loadAccordionDoor()
-        // this.sidesDebug()
+        this.loadWalls(CONFIG)
+        this.loadGlassWindow(CONFIG)
+        this.loadSliderDoor(CONFIG)
+        this.loadPortalDoor(CONFIG)
+        this.loadGuillotineWindow(CONFIG)
+        this.loadAccordionDoor(CONFIG)
+
 
     }
 
-    loadQudrix01()
+    loadWalls(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/qudrix-webgl_q1.glb',
@@ -79,32 +85,51 @@ export default class Side02
                      * Add Sides
                      */
 
-                    if (child.name === 'sides_glass_window')
-                    {
-                        this.glassWindow.add(child)
-                        this.glassWindow.scale.set(0, 0, 0)
+                    
+                    // if (child.name === 'sides_glass_window')
+                    // {
+                    //     this.glassWindow.add(child)
+                    //     child.children[0].material = new THREE.MeshBasicMaterial({color: 'red'})
+                    //     child.children[1].material = new THREE.MeshBasicMaterial({color: 'blue'})
+                    //     console.log(child.children[1]);
 
-                        child.children[0].material = this.materials.glassWindow
+                    //     // this.glassWindow.scale.set(0, 0, 0)
 
-                        child.castShadow = true
-                        child.receiveShadow = true
-                    }
+                    //     child.children[0].material = this.materials.glass
+
+                    //     child.castShadow = true
+                    //     child.receiveShadow = true
+
+                    //     if (CONFIG.sides['side-02']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                    //     else { this.glassWindow.scale.set(0, 0, 0) }
+                    // }
+
+                    
 
                     if (child.name === 'sides_solid_panel_01')
                     {
                         this.solidWall.add(child)
-                        this.solidWall.scale.set(0, 0, 0)
+
+                        child.children[1].material = this.materials.wallBlack
+                        // this.solidWall.scale.set(0, 0, 0)
                         child.castShadow = true
                         child.receiveShadow = true
+
+                        if (CONFIG.sides['side-02']['element-name'] === "Solid Panels") { this.solidWall.scale.set(1, 1, 1) }
+                        else { this.solidWall.scale.set(0, 0, 0) }
                     }
 
                     if (child.name === 'sides_solid_panels_02')
                     {
                         this.smartGlassWindow.add(child)
-                        this.smartGlassWindow.scale.set(0, 0, 0)
+                        // this.smartGlassWindow.scale.set(0, 0, 0)
                         child.castShadow = true
                         child.receiveShadow = true
+                        child.children[0].material = this.materials.glassWindow
                         child.children[1].material = this.materials.glassWindow
+
+                        if (CONFIG.sides['side-02']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
+                        else { this.smartGlassWindow.scale.set(0, 0, 0) }
                     }
 
                 }
@@ -112,15 +137,60 @@ export default class Side02
         )
     }
 
+    loadGlassWindow(CONFIG)
+    {
+        this.loader.gltf.load(
+            '/3D/Animation/qudrix-webgl_q1_glassWindow.gltf',
+            (gltf) =>
+            {
+                // this.glassWindow.add(gltf.scene)
 
-    loadSliderDoor()
+                const glass = gltf.scene.children[0].children[0]
+                const metal = gltf.scene.children[0].children[1]
+
+                // console.log(gltf.scene.children[0].children[0]);
+
+                this.glassWindow.add(
+                    glass,
+                    metal
+                )
+
+                glass.material = this.materials.glassWindow
+                metal.material = this.materials.wallBlack
+
+                if (CONFIG.sides['side-02']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                else { this.glassWindow.scale.set(0, 0, 0) }
+
+
+
+            }
+        )
+    }
+
+    loadSliderDoor(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_sides_slider-door.glb',
             (gltf) =>
             {
                 this.sliderDoor.add(gltf.scene)
-                this.sliderDoor.scale.set(0, 0, 0)
+
+            
+
+                gltf.scene.children[0].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[1].material = this.materials.wallBlack
+                gltf.scene.children[0].children[2].material = this.materials.wallBlack
+                gltf.scene.children[0].children[3].material = this.materials.wallBlack
+
+                gltf.scene.children[0].children[4].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[4].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[5].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[5].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[6].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[6].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[7].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[7].children[1].material = this.materials.glassWindow
+
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
                 // Shadows
@@ -143,20 +213,41 @@ export default class Side02
                 this.actionSliderDoor = this.mixerSliderDoor.clipAction(gltf.animations[0])
                 // console.log(this.actionSliderDoor);
 
-                this.animation.reverse(this.actionSliderDoor, 1.5)
+                this.animation.play(this.actionSliderDoor, 1.5)
+
+                if (CONFIG.sides['side-02']['element-name'] === 'Slider Door') { this.sliderDoor.scale.set(1, 1, 1) }
+                else { this.sliderDoor.scale.set(0, 0, 0) }
+
 
             }
         )
     }
 
-    loadPortalDoor()
+    loadPortalDoor(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_sides_portal-door.glb',
             (gltf) =>
             {
                 this.portalDoor.add(gltf.scene)
-                this.portalDoor.scale.set(0, 0, 0)
+
+                // frame
+                gltf.scene.children[0].children[0].material = this.materials.wallBlack
+                // part01 frame
+                gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
+                // part01 frame
+                gltf.scene.children[0].children[1].children[1].material = this.materials.glassWindow
+                // part02 frame
+                gltf.scene.children[0].children[2].children[0].material = this.materials.wallBlack
+                // part02 frame
+                gltf.scene.children[0].children[2].children[1].material = this.materials.glassWindow
+
+
+                // this.portalDoor.add(
+                //     frame,
+                //     part01,
+                //     part02
+                // )
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
                 // Shadows
@@ -168,38 +259,52 @@ export default class Side02
                         child.castShadow = true
                     }
 
-                    if (child.isMesh && child.material.name === 'Glass 001')
-                    {
-                        child.material = this.materials.glassWindow
+                    // console.log(child.material);
 
-                    }
+                    // if (child.isMesh && child.material.name === 'Glass 001')
+                    // {
+                    //     child.material = this.materials.glass
+
+                    // }
                 })
+
+              
 
                 this.mixerPortalDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionPortalDoor = this.mixerPortalDoor.clipAction(gltf.animations[0])
 
                 this.animation.reverse(this.actionPortalDoor, 1.5)
 
+                if (CONFIG.sides['side-02']['element-name'] === "Portal door") { this.portalDoor.scale.set(1, 1, 1) }
+                else { this.portalDoor.scale.set(0, 0, 0) }
+
 
             }
         )
     }
 
-    loadGuillotineWindow()
+    loadGuillotineWindow(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_sides_guillotine-q2-window.glb',
             (gltf) =>
             {
                 this.guillotineWindow.add(gltf.scene)
-                this.guillotineWindow.scale.set(0, 0, 0)
-                // this.sliderDoor.rotation.y = Math.PI / -2
+
+                // this.guillotineWindow.rotation.x = Math.PI 
+
+
 
                 gltf.scene.traverse((child) =>
                 {
+                 
                     if (child.isMesh && child.material.name === 'glass 003')
                     {
-                        child.material = this.materials.glass
+                        child.material = this.materials.glassWindow
+                    }
+                    if (child.isMesh && child.material.name === 'Metal для всех 001')
+                    {
+                        child.material = this.materials.wallBlack
                     }
                 })
 
@@ -216,21 +321,23 @@ export default class Side02
                 this.mixerGuillotineWindow = new THREE.AnimationMixer(gltf.scene)
                 this.actionGuillotineWindow = this.mixerGuillotineWindow.clipAction(gltf.animations[0])
 
-                this.animation.reverse(this.actionGuillotineWindow, 1.5)
+                this.animation.play(this.actionGuillotineWindow, 1.5)
+
+                if (CONFIG.sides['side-02']['element-name'] === "Guillotine Q2 Window") { this.guillotineWindow.scale.set(1, 1, 1) }
+                else { this.guillotineWindow.scale.set(0, 0, 0) }
 
 
             }
         )
     }
 
-    loadAccordionDoor()
+    loadAccordionDoor(CONFIG)
     {
         this.loader.gltf.load(
             '/3D/Animation/qudrix-webgl_q1_sides_accordion-door.glb',
             (gltf) =>
             {
                 this.accordionDoor.add(gltf.scene)
-                this.accordionDoor.scale.set(0, 0, 0)
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
                 gltf.scene.traverse((child) =>
@@ -238,9 +345,18 @@ export default class Side02
 
                     if (child.isMesh && child.material.name === 'Glass')
                     {
-                        child.material = this.materials.glass
+                        child.material = this.materials.glassWindow
 
-                        // console.log(child.material);
+                    }
+                    if (child.isMesh && child.material.name === 'Metal 002')
+                    {
+                        child.material = this.materials.wallBlack
+
+                    }
+                    if (child.isMesh && child.material.name === 'Black Plastic')
+                    {
+                        child.material = this.materials.roofWhite
+
                     }
                 })
 
@@ -258,6 +374,9 @@ export default class Side02
                 this.actionAccordionDoor = this.mixerAccordionDoor.clipAction(gltf.animations[0])
 
                 this.animation.reverse(this.actionAccordionDoor, 1.5)
+
+                if (CONFIG.sides['side-02']['element-name'] === "Accordion Door") { this.accordionDoor.scale.set(1, 1, 1) }
+                else { this.accordionDoor.scale.set(0, 0, 0) }
 
 
             }
@@ -278,7 +397,7 @@ export default class Side02
             this.accordionDoor.scale.set(0, 0, 0)
             this.smartGlassWindow.scale.set(0, 0, 0)
 
-            this.animation.reverse(this.actionSliderDoor, 1.5)
+            this.animation.play(this.actionSliderDoor, 1.5)
 
         }
 
