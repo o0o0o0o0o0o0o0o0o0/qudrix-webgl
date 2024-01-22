@@ -55,7 +55,6 @@ export default class StaticModel
             (gltf) =>
             {
                 const children = [...gltf.scene.children[0].children]
-                console.log(children);
 
                 for (const child of children)
                 {
@@ -123,7 +122,7 @@ export default class StaticModel
                     if (child.name === 'sides_glass_window')
                     {
                         this.glassWindow.add(child)
-                        this.glassWindow.scale.set(0, 0, 0)
+                        this.glassWindow.scale.set(1, 1, 1)
 
                         child.children[0].material = this.materials.glassWindow
 
@@ -152,11 +151,10 @@ export default class StaticModel
                      * Attachment
                      */
 
-                    if (child.name === 'attach_bioclimactic_pergola_Q27')
+                    if (child.name === 'attach_bioclimactic_pergola_Q27_base')
                     {
 
-                        // console.log(child);
-                        this.attachment.add(child.children[0])
+                        this.attachment.add(child)
                     }
 
                     // Material attachment

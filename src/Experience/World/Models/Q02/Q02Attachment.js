@@ -6,14 +6,14 @@ import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
 // import StaticModel from './StaticModel'
-import Qudrix01 from '../Qudrix01'
+import Qudrix02 from '../Qudrix02'
 
 export default class Attachment
 {
     constructor(CONFIG)
     {
         this.experience = new Experience()
-
+         
         this.time = this.experience.time
         this.animation = new Animation()
         this.renderer = this.experience.renderer
@@ -23,16 +23,20 @@ export default class Attachment
         this.materials = this.experience.materials
 
         // this.staticModel = new StaticModel(CONFIG)
-        this.qudrix01 = new Qudrix01()
+        this.qudrix02 = new Qudrix02()
 
         /**
          * Attachment
          */
-        this.instance = this.qudrix01.staticModel.attachment
+        this.instance = this.qudrix02.staticModel.attachment
         this.instance.scale.set(0, 0, 0)
 
         this.automaticAwing = new THREE.Group()
         this.bioclimacticPergola = new THREE.Group()
+
+        this.zOffset = 0.42
+        this.automaticAwing.position.z += this.zOffset
+        this.bioclimacticPergola.position.z += this.zOffset
 
         this.instance.add(
             this.automaticAwing,
@@ -58,28 +62,26 @@ export default class Attachment
     loadAutomaticAwing(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Q01/Animation/qudrix-webgl_q1_attach_automatic-awing.glb',
+            '/3D/Q02/Animation/qudrix-webgl_q2_attach_automatic-awing.glb',
             (gltf) =>
             {
                 this.automaticAwing.add(gltf.scene)
-
-                gltf.scene.traverse((obj) =>
-                {
-                    if (obj.isMesh)
-                    {
+                
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
 
                         obj.castShadow = true
                         obj.receiveShadow = true
 
-                        if (obj.material.name === 'Golden silk fabric')
-                        {
+                        console.log(obj.material);
+
+                        if (obj.material.name === 'Golden silk fabric.008') {
                             obj.material = this.materials.roofWhite
                         }
-                        else
-                        {
+                        else {
                             obj.material = this.materials.wallBlack
                         }
-
+                       
                     }
                 })
 
@@ -107,14 +109,12 @@ export default class Attachment
     loadBioclimacticPergola(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Q01/Animation/qudrix-webgl_q1_attach_bioclimactic-pergola-Q27.glb',
+            '/3D/Q02/Animation/qudrix-webgl_q2_attach_bioclimactic-pergola-Q27.glb',
             (gltf) =>
             {
                 this.bioclimacticPergola.add(gltf.scene)
-                gltf.scene.traverse((obj) =>
-                {
-                    if (obj.isMesh)
-                    {
+                gltf.scene.traverse((obj) => {
+                    if (obj.isMesh) {
                         obj.castShadow = true
                         obj.receiveShadow = true
                         obj.material = this.materials.roofWhite

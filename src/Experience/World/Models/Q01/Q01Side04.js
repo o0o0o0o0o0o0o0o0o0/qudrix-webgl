@@ -20,8 +20,8 @@ export default class Side04
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         
-         this.loader = new Loaders()
+
+        this.loader = new Loaders()
         this.materials = this.experience.materials
 
         this.qudrix01 = new Qudrix01()
@@ -66,6 +66,11 @@ export default class Side04
         this.loadGuillotineWindow(CONFIG)
         this.loadAccordionDoor(CONFIG)
 
+        /**
+         * Set functions
+         */
+        this.setFunctions()
+
 
     }
 
@@ -85,7 +90,7 @@ export default class Side04
                      * Add Sides
                      */
 
-                    
+
                     // if (child.name === 'sides_glass_window')
                     // {
                     //     this.glassWindow.add(child)
@@ -104,7 +109,7 @@ export default class Side04
                     //     else { this.glassWindow.scale.set(0, 0, 0) }
                     // }
 
-                    
+
 
                     if (child.name === 'sides_solid_panel_01')
                     {
@@ -175,7 +180,7 @@ export default class Side04
             {
                 this.sliderDoor.add(gltf.scene)
 
-            
+
 
                 gltf.scene.children[0].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[1].material = this.materials.wallBlack
@@ -268,7 +273,7 @@ export default class Side04
                     // }
                 })
 
-              
+
 
                 this.mixerPortalDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionPortalDoor = this.mixerPortalDoor.clipAction(gltf.animations[0])
@@ -297,7 +302,7 @@ export default class Side04
 
                 gltf.scene.traverse((child) =>
                 {
-                 
+
                     if (child.isMesh && child.material.name === 'glass 003')
                     {
                         child.material = this.materials.glassWindow

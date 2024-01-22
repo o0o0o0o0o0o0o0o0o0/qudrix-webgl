@@ -85,16 +85,11 @@ export default class Qudrix01
         this.side03.instance.rotation.y = Math.PI
         this.side04.instance.rotation.y = Math.PI / 2
 
-
-        this.sidesDebug()
-
         /**
          * Attachment
          */
         this.attachment = new Attachment(CONFIG)
         this.instance.add(this.attachment.instance)
-
-        this.attachmentDebug()
 
         /**
          * Color 
@@ -221,8 +216,8 @@ export default class Qudrix01
     update()
     {
         this.roof.update()
-        // this.updateSides()
-        // this.attachment.update()
+        this.updateSides()
+        this.attachment.update()
     }
 }
 
