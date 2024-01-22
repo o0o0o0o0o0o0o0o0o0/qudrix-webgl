@@ -17,6 +17,7 @@ export default class Debug
             this.directionalLightFolder = this.ui.addFolder('directional').open().hide()
             this.areaLightFolder = this.ui.addFolder('areaLight').open().hide()
 
+            this.sizeFolder = this.ui.addFolder('sizes')
             this.roofFolder = this.ui.addFolder('roof')
             this.pergolaQ27Accessories = this.ui.addFolder('pergolaQ27 Accessories').close()
             this.sidesFolder = this.ui.addFolder('Sides').open()

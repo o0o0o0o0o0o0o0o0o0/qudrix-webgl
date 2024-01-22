@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
 
-import Experience from '../Experience'
+import Experience from '../../Experience'
 
 export default class AreaLight {
     constructor() {

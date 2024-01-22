@@ -1,4 +1,4 @@
-//rename Side01, side-01
+//rename Side04, side-04
 
 import * as THREE from 'three'
 import Loaders from '../../../Utils/Loaders'
@@ -8,19 +8,19 @@ import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
 import Qudrix01 from '../Qudrix01'
-import StaticModel from './StaticModel'
+import StaticModel from './Q01StaticModel'
 
 
-export default class Side01
+export default class Side04
 {
     constructor(CONFIG)
     {
         this.experience = new Experience()
-         
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
+         
          this.loader = new Loaders()
         this.materials = this.experience.materials
 
@@ -72,7 +72,7 @@ export default class Side01
     loadWalls(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/qudrix-webgl_q1.glb',
+            '/3D/Q01/qudrix-webgl_q1.glb',
             (gltf) =>
             {
                 // console.log(gltf);
@@ -100,7 +100,7 @@ export default class Side01
                     //     child.castShadow = true
                     //     child.receiveShadow = true
 
-                    //     if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                    //     if (CONFIG.sides['side-04']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
                     //     else { this.glassWindow.scale.set(0, 0, 0) }
                     // }
 
@@ -115,7 +115,7 @@ export default class Side01
                         child.castShadow = true
                         child.receiveShadow = true
 
-                        if (CONFIG.sides['side-01']['element-name'] === "Solid Panels") { this.solidWall.scale.set(1, 1, 1) }
+                        if (CONFIG.sides['side-04']['element-name'] === "Solid Panels") { this.solidWall.scale.set(1, 1, 1) }
                         else { this.solidWall.scale.set(0, 0, 0) }
                     }
 
@@ -128,7 +128,7 @@ export default class Side01
                         child.children[0].material = this.materials.glassWindow
                         child.children[1].material = this.materials.glassWindow
 
-                        if (CONFIG.sides['side-01']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
+                        if (CONFIG.sides['side-04']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
                         else { this.smartGlassWindow.scale.set(0, 0, 0) }
                     }
 
@@ -140,7 +140,7 @@ export default class Side01
     loadGlassWindow(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_glassWindow.gltf',
+            '/3D/Q01/Animation/qudrix-webgl_q1_glassWindow.gltf',
             (gltf) =>
             {
                 // this.glassWindow.add(gltf.scene)
@@ -158,7 +158,7 @@ export default class Side01
                 glass.material = this.materials.glassWindow
                 metal.material = this.materials.wallBlack
 
-                if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-04']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
                 else { this.glassWindow.scale.set(0, 0, 0) }
 
 
@@ -170,7 +170,7 @@ export default class Side01
     loadSliderDoor(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_slider-door.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_sides_slider-door.glb',
             (gltf) =>
             {
                 this.sliderDoor.add(gltf.scene)
@@ -215,7 +215,7 @@ export default class Side01
 
                 this.animation.play(this.actionSliderDoor, 1.5)
 
-                if (CONFIG.sides['side-01']['element-name'] === 'Slider Door') { this.sliderDoor.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-04']['element-name'] === 'Slider Door') { this.sliderDoor.scale.set(1, 1, 1) }
                 else { this.sliderDoor.scale.set(0, 0, 0) }
 
 
@@ -226,7 +226,7 @@ export default class Side01
     loadPortalDoor(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_portal-door.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_sides_portal-door.glb',
             (gltf) =>
             {
                 this.portalDoor.add(gltf.scene)
@@ -275,7 +275,7 @@ export default class Side01
 
                 this.animation.reverse(this.actionPortalDoor, 1.5)
 
-                if (CONFIG.sides['side-01']['element-name'] === "Portal door") { this.portalDoor.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-04']['element-name'] === "Portal door") { this.portalDoor.scale.set(1, 1, 1) }
                 else { this.portalDoor.scale.set(0, 0, 0) }
 
 
@@ -286,7 +286,7 @@ export default class Side01
     loadGuillotineWindow(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_guillotine-q2-window.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_sides_guillotine-q2-window.glb',
             (gltf) =>
             {
                 this.guillotineWindow.add(gltf.scene)
@@ -323,7 +323,7 @@ export default class Side01
 
                 this.animation.play(this.actionGuillotineWindow, 1.5)
 
-                if (CONFIG.sides['side-01']['element-name'] === "Guillotine Q2 Window") { this.guillotineWindow.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-04']['element-name'] === "Guillotine Q2 Window") { this.guillotineWindow.scale.set(1, 1, 1) }
                 else { this.guillotineWindow.scale.set(0, 0, 0) }
 
 
@@ -334,7 +334,7 @@ export default class Side01
     loadAccordionDoor(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_sides_accordion-door.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_sides_accordion-door.glb',
             (gltf) =>
             {
                 this.accordionDoor.add(gltf.scene)
@@ -375,7 +375,7 @@ export default class Side01
 
                 this.animation.reverse(this.actionAccordionDoor, 1.5)
 
-                if (CONFIG.sides['side-01']['element-name'] === "Accordion Door") { this.accordionDoor.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-04']['element-name'] === "Accordion Door") { this.accordionDoor.scale.set(1, 1, 1) }
                 else { this.accordionDoor.scale.set(0, 0, 0) }
 
 

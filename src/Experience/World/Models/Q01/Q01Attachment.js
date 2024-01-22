@@ -53,7 +53,7 @@ export default class Attachment
     loadAutomaticAwing(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_attach_automatic-awing.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_attach_automatic-awing.glb',
             (gltf) =>
             {
                 this.automaticAwing.add(gltf.scene)
@@ -98,7 +98,7 @@ export default class Attachment
     loadBioclimacticPergola(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_attach_bioclimactic-pergola-Q27.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_attach_bioclimactic-pergola-Q27.glb',
             (gltf) =>
             {
                 this.bioclimacticPergola.add(gltf.scene)

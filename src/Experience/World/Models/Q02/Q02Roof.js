@@ -6,7 +6,7 @@ import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
 
 
-import Qudrix01 from '../Qudrix01'
+import Qudrix02 from '../Qudrix02'
 
 
 export default class Roof
@@ -22,15 +22,15 @@ export default class Roof
          this.loader = new Loaders()
         this.materials = this.experience.materials
 
-        this.qudrix01 = new Qudrix01()
+        this.qudrix02 = new Qudrix02()
 
         this.instance = new THREE.Group()
 
         /**
          * Roof
          */
-        this.roofSolidPanels = this.qudrix01.staticModel.roofSolidPanels
-        this.roofMirrorGlass = this.qudrix01.staticModel.roofMirrorGlass
+        this.roofSolidPanels = this.qudrix02.staticModel.roofSolidPanels
+        this.roofMirrorGlass = this.qudrix02.staticModel.roofMirrorGlass
         this.roofPergolaQ25 = new THREE.Group()
         this.roofPergolaQ27 = new THREE.Group()
         this.roofAccessories = new THREE.Group()
@@ -71,7 +71,7 @@ export default class Roof
     loadRoofPergolaQ25(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
             (gltf) =>
             {
                 this.roofPergolaQ25.add(gltf.scene)
@@ -102,7 +102,7 @@ export default class Roof
     loadRoofPergolaQ27(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q27.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q27.glb',
             (gltf) =>
             {
                 this.roofPergolaQ27.add(gltf.scene)
@@ -136,7 +136,7 @@ export default class Roof
     loadRoofAccessories()
     {
         this.loader.gltf.load(
-            '/3D/Animation/qudrix-webgl_q1_roof_sunshade-dazzoni.glb',
+            '/3D/Q01/Animation/qudrix-webgl_q1_roof_sunshade-dazzoni.glb',
             (gltf) =>
             {
                 // console.log(gltf.scene);
@@ -274,10 +274,10 @@ export default class Roof
 
 
 
-// loadQudrix01(CONFIG)
+// loadQudrix02(CONFIG)
 // {
 //     this.loader.gltf.load(
-//         '/3D/qudrix-webgl_q1.glb',
+//         '/3D/Q01/qudrix-webgl_q1.glb',
 //         (gltf) =>
 //         {
 //             // console.log(gltf);

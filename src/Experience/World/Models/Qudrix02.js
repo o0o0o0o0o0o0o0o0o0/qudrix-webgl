@@ -5,21 +5,21 @@ import Materials from '../../Resources/Materials'
 
 import Experience from '../../Experience'
 
-import StaticModel from './Q01/Q01StaticModel'
+import StaticModel from './Q02/Q02StaticModel'
 
-import Roof from './Q01/Q01Roof'
-import Side01 from './Q01/Q01Side01'
-import Side02 from './Q01/Q01Side02'
-import Side03 from './Q01/Q01Side03'
-import Side04 from './Q01/Q01Side04'
-import Attachment from './Q01/Q01Attachment'
+// import Roof from './Q01/Q01Roof'
+// import Side01 from './Q01/Q01Side01'
+// import Side02 from './Q01/Q01Side02'
+// import Side03 from './Q01/Q01Side03'
+// import Side04 from './Q01/Q01Side04'
+// import Attachment from './Q01/Q01Attachment'
 
 // import data from '../../../CONFIG.json'
 // const CONFIG = data
 
 let instance = null
 
-export default class Qudrix01
+export default class Qudrix02
 {
     constructor(CONFIG)
     {
@@ -47,7 +47,7 @@ export default class Qudrix01
         /**
          * Ground
          */
-        this.loadGround(CONFIG)
+        // this.loadGround(CONFIG)
 
         /**
          * Base
@@ -59,48 +59,45 @@ export default class Qudrix01
         /**
          * Roof
          */
-        this.roof = new Roof(CONFIG)
-        this.instance.add(this.roof.instance)
-        this.roofDebug()
+        // this.roof = new Roof(CONFIG)
+        // this.instance.add(this.roof.instance)
+        // this.roofDebug()
 
         /**
          * Sides
          */
-        this.sides = new THREE.Group()
-        this.instance.add(this.sides)
+        // this.sides = new THREE.Group()
+        // this.instance.add(this.sides)
 
-        this.side01 = new Side01(CONFIG)
-        this.side02 = new Side02(CONFIG)
-        this.side03 = new Side03(CONFIG)
-        this.side04 = new Side04(CONFIG)
-        this.sides.add(
-            this.side01.instance,
-            this.side02.instance,
-            this.side03.instance,
-            this.side04.instance,
-        )
+        // this.side01 = new Side01(CONFIG)
+        // this.side02 = new Side02(CONFIG)
+        // this.side03 = new Side03(CONFIG)
+        // this.side04 = new Side04(CONFIG)
+        // this.sides.add(
+        //     this.side01.instance,
+        //     this.side02.instance,
+        //     this.side03.instance,
+        //     this.side04.instance,
+        // )
 
-        this.side01.instance.rotation.y = 0
-        this.side02.instance.rotation.y = - Math.PI / 2
-        this.side03.instance.rotation.y = Math.PI
-        this.side04.instance.rotation.y = Math.PI / 2
-
-
-        this.sidesDebug()
+        // this.side01.instance.rotation.y = 0
+        // this.side02.instance.rotation.y = - Math.PI / 2
+        // this.side03.instance.rotation.y = Math.PI
+        // this.side04.instance.rotation.y = Math.PI / 2
+        // this.sidesDebug()
 
         /**
          * Attachment
          */
-        this.attachment = new Attachment(CONFIG)
-        this.instance.add(this.attachment.instance)
-
-        this.attachmentDebug()
+        // this.attachment = new Attachment(CONFIG)
+        // this.instance.add(this.attachment.instance)
+        // this.attachmentDebug()
 
         /**
          * Color 
          */
 
-        this.colorDebug()
+        // this.colorDebug()
     }
 
     loadGround(CONFIG)
@@ -220,9 +217,9 @@ export default class Qudrix01
 
     update()
     {
-        // this.roof.update()
-        // this.updateSides()
-        // this.attachment.update()
+        this.roof.update()
+        this.updateSides()
+        this.attachment.update()
     }
 }
 

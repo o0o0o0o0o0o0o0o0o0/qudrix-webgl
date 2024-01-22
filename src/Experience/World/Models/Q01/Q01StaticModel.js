@@ -51,7 +51,7 @@ export default class StaticModel
     loadStaticModel(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/qudrix-webgl_q1.glb',
+            '/3D/Q01/qudrix-webgl_q1.glb',
             (gltf) =>
             {
                 // console.log(gltf);
