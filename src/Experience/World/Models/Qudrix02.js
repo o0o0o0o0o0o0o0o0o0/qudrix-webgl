@@ -7,12 +7,12 @@ import Experience from '../../Experience'
 
 import StaticModel from './Q02/Q02StaticModel'
 
-// import Roof from './Q01/Q01Roof'
-// import Side01 from './Q01/Q01Side01'
-// import Side02 from './Q01/Q01Side02'
-// import Side03 from './Q01/Q01Side03'
-// import Side04 from './Q01/Q01Side04'
-// import Attachment from './Q01/Q01Attachment'
+import Roof from './Q02/Q02Roof'
+// import Side01 from './Q02/Q02Side01'
+// import Side02 from './Q02/Q02Side02'
+// import Side03 from './Q02/Q02Side03'
+// import Side04 from './Q02/Q02Side04'
+// import Attachment from './Q02/Q02Attachment'
 
 // import data from '../../../CONFIG.json'
 // const CONFIG = data
@@ -59,9 +59,9 @@ export default class Qudrix02
         /**
          * Roof
          */
-        // this.roof = new Roof(CONFIG)
-        // this.instance.add(this.roof.instance)
-        // this.roofDebug()
+        this.roof = new Roof(CONFIG)
+        this.instance.add(this.roof.instance)
+ 
 
         /**
          * Sides
@@ -218,8 +218,8 @@ export default class Qudrix02
     update()
     {
         this.roof.update()
-        this.updateSides()
-        this.attachment.update()
+        // this.updateSides()
+        // this.attachment.update()
     }
 }
 

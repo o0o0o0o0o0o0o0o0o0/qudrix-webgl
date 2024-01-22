@@ -14,12 +14,12 @@ export default class Roof
     constructor(CONFIG)
     {
         this.experience = new Experience()
-         
+
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         this.loader = new Loaders()
+        this.loader = new Loaders()
         this.materials = this.experience.materials
 
         this.qudrix01 = new Qudrix01()
@@ -65,6 +65,11 @@ export default class Roof
         this.loadRoofPergolaQ27(CONFIG)
         this.loadRoofAccessories()
 
+        /**
+         * Set functions for debug
+         */
+        this.setFunctions()
+
 
     }
 
@@ -76,8 +81,10 @@ export default class Roof
             {
                 this.roofPergolaQ25.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.material = this.materials.roofWhite
 
                         obj.castShadow = true
@@ -107,8 +114,10 @@ export default class Roof
             {
                 this.roofPergolaQ27.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.material = this.materials.roofWhite
 
                         obj.castShadow = true
@@ -119,9 +128,6 @@ export default class Roof
                 this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
                 this.animation.play(this.actionPergolaQ27, 1.5)
-
-
-
 
                 // Check CONFIG
                 if (CONFIG.roof['element-name'] === 'Bioclimatic pergola Q27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
@@ -142,8 +148,10 @@ export default class Roof
                 // console.log(gltf.scene);
                 this.roofAccessories.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.castShadow = true
                         obj.receiveShadow = true
                     }

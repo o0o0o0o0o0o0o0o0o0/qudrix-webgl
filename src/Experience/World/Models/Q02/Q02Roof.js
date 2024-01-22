@@ -14,12 +14,12 @@ export default class Roof
     constructor(CONFIG)
     {
         this.experience = new Experience()
-         
+
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         this.loader = new Loaders()
+        this.loader = new Loaders()
         this.materials = this.experience.materials
 
         this.qudrix02 = new Qudrix02()
@@ -35,6 +35,11 @@ export default class Roof
         this.roofPergolaQ27 = new THREE.Group()
         this.roofAccessories = new THREE.Group()
 
+        this.zOffset = 0.42
+        this.roofPergolaQ25.position.z += this.zOffset
+        this.roofPergolaQ27.position.z += this.zOffset
+
+
         this.instance.add(
             this.roofSolidPanels,
             this.roofMirrorGlass,
@@ -43,7 +48,6 @@ export default class Roof
             this.roofAccessories
         )
         this.roofAccessoriesStatus = false
-
 
 
         /**
@@ -65,19 +69,26 @@ export default class Roof
         this.loadRoofPergolaQ27(CONFIG)
         this.loadRoofAccessories()
 
+        /**
+         * Set functions for debug
+         */
+        this.setFunctions()
+
 
     }
 
     loadRoofPergolaQ25(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Q01/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q25.glb',
+            '/3D/Q02/Animation/qudrix-webgl_q2_roof_bioclimatic-pergola-Q25.glb',
             (gltf) =>
             {
                 this.roofPergolaQ25.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.material = this.materials.roofWhite
 
                         obj.castShadow = true
@@ -102,13 +113,15 @@ export default class Roof
     loadRoofPergolaQ27(CONFIG)
     {
         this.loader.gltf.load(
-            '/3D/Q01/Animation/qudrix-webgl_q1_roof_bioclimatic-pergola-Q27.glb',
+            '/3D/Q02/Animation/qudrix-webgl_q2_roof_bioclimatic-pergola-Q27.glb',
             (gltf) =>
             {
                 this.roofPergolaQ27.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.material = this.materials.roofWhite
 
                         obj.castShadow = true
@@ -119,9 +132,6 @@ export default class Roof
                 this.mixerPergolaQ27 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ27 = this.mixerPergolaQ27.clipAction(gltf.animations[0])
                 this.animation.play(this.actionPergolaQ27, 1.5)
-
-
-
 
                 // Check CONFIG
                 if (CONFIG.roof['element-name'] === 'Bioclimatic pergola Q27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
@@ -136,14 +146,16 @@ export default class Roof
     loadRoofAccessories()
     {
         this.loader.gltf.load(
-            '/3D/Q01/Animation/qudrix-webgl_q1_roof_sunshade-dazzoni.glb',
+            '/3D/Q02/Animation/qudrix-webgl_q2_roof_sunshade-dazzoni.glb',
             (gltf) =>
             {
                 // console.log(gltf.scene);
                 this.roofAccessories.add(gltf.scene)
 
-                gltf.scene.traverse((obj) => {
-                    if (obj.isMesh) {
+                gltf.scene.traverse((obj) =>
+                {
+                    if (obj.isMesh)
+                    {
                         obj.castShadow = true
                         obj.receiveShadow = true
                     }
@@ -277,7 +289,7 @@ export default class Roof
 // loadQudrix02(CONFIG)
 // {
 //     this.loader.gltf.load(
-//         '/3D/Q01/qudrix-webgl_q1.glb',
+//         '/3D/Q02/qudrix-webgl_q2.glb',
 //         (gltf) =>
 //         {
 //             // console.log(gltf);

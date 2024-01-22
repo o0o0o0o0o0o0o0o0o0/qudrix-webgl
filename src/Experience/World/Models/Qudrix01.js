@@ -61,7 +61,7 @@ export default class Qudrix01
          */
         this.roof = new Roof(CONFIG)
         this.instance.add(this.roof.instance)
-        this.roofDebug()
+        // this.roofDebug()
 
         /**
          * Sides
@@ -220,7 +220,7 @@ export default class Qudrix01
 
     update()
     {
-        // this.roof.update()
+        this.roof.update()
         // this.updateSides()
         // this.attachment.update()
     }

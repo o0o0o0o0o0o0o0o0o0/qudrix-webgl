@@ -46,15 +46,16 @@ export default class World
             this.qudrix02.instance,
         )
         if (CONFIG.size['element-name'] === 'Q01') { this.qudrix01.instance.scale.set(1, 1, 1) }
-        else { this.qudrix01.instance.scale.set(0, 0, 0)  }
+        else { this.qudrix01.instance.scale.set(0, 0, 0) }
         if (CONFIG.size['element-name'] === 'Q02') { this.qudrix02.instance.scale.set(1, 1, 1) }
-        else { this.qudrix02.instance.scale.set(0, 0, 0)  }
+        else { this.qudrix02.instance.scale.set(0, 0, 0) }
 
         this.setBG()
         this.setShadowCatcher()
         this.debugShadowCatcher()
 
         this.debugSizes()
+        this.debugRoof()
 
     }
 
@@ -102,23 +103,74 @@ export default class World
         }
     }
 
-    setFunctions() {
+    setFunctions()
+    {
         this.functions = {}
-        this.functions.setQ01 = () => {
-            this.qudrix01.instance.scale.set(1,1,1)
-            this.qudrix02.instance.scale.set(0,0,0)
+        this.functions.setQ01 = () =>
+        {
+            this.qudrix01.instance.scale.set(1, 1, 1)
+            this.qudrix02.instance.scale.set(0, 0, 0)
         }
-        this.functions.setQ02 = () => {
-            this.qudrix01.instance.scale.set(0,0,0)
-            this.qudrix02.instance.scale.set(1,1,1)
+        this.functions.setQ02 = () =>
+        {
+            this.qudrix01.instance.scale.set(0, 0, 0)
+            this.qudrix02.instance.scale.set(1, 1, 1)
         }
     }
 
-    debugSizes() {
+    debugSizes()
+    {
         this.setFunctions()
-        if (this.debug.active) {
+        if (this.debug.active)
+        {
             this.debug.sizeFolder.add(this.functions, 'setQ01').name('Q01')
             this.debug.sizeFolder.add(this.functions, 'setQ02').name('Q02')
+        }
+    }
+
+    debugRoof()
+    {
+        console.log(this.qudrix01.roof.functions);
+        this.functionsRoof = {}
+        this.functionsRoof.addRoofSolidPanels = () =>
+        {
+            this.qudrix01.roof.functions.addRoofSolidPanels()
+            this.qudrix02.roof.functions.addRoofSolidPanels()
+        }
+        this.functionsRoof.addRoofMirrorGlass = () =>
+        {
+            this.qudrix01.roof.functions.addRoofMirrorGlass()
+            this.qudrix02.roof.functions.addRoofMirrorGlass()
+        }
+        this.functionsRoof.addRoofPergolaQ25 = () =>
+        {
+            this.qudrix01.roof.functions.addRoofPergolaQ25()
+            this.qudrix02.roof.functions.addRoofPergolaQ25()
+        }
+        this.functionsRoof.addRoofPergolaQ27 = () =>
+        {
+            this.qudrix01.roof.functions.addRoofPergolaQ27()
+            this.qudrix02.roof.functions.addRoofPergolaQ27()
+        }
+        this.functionsRoof.removeAccessories = () =>
+        {
+            this.qudrix01.roof.functions.removeAccessories()
+            this.qudrix02.roof.functions.removeAccessories()
+        }
+        this.functionsRoof.addAccessories = () =>
+        {
+            this.qudrix01.roof.functions.addAccessories()
+            this.qudrix02.roof.functions.addAccessories()
+        }
+
+        if (this.debug.active)
+        {
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofSolidPanels').name('SolidPanels')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofMirrorGlass').name('MirrorGlass')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ25').name('PergolaQ25')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ27').name('PergolaQ27')
+            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'removeAccessories').name('No Accessories')
+            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'addAccessories').name('Add Sunshade')
         }
     }
 
@@ -128,10 +180,10 @@ export default class World
         {
             this.qudrix01.update()
         }
-        // if (this.qudrix02)
-        // {
-        //     this.qudrix02.update()
-        // }
+        if (this.qudrix02)
+        {
+            this.qudrix02.update()
+        }
     }
 
 }
