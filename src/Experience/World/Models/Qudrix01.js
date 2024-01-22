@@ -17,11 +17,6 @@ import Attachment from './Q01/Attachment'
 import data from '../../../CONFIG.json'
 const CONFIG = data
 
-// let CONFIG = await import('../../../CONFIG.json', {
-//     with: { type: "json" },
-// });
-
-
 let instance = null
 
 export default class Qudrix01
