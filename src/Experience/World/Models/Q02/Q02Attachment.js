@@ -73,8 +73,6 @@ export default class Attachment
                         obj.castShadow = true
                         obj.receiveShadow = true
 
-                        console.log(obj.material);
-
                         if (obj.material.name === 'Golden silk fabric.008') {
                             obj.material = this.materials.roofWhite
                         }
