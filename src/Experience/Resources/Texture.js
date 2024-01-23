@@ -25,8 +25,10 @@ export default class Textures
         this.bg = this.loader.textures.load('../../textures/scene_00000.png')
 
         // Ground
-        this.groundBake = this.loader.textures.load('../../textures/Ground/plane02_no_attachment_00000.png')
-        this.groundAttachmentBake = this.loader.textures.load('../../textures/Ground/plane02_00000.png')
+        this.groundBakeQ01 = this.loader.textures.load('../../textures/Ground/plane02_no_attachment_00000.png')
+        this.groundAttachmentBakeQ01 = this.loader.textures.load('../../textures/Ground/plane02_00000.png')
+        this.groundBakeQ02 = this.loader.textures.load('../../textures/Ground/Q02_00000.png')
+        this.groundAttachmentBakeQ02 = this.loader.textures.load('../../textures/Ground/Q02_attach_00000.png')
 
         // Cube
         this.cubeBake = this.loader.textures.load('../../textures/Base/cube_0000.png')

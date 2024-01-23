@@ -153,7 +153,7 @@ export default class Attachment
 
             this.animation.reverse(this.actionAutomaticAwing, 1.5)
 
-            this.materials.ground.map = this.materials.textures.groundAttachmentBake
+            this.materials.groundQ01.map = this.materials.textures.groundAttachmentBakeQ01
         }
 
         this.functions.addBioclimacticPergola = () =>
@@ -164,7 +164,7 @@ export default class Attachment
 
             this.animation.play(this.actionBioclimacticPergola, 1.5)
 
-            this.materials.ground.map = this.materials.textures.groundAttachmentBake
+            this.materials.groundQ01.map = this.materials.textures.groundAttachmentBakeQ01
 
         }
 
@@ -174,7 +174,7 @@ export default class Attachment
             this.automaticAwing.scale.set(0, 0, 0)
             this.bioclimacticPergola.scale.set(0, 0, 0)
 
-            this.materials.ground.map = this.materials.textures.groundBake
+            this.materials.groundQ01.map = this.materials.textures.groundBakeQ01
 
 
         }

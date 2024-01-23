@@ -19,6 +19,7 @@ export default class DebugWorld
     {
 
         this.experience = new Experience()
+        this.materials = this.experience.materials
         this.debug = this.experience.debug
         this.world = new World()
 

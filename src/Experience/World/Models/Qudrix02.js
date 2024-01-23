@@ -44,7 +44,7 @@ export default class Qudrix02
         /**
          * Ground
          */
-        // this.loadGround(CONFIG)
+        this.loadGround(CONFIG)
 
         /**
          * Base
@@ -99,13 +99,13 @@ export default class Qudrix02
     {
         this.ground = new THREE.Mesh(
             new THREE.PlaneGeometry(25, 25, 1, 1),
-            this.materials.ground
+            this.materials.groundQ02
         )
         this.ground.rotation.x = - Math.PI / 2
         this.instance.add(this.ground)
 
-        if (CONFIG.attachment['element-name'] === 'None') { this.materials.ground.map = this.materials.textures.groundBake }
-        else { this.materials.ground.map = this.materials.textures.groundAttachmentBake }
+        if (CONFIG.attachment['element-name'] === 'None') { this.materials.groundQ02.map = this.materials.textures.groundBakeQ02 }
+        else { this.materials.groundQ02.map = this.materials.textures.groundAttachmentBakeQ02 }
 
     }
 

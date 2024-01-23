@@ -64,7 +64,14 @@ export default class Materials
     
 
         this.ground = new THREE.MeshBasicMaterial({
-            map: this.textures.groundBake
+            map: this.textures.groundBakeQ01
+        })
+
+        this.groundQ01 = new THREE.MeshBasicMaterial({
+            map: this.textures.groundBakeQ01
+        })
+        this.groundQ02 = new THREE.MeshBasicMaterial({
+            map: this.textures.groundBakeQ02
         })
 
         this.bg = new THREE.MeshBasicMaterial({
