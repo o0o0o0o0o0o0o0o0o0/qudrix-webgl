@@ -28,6 +28,7 @@ export default class DebugWorld
         this.qudrix02 = this.world.qudrix02
 
         // Debug
+        // this.debugBuildingGroup()
         this.ease = "power3.inOut"
 
         this.debugCamera = new DebugCamera(camera)
@@ -59,10 +60,10 @@ export default class DebugWorld
                 this.buildingGroup.scale.y = value
                 this.buildingGroup.scale.z = value
 
-                this.key.width = 10 * value
-                this.key.height = 10 * value
-                this.top.width = 10 * value
-                this.top.height = 10 * value
+                this.areaLightKey.width = 10 * value
+                this.areaLightKey.height = 10 * value
+                this.areaLightTop.width = 10 * value
+                this.areaLightTop.height = 10 * value
             })
         }
     }
@@ -75,14 +76,14 @@ export default class DebugWorld
             this.qudrix01.instance.scale.set(1, 1, 1)
             this.qudrix02.instance.scale.set(0, 0, 0)
 
-            this.debugCamera.functions.default()
+            // this.debugCamera.functions.default()
         }
         this.functionsSizes.setQ02 = () =>
         {
             this.qudrix01.instance.scale.set(0, 0, 0)
             this.qudrix02.instance.scale.set(1, 1, 1)
 
-            this.debugCamera.functions.default()
+            // this.debugCamera.functions.default()
         }
     }
 
@@ -105,42 +106,42 @@ export default class DebugWorld
             this.qudrix01.roof.functions.addRoofSolidPanels()
             this.qudrix02.roof.functions.addRoofSolidPanels()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
         this.functionsRoof.addRoofMirrorGlass = () =>
         {
             this.qudrix01.roof.functions.addRoofMirrorGlass()
             this.qudrix02.roof.functions.addRoofMirrorGlass()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
         this.functionsRoof.addRoofPergolaQ25 = () =>
         {
             this.qudrix01.roof.functions.addRoofPergolaQ25()
             this.qudrix02.roof.functions.addRoofPergolaQ25()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
         this.functionsRoof.addRoofPergolaQ27 = () =>
         {
             this.qudrix01.roof.functions.addRoofPergolaQ27()
             this.qudrix02.roof.functions.addRoofPergolaQ27()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
         this.functionsRoof.removeAccessories = () =>
         {
             this.qudrix01.roof.functions.removeAccessories()
             this.qudrix02.roof.functions.removeAccessories()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
         this.functionsRoof.addAccessories = () =>
         {
             this.qudrix01.roof.functions.addAccessories()
             this.qudrix02.roof.functions.addAccessories()
 
-            this.debugCamera.functions.default()
+            this.debugCamera.functions.roof()
         }
     }
 
@@ -221,49 +222,49 @@ export default class DebugWorld
 
         this.functionsSide02.addSliderDoor = () =>
         {
-            this.qudrix02.side02.functions.addSliderDoor()
+            this.qudrix01.side02.functions.addSliderDoor()
             this.qudrix02.side02.functions.addSliderDoor()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addSolidWall = () =>
         {
-            this.qudrix02.side02.functions.addSolidWall()
+            this.qudrix01.side02.functions.addSolidWall()
             this.qudrix02.side02.functions.addSolidWall()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addGlassWindow = () =>
         {
-            this.qudrix02.side02.functions.addGlassWindow()
+            this.qudrix01.side02.functions.addGlassWindow()
             this.qudrix02.side02.functions.addGlassWindow()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addGuillotineWindow = () =>
         {
-            this.qudrix02.side02.functions.addGuillotineWindow()
+            this.qudrix01.side02.functions.addGuillotineWindow()
             this.qudrix02.side02.functions.addGuillotineWindow()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addPortalDoor = () =>
         {
-            this.qudrix02.side02.functions.addPortalDoor()
+            this.qudrix01.side02.functions.addPortalDoor()
             this.qudrix02.side02.functions.addPortalDoor()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addAccordionDoor = () =>
         {
-            this.qudrix02.side02.functions.addAccordionDoor()
+            this.qudrix01.side02.functions.addAccordionDoor()
             this.qudrix02.side02.functions.addAccordionDoor()
 
             this.debugCamera.functions.side02()
         }
         this.functionsSide02.addSmartGlassWindow = () =>
         {
-            this.qudrix02.side02.functions.addSmartGlassWindow()
+            this.qudrix01.side02.functions.addSmartGlassWindow()
             this.qudrix02.side02.functions.addSmartGlassWindow()
 
             this.debugCamera.functions.side02()
@@ -277,50 +278,50 @@ export default class DebugWorld
 
         this.functionsSide03.addSliderDoor = () =>
         {
-            this.qudrix03.side03.functions.addSliderDoor()
-            this.qudrix03.side03.functions.addSliderDoor()
+            this.qudrix01.side03.functions.addSliderDoor()
+            this.qudrix02.side03.functions.addSliderDoor()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addSolidWall = () =>
         {
-            this.qudrix03.side03.functions.addSolidWall()
-            this.qudrix03.side03.functions.addSolidWall()
+            this.qudrix01.side03.functions.addSolidWall()
+            this.qudrix02.side03.functions.addSolidWall()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addGlassWindow = () =>
         {
-            this.qudrix03.side03.functions.addGlassWindow()
-            this.qudrix03.side03.functions.addGlassWindow()
+            this.qudrix01.side03.functions.addGlassWindow()
+            this.qudrix02.side03.functions.addGlassWindow()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addGuillotineWindow = () =>
         {
-            this.qudrix03.side03.functions.addGuillotineWindow()
-            this.qudrix03.side03.functions.addGuillotineWindow()
+            this.qudrix01.side03.functions.addGuillotineWindow()
+            this.qudrix02.side03.functions.addGuillotineWindow()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addPortalDoor = () =>
         {
-            this.qudrix03.side03.functions.addPortalDoor()
-            this.qudrix03.side03.functions.addPortalDoor()
+            this.qudrix01.side03.functions.addPortalDoor()
+            this.qudrix02.side03.functions.addPortalDoor()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addAccordionDoor = () =>
         {
-            this.qudrix03.side03.functions.addAccordionDoor()
-            this.qudrix03.side03.functions.addAccordionDoor()
+            this.qudrix01.side03.functions.addAccordionDoor()
+            this.qudrix02.side03.functions.addAccordionDoor()
 
             this.debugCamera.functions.side03()
         }
         this.functionsSide03.addSmartGlassWindow = () =>
         {
-            this.qudrix03.side03.functions.addSmartGlassWindow()
-            this.qudrix03.side03.functions.addSmartGlassWindow()
+            this.qudrix01.side03.functions.addSmartGlassWindow()
+            this.qudrix02.side03.functions.addSmartGlassWindow()
 
             this.debugCamera.functions.side03()
         }
@@ -342,8 +343,8 @@ export default class DebugWorld
         {
             this.qudrix01.side04.functions.addSolidWall()
             this.qudrix02.side04.functions.addSolidWall()
-            this.debugCamera.functions.side04()
 
+            this.debugCamera.functions.side04()
         }
         this.functionsSide04.addGlassWindow = () =>
         {
@@ -351,7 +352,6 @@ export default class DebugWorld
             this.qudrix02.side04.functions.addGlassWindow()
 
             this.debugCamera.functions.side04()
-
         }
         this.functionsSide04.addGuillotineWindow = () =>
         {
@@ -359,7 +359,6 @@ export default class DebugWorld
             this.qudrix02.side04.functions.addGuillotineWindow()
 
             this.debugCamera.functions.side04()
-
         }
         this.functionsSide04.addPortalDoor = () =>
         {
@@ -367,7 +366,6 @@ export default class DebugWorld
             this.qudrix02.side04.functions.addPortalDoor()
 
             this.debugCamera.functions.side04()
-
         }
         this.functionsSide04.addAccordionDoor = () =>
         {
@@ -375,7 +373,6 @@ export default class DebugWorld
             this.qudrix02.side04.functions.addAccordionDoor()
 
             this.debugCamera.functions.side04()
-
         }
         this.functionsSide04.addSmartGlassWindow = () =>
         {
@@ -383,7 +380,6 @@ export default class DebugWorld
             this.qudrix02.side04.functions.addSmartGlassWindow()
 
             this.debugCamera.functions.side04()
-
         }
 
     }

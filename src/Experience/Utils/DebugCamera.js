@@ -58,6 +58,75 @@ export default class DebugCamera
             this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
         }
 
+        this.functions.sizes = () =>
+        {
+            this.duration = 0.75
+            this.positionY = 0
+            this.scaleXYZ = 1
+
+            gsap.to(camera.position, {
+                x: 14,
+                y: 9.5,
+                z: 10,
+                ease: this.ease,
+                duration: this.duration
+            })
+            gsap.to(camera.rotation, {
+                x: -0.7,
+                y: 0.8,
+                z: 0.56,
+                ease: this.ease,
+                duration: this.duration
+            })
+            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+        }
+
+        this.functions.roof = () => {
+            this.duration = 0.75
+            this.positionY = -10
+            this.scaleXYZ = 4
+
+            gsap.to(camera.position, {
+                x: 14,
+                y: 9.5,
+                z: 10,
+                ease: this.ease,
+                duration: this.duration
+            })
+            gsap.to(camera.rotation, {
+                x: -0.7,
+                y: 0.8,
+                z: 0.56,
+                ease: this.ease,
+                duration: this.duration
+            })
+            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+        }
+
+        this.functions.side01 = () =>
+        {
+            this.duration = 1
+            this.positionY = -2.75
+            this.scaleXYZ = 2.5
+            gsap
+                .to(camera.position, {
+                    x: 13.497,
+                    y: 1,
+                    z: 0.22,
+                    ease: this.ease,
+                    duration: this.duration
+                })
+            gsap
+                .to(camera.rotation, {
+                    x: -1.8489,
+                    y: 1.493,
+                    z: 1.8497,
+                    ease: this.ease,
+                    duration: this.duration
+                })
+            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+        }
+
         this.functions.side02 = () =>
         {
             this.duration = 1
@@ -130,29 +199,7 @@ export default class DebugCamera
             this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
         }
 
-        this.functions.side01 = () =>
-        {
-            this.duration = 1
-            this.positionY = -2.75
-            this.scaleXYZ = 2.5
-            gsap
-                .to(camera.position, {
-                    x: 13.497,
-                    y: 1,
-                    z: 0.22,
-                    ease: this.ease,
-                    duration: this.duration
-                })
-            gsap
-                .to(camera.rotation, {
-                    x: -1.8489,
-                    y: 1.493,
-                    z: 1.8497,
-                    ease: this.ease,
-                    duration: this.duration
-                })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
-        }
+
 
     }
 
