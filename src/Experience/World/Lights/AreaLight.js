@@ -9,6 +9,8 @@ export default class AreaLight {
         this.experience = new Experience()
         this.debug = this.experience.debug
 
+        this.side = 10
+
         this.key = new THREE.RectAreaLight()
         this.key.position.x = 0
         this.key.position.y = 0
@@ -18,8 +20,8 @@ export default class AreaLight {
         this.key.rotation.z = 0
         this.key.color = new THREE.Color(0xffffff)
         this.key.intensity = 10
-        this.key.width = 10
-        this.key.height = 10
+        this.key.width = this.side
+        this.key.height = this.side
         this.keyHelper = new RectAreaLightHelper(this.key)
 
         this.top = new THREE.RectAreaLight()
@@ -31,8 +33,8 @@ export default class AreaLight {
         this.top.rotation.z = 0
         this.top.color = new THREE.Color(0xffffff)
         this.top.intensity = 10
-        this.top.width = 10
-        this.top.height = 10
+        this.top.width = this.side
+        this.top.height = this.side
         this.topHelper = new RectAreaLightHelper(this.top)
 
         // this.debugArea()

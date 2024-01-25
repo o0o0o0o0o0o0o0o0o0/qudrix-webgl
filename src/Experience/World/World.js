@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import Experience from "../Experience";
 
 import Lights from './Lights/Lights';
+import Camera from '../Camera.js'
 
 import Cube from './Models/Cube';
 
@@ -33,27 +34,32 @@ export default class World
         this.scene = this.experience.scene
 
         this.lights = new Lights()
+        this.camera = new Camera()
+ 
 
         this.cube = new Cube()
         this.qudrix01 = new Qudrix01(CONFIG)
         this.qudrix02 = new Qudrix02(CONFIG)
 
+        this.buildingGroup = new THREE.Group()
+        this.scene.add(this.buildingGroup)
+
 
 
         // Add lights
-        this.scene.add(
+        this.buildingGroup.add(
             this.lights.directional,
             // this.lights.directionalHelper,
             // this.lights.directionalCameraShadowHelper,
             this.lights.ambient,
             this.lights.areaLight.key,
-            // this.lights.areaLight.keyHelper,
+            this.lights.areaLight.keyHelper,
             this.lights.areaLight.top,
-            // this.lights.areaLight.topHelper,
+            this.lights.areaLight.topHelper,
         )
 
         // Add models
-        this.scene.add(
+        this.buildingGroup.add(
             this.cube.instance,
             this.qudrix01.instance,
             this.qudrix02.instance,
@@ -70,7 +76,7 @@ export default class World
         /**
          * Debug world elemetns
          */
-        this.debugWorld = new DebugWorld()
+        this.debugWorld = new DebugWorld(this.camera.instance)
 
     }
 

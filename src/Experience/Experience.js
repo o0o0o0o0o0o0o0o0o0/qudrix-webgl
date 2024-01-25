@@ -36,9 +36,11 @@ export default class Experience
         this.time = new Time()
         this.scene = new THREE.Scene()
 
-        this.camera = new Camera()
-        this.renderer = new Renderer()
         this.world = new World()
+        this.camera = this.world.camera
+        // this.camera = new Camera()  
+        this.renderer = new Renderer()
+        // this.camera = this.world.camera
 
         this.axesHelper = new THREE.AxesHelper(5)
         // this.scene.add(this.axesHelper)

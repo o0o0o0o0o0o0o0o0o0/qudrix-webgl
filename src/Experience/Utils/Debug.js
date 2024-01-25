@@ -12,6 +12,7 @@ export default class Debug
         {
             this.ui = new dat.GUI()
 
+            this.cameraFolder = this.ui.addFolder('camera').open().show()
             this.rendererFolder = this.ui.addFolder('renderer').open().show()
             this.ambientLightFolder = this.ui.addFolder('ambient').open().hide()
             this.directionalLightFolder = this.ui.addFolder('directional').open().hide()
