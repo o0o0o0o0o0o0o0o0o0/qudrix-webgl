@@ -46,8 +46,6 @@ export default class World
         this.buildingGroup = new THREE.Group()
         this.scene.add(this.buildingGroup)
 
-
-
         // Add lights
         this.buildingGroup.add(
             this.lights.directional,
