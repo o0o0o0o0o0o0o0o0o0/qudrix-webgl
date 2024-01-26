@@ -30,13 +30,12 @@ export default class DebugWorld
         this.qudrix02 = this.world.qudrix02
 
         // Debug
-        // this.debugBuildingGroup()
+
         this.ease = "power3.inOut"
 
         this.debugCamera = new DebugCamera(camera)
 
         this.debugCamera.start()
-
 
         // this.debugCamera(camera)
         this.debugSizes()
@@ -93,18 +92,7 @@ export default class DebugWorld
         }
     }
 
-    debugSizes()
-    {
-        this.setFunctionSizes()
-
-        if (this.debug.active)
-        {
-            this.debug.sizeFolder.add(this.functionsSizes, 'setQ01').name('Q01')
-            this.debug.sizeFolder.add(this.functionsSizes, 'setQ02').name('Q02')
-        }
-    }
-
-    setFunctionRoof()
+    setFunctionsRoof()
     {
         this.functionsRoof = {}
         this.functionsRoof.addRoofSolidPanels = () =>
@@ -171,21 +159,6 @@ export default class DebugWorld
             this.CONFIG.roof["accessory01-name"] = "Sunshade Dazzoni"
             console.log(this.CONFIG.roof["accessory01-name"]);
 
-        }
-    }
-
-    debugRoof()
-    {
-        this.setFunctionRoof()
-
-        if (this.debug.active)
-        {
-            this.debug.roofFolder.add(this.functionsRoof, 'addRoofSolidPanels').name('SolidPanels')
-            this.debug.roofFolder.add(this.functionsRoof, 'addRoofMirrorGlass').name('MirrorGlass')
-            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ25').name('PergolaQ25')
-            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ27').name('PergolaQ27')
-            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'removeAccessories').name('No Accessories')
-            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'addAccessories').name('Add Sunshade')
         }
     }
 
@@ -496,6 +469,72 @@ export default class DebugWorld
 
     }
 
+    setFunctionsAttachment()
+    {
+
+        this.functionsAttachment = {}
+        this.functionsAttachment.addAutomaticAwing = () =>
+        {
+            this.qudrix01.attachment.functions.addAutomaticAwing()
+            this.qudrix02.attachment.functions.addAutomaticAwing()
+
+            this.debugCamera.functions.default()
+
+            this.CONFIG.attachment["element-name"] = "Automatic Awing"
+            console.log(this.CONFIG.attachment["element-name"]);
+        }
+        this.functionsAttachment.addBioclimacticPergola = () =>
+        {
+            this.qudrix01.attachment.functions.addBioclimacticPergola()
+            this.qudrix02.attachment.functions.addBioclimacticPergola()
+
+            this.debugCamera.functions.default()
+
+            this.CONFIG.attachment["element-name"] = "Bioclimatic pergola Q27"
+            console.log(this.CONFIG.attachment["element-name"]);
+        }
+        this.functionsAttachment.removeAttachment = () =>
+        {
+            this.qudrix01.attachment.functions.removeAttachment()
+            this.qudrix02.attachment.functions.removeAttachment()
+
+            this.debugCamera.functions.default()
+
+            this.CONFIG.attachment["element-name"] = "None"
+            console.log(this.CONFIG.attachment["element-name"]);
+        }
+    }
+
+
+
+    debugSizes()
+    {
+        this.setFunctionSizes()
+
+        if (this.debug.active)
+        {
+            this.debug.sizeFolder.add(this.functionsSizes, 'setQ01').name('Q01')
+            this.debug.sizeFolder.add(this.functionsSizes, 'setQ02').name('Q02')
+        }
+    }
+
+
+    debugRoof()
+    {
+        this.setFunctionsRoof()
+
+        if (this.debug.active)
+        {
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofSolidPanels').name('SolidPanels')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofMirrorGlass').name('MirrorGlass')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ25').name('PergolaQ25')
+            this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ27').name('PergolaQ27')
+            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'removeAccessories').name('No Accessories')
+            this.debug.pergolaQ27Accessories.add(this.functionsRoof, 'addAccessories').name('Add Sunshade')
+        }
+    }
+
+
     debugSide01()
     {
         this.setFunctionsSide01()
@@ -564,40 +603,12 @@ export default class DebugWorld
 
     }
 
+
+
     debugAttachment()
     {
 
-        this.functionsAttachment = {}
-        this.functionsAttachment.addAutomaticAwing = () =>
-        {
-            this.qudrix01.attachment.functions.addAutomaticAwing()
-            this.qudrix02.attachment.functions.addAutomaticAwing()
-
-            this.debugCamera.functions.default()
-
-            this.CONFIG.attachment["element-name"] = "Automatic Awing"
-            console.log(this.CONFIG.attachment["element-name"]);
-        }
-        this.functionsAttachment.addBioclimacticPergola = () =>
-        {
-            this.qudrix01.attachment.functions.addBioclimacticPergola()
-            this.qudrix02.attachment.functions.addBioclimacticPergola()
-
-            this.debugCamera.functions.default()
-
-            this.CONFIG.attachment["element-name"] = "Bioclimatic pergola Q27"
-            console.log(this.CONFIG.attachment["element-name"]);
-        }
-        this.functionsAttachment.removeAttachment = () =>
-        {
-            this.qudrix01.attachment.functions.removeAttachment()
-            this.qudrix02.attachment.functions.removeAttachment()
-
-            this.debugCamera.functions.default()
-
-            this.CONFIG.attachment["element-name"] = "None"
-            console.log(this.CONFIG.attachment["element-name"]);
-        }
+        this.setFunctionsAttachment()
 
         if (this.debug.active)
         {
@@ -609,75 +620,6 @@ export default class DebugWorld
     }
 
 
-
-    setCameraFunctions(camera)
-    {
-        this.functionsCamera = {}
-
-        this.functionsCamera.default = () =>
-        {
-            this.duration = 0.75
-            this.positionY = 0
-            this.scaleXYZ = 1
-
-            console.log(camera.position);
-
-            gsap.to(camera.position, {
-                x: 14,
-                y: 9.5,
-                z: 10,
-                ease: this.ease,
-                duration: this.duration
-            })
-            gsap.to(camera.rotation, {
-                x: -0.7,
-                y: 0.8,
-                z: 0.56,
-                ease: this.ease,
-                duration: this.duration
-            })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
-        }
-
-        this.functionsCamera.side01 = () =>
-        {
-            this.duration = 1
-            this.positionY = -2.75
-            this.scaleXYZ = 2.5
-            gsap
-                .to(camera.position, {
-                    x: 0,
-                    y: 1,
-                    z: 13.5,
-                    ease: this.ease,
-                    duration: this.duration
-                })
-            gsap
-                .to(camera.rotation, {
-                    x: 0.0785,
-                    y: 0.000,
-                    z: 0.000,
-                    ease: this.ease,
-                    duration: this.duration
-                })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
-        }
-    }
-
-    debugCamera(camera)
-    {
-        this.setCameraFunctions(camera)
-        // Debug
-
-        if (this.debug.active)
-        {
-            this.debug.cameraFolder.add(this.functionsCamera, 'default')
-            this.debug.cameraFolder.add(this.functionsCamera, 'side01')
-            // this.debug.cameraFolder.add(this.functionsCamera, 'side02')
-            // this.debug.cameraFolder.add(this.functionsCamera, 'side03')
-            // this.debug.cameraFolder.add(this.functionsCamera, 'side04')
-        }
-    }
 
     scaleBuildingAndLights(positionY, scaleXYZ)
     {
