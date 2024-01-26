@@ -48,27 +48,6 @@ export default class DebugWorld
 
     }
 
-    debugBuildingGroup()
-    {
-
-        if (this.debug.active)
-        {
-            this.debug.cameraFolder.add(this.buildingGroup.position, 'x', -10, 10, 0.001).name('position.x')
-            this.debug.cameraFolder.add(this.buildingGroup.position, 'y', -10, 10, 0.001).name('position.y')
-            this.debug.cameraFolder.add(this.buildingGroup.position, 'z', -10, 10, 0.001).name('position.z')
-            this.debug.cameraFolder.add(this.buildingGroup.scale, 'x', 0, 10, 0.01).name('building.scale').onChange((value) =>
-            {
-                this.buildingGroup.scale.y = value
-                this.buildingGroup.scale.z = value
-
-                this.areaLightKey.width = 10 * value
-                this.areaLightKey.height = 10 * value
-                this.areaLightTop.width = 10 * value
-                this.areaLightTop.height = 10 * value
-            })
-        }
-    }
-
     setFunctionSizes()
     {
         this.functionsSizes = {}
@@ -651,6 +630,27 @@ export default class DebugWorld
                 ease: this.ease,
                 duration: this.duration
             })
+    }
+
+    debugBuildingGroup()
+    {
+
+        if (this.debug.active)
+        {
+            this.debug.cameraFolder.add(this.buildingGroup.position, 'x', -10, 10, 0.001).name('position.x')
+            this.debug.cameraFolder.add(this.buildingGroup.position, 'y', -10, 10, 0.001).name('position.y')
+            this.debug.cameraFolder.add(this.buildingGroup.position, 'z', -10, 10, 0.001).name('position.z')
+            this.debug.cameraFolder.add(this.buildingGroup.scale, 'x', 0, 10, 0.01).name('building.scale').onChange((value) =>
+            {
+                this.buildingGroup.scale.y = value
+                this.buildingGroup.scale.z = value
+
+                this.areaLightKey.width = 10 * value
+                this.areaLightKey.height = 10 * value
+                this.areaLightTop.width = 10 * value
+                this.areaLightTop.height = 10 * value
+            })
+        }
     }
 
 
