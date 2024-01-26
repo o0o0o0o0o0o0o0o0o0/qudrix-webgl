@@ -141,7 +141,7 @@ export default class Qudrix01
         {
             // Side01
             this.debug.side01Folder.add(this.side01.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side01Folder.add(this.side01.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side01Folder.add(this.side01.functions, 'addSolidPanels').name('SolidPanels')
             this.debug.side01Folder.add(this.side01.functions, 'addGlassWindow').name('GlassWindow')
             this.debug.side01Folder.add(this.side01.functions, 'addGuillotineWindow').name('GuillotineWindow')
             this.debug.side01Folder.add(this.side01.functions, 'addPortalDoor').name('PortalDoor')
@@ -150,7 +150,7 @@ export default class Qudrix01
 
             // Side02
             this.debug.side02Folder.add(this.side02.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side02Folder.add(this.side02.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side02Folder.add(this.side02.functions, 'addSolidPanels').name('SolidPanels')
             this.debug.side02Folder.add(this.side02.functions, 'addGlassWindow').name('GlassWindow')
             this.debug.side02Folder.add(this.side02.functions, 'addGuillotineWindow').name('GuillotineWindow')
             this.debug.side02Folder.add(this.side02.functions, 'addPortalDoor').name('PortalDoor')
@@ -159,7 +159,7 @@ export default class Qudrix01
 
             // Side03
             this.debug.side03Folder.add(this.side03.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side03Folder.add(this.side03.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side03Folder.add(this.side03.functions, 'addSolidPanels').name('SolidPanels')
             this.debug.side03Folder.add(this.side03.functions, 'addGlassWindow').name('GlassWindow')
             this.debug.side03Folder.add(this.side03.functions, 'addGuillotineWindow').name('GuillotineWindow')
             this.debug.side03Folder.add(this.side03.functions, 'addPortalDoor').name('PortalDoor')
@@ -168,7 +168,7 @@ export default class Qudrix01
 
             // Side04
             this.debug.side04Folder.add(this.side04.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side04Folder.add(this.side04.functions, 'addSolidWall').name('SolidWall')
+            this.debug.side04Folder.add(this.side04.functions, 'addSolidPanels').name('SolidPanels')
             this.debug.side04Folder.add(this.side04.functions, 'addGlassWindow').name('GlassWindow')
             this.debug.side04Folder.add(this.side04.functions, 'addGuillotineWindow').name('GuillotineWindow')
             this.debug.side04Folder.add(this.side04.functions, 'addPortalDoor').name('PortalDoor')

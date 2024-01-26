@@ -31,7 +31,7 @@ export default class DebugCamera
 
     }
 
-    setFunctions(camera)
+    setFunctions()
     {
         this.functions = {}
 
@@ -41,14 +41,14 @@ export default class DebugCamera
             this.positionY = 0
             this.scaleXYZ = 1
 
-            gsap.to(camera.position, {
+            gsap.to(this.camera.position, {
                 x: 14,
                 y: 9.5,
                 z: 10,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(camera.rotation, {
+            gsap.to(this.camera.rotation, {
                 x: -0.7,
                 y: 0.8,
                 z: 0.56,
@@ -64,14 +64,14 @@ export default class DebugCamera
             this.positionY = 0
             this.scaleXYZ = 1
 
-            gsap.to(camera.position, {
+            gsap.to(this.camera.position, {
                 x: 14,
                 y: 9.5,
                 z: 10,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(camera.rotation, {
+            gsap.to(this.camera.rotation, {
                 x: -0.7,
                 y: 0.8,
                 z: 0.56,
@@ -86,14 +86,14 @@ export default class DebugCamera
             this.positionY = -10
             this.scaleXYZ = 4
 
-            gsap.to(camera.position, {
+            gsap.to(this.camera.position, {
                 x: 14,
                 y: 9.5,
                 z: 10,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(camera.rotation, {
+            gsap.to(this.camera.rotation, {
                 x: -0.7,
                 y: 0.8,
                 z: 0.56,
@@ -109,7 +109,7 @@ export default class DebugCamera
             this.positionY = -2.75
             this.scaleXYZ = 2.5
             gsap
-                .to(camera.position, {
+                .to(this.camera.position, {
                     x: 13.497,
                     y: 1,
                     z: 0.22,
@@ -117,7 +117,7 @@ export default class DebugCamera
                     duration: this.duration
                 })
             gsap
-                .to(camera.rotation, {
+                .to(this.camera.rotation, {
                     x: -1.8489,
                     y: 1.493,
                     z: 1.8497,
@@ -133,7 +133,7 @@ export default class DebugCamera
             this.positionY = -2.75
             this.scaleXYZ = 2.5
             gsap
-                .to(camera.position, {
+                .to(this.camera.position, {
                     x: 0,
                     y: 1,
                     z: 13.5,
@@ -141,7 +141,7 @@ export default class DebugCamera
                     duration: this.duration
                 })
             gsap
-                .to(camera.rotation, {
+                .to(this.camera.rotation, {
                     x: 0.0785,
                     y: 0.000,
                     z: 0.000,
@@ -157,7 +157,7 @@ export default class DebugCamera
             this.positionY = -2.75
             this.scaleXYZ = 2.5
             gsap
-                .to(camera.position, {
+                .to(this.camera.position, {
                     x: -13.497,
                     y: 1,
                     z: 0.22,
@@ -165,7 +165,7 @@ export default class DebugCamera
                     duration: this.duration
                 })
             gsap
-                .to(camera.rotation, {
+                .to(this.camera.rotation, {
                     x: -1.356,
                     y: -1.4942,
                     z: -1.3557,
@@ -181,7 +181,7 @@ export default class DebugCamera
             this.positionY = -2.75
             this.scaleXYZ = 2.5
             gsap
-                .to(camera.position, {
+                .to(this.camera.position, {
                     x: 0.399,
                     y: 1,
                     z: -13.5,
@@ -189,7 +189,7 @@ export default class DebugCamera
                     duration: this.duration
                 })
             gsap
-                .to(camera.rotation, {
+                .to(this.camera.rotation, {
                     x: -3.0667,
                     y: 0.0295,
                     z: 3.139,

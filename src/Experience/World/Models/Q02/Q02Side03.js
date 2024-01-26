@@ -414,7 +414,7 @@ export default class Side03
 
         }
 
-        this.functions.addSolidWall = () =>
+        this.functions.addSolidPanels = () =>
         {
             this.sliderDoor.scale.set(0, 0, 0)
             this.solidWall.scale.set(1, 1, 1)

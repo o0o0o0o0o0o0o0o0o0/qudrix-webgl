@@ -7,7 +7,6 @@ export default class Camera
 {
     constructor()
     {
-        console.log('this is camera');
         this.experience = new Experience()
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene

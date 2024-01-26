@@ -4,7 +4,9 @@
     },
   
     "roof": {
-      "element-name": "Bioclimatic pergola Q27"
+      "element-name": "Bioclimatic pergola Q27",
+
+      "accessory01-name": "Sunshade Dazzoni" 
     },
   
     "sides": {

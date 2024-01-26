@@ -13,7 +13,7 @@ import Qudrix02 from './Models/Qudrix02';
 import DebugWorld from '../Utils/DebugWorld';
 
 import data from '../../CONFIG.json'
-const CONFIG = data
+// const CONFIG = data
 
 let instance = null
 
@@ -28,6 +28,8 @@ export default class World
         }
         instance = this
 
+        this.CONFIG = data
+
         this.experience = new Experience()
         this.materials = this.experience.materials
         this.debug = this.experience.debug
@@ -38,8 +40,8 @@ export default class World
  
 
         this.cube = new Cube()
-        this.qudrix01 = new Qudrix01(CONFIG)
-        this.qudrix02 = new Qudrix02(CONFIG)
+        this.qudrix01 = new Qudrix01(this.CONFIG)
+        this.qudrix02 = new Qudrix02(this.CONFIG)
 
         this.buildingGroup = new THREE.Group()
         this.scene.add(this.buildingGroup)
@@ -64,9 +66,9 @@ export default class World
             this.qudrix01.instance,
             this.qudrix02.instance,
         )
-        if (CONFIG.size['element-name'] === 'Q01') { this.qudrix01.instance.scale.set(1, 1, 1) }
+        if (this.CONFIG.size['element-name'] === 'Q01') { this.qudrix01.instance.scale.set(1, 1, 1) }
         else { this.qudrix01.instance.scale.set(0, 0, 0) }
-        if (CONFIG.size['element-name'] === 'Q02') { this.qudrix02.instance.scale.set(1, 1, 1) }
+        if (this.CONFIG.size['element-name'] === 'Q02') { this.qudrix02.instance.scale.set(1, 1, 1) }
         else { this.qudrix02.instance.scale.set(0, 0, 0) }
 
         this.setBG()
