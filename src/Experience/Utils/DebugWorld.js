@@ -15,6 +15,7 @@ export default class DebugWorld
         // this.camera = new Camera()
 
         this.experience = new Experience()
+        this.manager = this.experience.manager
         this.materials = this.experience.materials
         this.debug = this.experience.debug
 
@@ -47,6 +48,14 @@ export default class DebugWorld
         // this.debugSide03()
         // this.debugSide04()
         // this.debugAttachment()
+
+        // this.experience.manager.loadingManager.onLoad = () => {
+        //     this.functionsMASTER.build()
+        // }
+
+
+
+
 
     }
 
@@ -193,7 +202,7 @@ export default class DebugWorld
                 this.world.qudrix02.roof.functions.removeAccessories()
             }
             if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
-                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27" )
+                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
             {
                 this.world.qudrix01.roof.functions.addAccessories()
                 this.world.qudrix02.roof.functions.addAccessories()

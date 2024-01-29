@@ -10,12 +10,13 @@ export default class StaticModel
     constructor(CONFIG)
     {
         this.experience = new Experience()
+        this.manager = this.experience.manager
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
          
-         this.loader = new Loaders()
+         this.loader = new Loaders(this.manager.loadingManager)
         
         this.materials = this.experience.materials
 
@@ -100,8 +101,8 @@ export default class StaticModel
                         this.roofSolidMesh.receiveShadow = true
 
                         // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'Solid Panels') { this.roofSolidPanels.scale.set(1, 1, 1) }
-                        else { this.roofSolidPanels.scale.set(0, 0, 0) }
+                        // if (CONFIG.roof['element-name'] === 'Solid Panels') { this.roofSolidPanels.scale.set(1, 1, 1) }
+                        // else { this.roofSolidPanels.scale.set(0, 0, 0) }
 
                         // Mirror
                         this.roofMirrorMesh.copy(child)
@@ -110,8 +111,8 @@ export default class StaticModel
                         this.roofMirrorGlass.castShadow = true
                         this.roofMirrorGlass.receiveShadow = true
                         // Check CONFIG
-                        if (CONFIG.roof['element-name'] === 'Mirror Glass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
-                        else { this.roofMirrorGlass.scale.set(0, 0, 0) }
+                        // if (CONFIG.roof['element-name'] === 'Mirror Glass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
+                        // else { this.roofMirrorGlass.scale.set(0, 0, 0) }
 
                     }
 

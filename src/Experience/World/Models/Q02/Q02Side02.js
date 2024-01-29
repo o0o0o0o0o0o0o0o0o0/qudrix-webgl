@@ -21,7 +21,8 @@ export default class Side02
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         this.loader = new Loaders()
+                 this.manager = this.experience.manager
+        this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
         this.qudrix02 = new Qudrix02()

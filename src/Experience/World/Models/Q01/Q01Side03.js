@@ -21,7 +21,8 @@ export default class Side03
         this.debug = this.experience.debug
 
 
-        this.loader = new Loaders()
+                this.manager = this.experience.manager
+        this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
         this.qudrix01 = new Qudrix01()

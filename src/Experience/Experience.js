@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 
 import Debug from './Utils/Debug';
+import Manager from './Utils/Manager';
 
 import Sizes from "./Utils/Sizes";
 import Time from "./Utils/Time";
@@ -28,6 +29,7 @@ export default class Experience
         this.canvas = canvas
 
         this.debug = new Debug()
+        this.manager = new Manager()
 
         this.textures = new Textures()
         this.materials = new Materials()

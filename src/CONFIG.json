@@ -1,12 +1,12 @@
 {
     "size": {
-      "element-name": "Q02"
+      "element-name": "Q01"
     },
   
     "roof": {
       "element-name": "Bioclimatic pergola Q27",
 
-      "accessory01-name": "Sunshade Dazzoni" 
+      "accessory01-name": "None" 
     },
   
     "sides": {

@@ -19,7 +19,8 @@ export default class Roof
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-        this.loader = new Loaders()
+                this.manager = this.experience.manager
+        this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
         this.qudrix02 = new Qudrix02()
@@ -103,8 +104,8 @@ export default class Roof
 
 
                 // Check CONFIG
-                if (CONFIG.roof['element-name'] === 'Swivel Sliding pergola Q25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
-                else { this.roofPergolaQ25.scale.set(0, 0, 0) }
+                // if (CONFIG.roof['element-name'] === 'Swivel Sliding pergola Q25') { this.roofPergolaQ25.scale.set(1, 1, 1) }
+                // else { this.roofPergolaQ25.scale.set(0, 0, 0) }
 
             }
         )
@@ -134,8 +135,8 @@ export default class Roof
                 this.animation.play(this.actionPergolaQ27, 1.5)
 
                 // Check CONFIG
-                if (CONFIG.roof['element-name'] === 'Bioclimatic pergola Q27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
-                else { this.roofPergolaQ27.scale.set(0, 0, 0) }
+                // if (CONFIG.roof['element-name'] === 'Bioclimatic pergola Q27') { this.roofPergolaQ27.scale.set(1, 1, 1) }
+                // else { this.roofPergolaQ27.scale.set(0, 0, 0) }
 
 
 

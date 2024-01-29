@@ -14,6 +14,10 @@ const canvas = document.querySelector('canvas.webgl')
 
 const experience = new Experience(canvas)
 
+experience.manager.loadingManager.onLoad = () => {
+    experience.world.debugWorld.functionsMASTER.build()
+}
+
 
 
 

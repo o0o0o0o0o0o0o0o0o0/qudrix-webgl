@@ -34,7 +34,7 @@ export default class Qudrix01
         this.experience = new Experience()
 
         this.time = this.experience.time
-        this.loader = new Loaders()
+
 
         this.materials = this.experience.materials
         this.staticModel = new StaticModel(CONFIG)
