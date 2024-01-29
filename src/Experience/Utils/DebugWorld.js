@@ -38,13 +38,15 @@ export default class DebugWorld
         this.debugCamera.start()
 
         // this.debugCamera(camera)
+        this.debugCONFIG()
+        this.debugMASTER()
         this.debugSizes()
         this.debugRoof()
-        this.debugSide01()
-        this.debugSide02()
-        this.debugSide03()
-        this.debugSide04()
-        this.debugAttachment()
+        // this.debugSide01()
+        // this.debugSide02()
+        // this.debugSide03()
+        // this.debugSide04()
+        // this.debugAttachment()
 
     }
 
@@ -57,8 +59,7 @@ export default class DebugWorld
             this.qudrix01.instance.scale.set(1, 1, 1)
             this.qudrix02.instance.scale.set(0, 0, 0)
 
-            this.CONFIG.size["element-name"] = "Q01"
-            console.log(this.CONFIG.size["element-name"]);
+
 
         }
         this.functionsSizes.setQ02 = () =>
@@ -71,6 +72,150 @@ export default class DebugWorld
         }
     }
 
+    setFunctionsCONFIG()
+    {
+        this.functionsCONFIG = {}
+
+        this.functionsCONFIG.setQ01 = () =>
+        {
+            this.CONFIG.size["element-name"] = "Q01"
+            console.log("this.CONFIG.size.element-name:", this.CONFIG.size["element-name"]);
+        }
+        this.functionsCONFIG.setQ02 = () =>
+        {
+            this.CONFIG.size["element-name"] = "Q02"
+            console.log("this.CONFIG.size.element-name:", this.CONFIG.size["element-name"]);
+        }
+
+        this.functionsCONFIG.setRoofSolidPanels = () =>
+        {
+            this.CONFIG.roof["element-name"] = "Solid Panels"
+            console.log("this.CONFIG.roof.element-name:", this.CONFIG.roof["element-name"]);
+        }
+
+        this.functionsCONFIG.setRoofMirrorGlass = () =>
+        {
+            this.CONFIG.roof["element-name"] = "Mirror Glass"
+            console.log("this.CONFIG.roof.element-name:", this.CONFIG.roof["element-name"]);
+        }
+
+        this.functionsCONFIG.setRoofPergolaQ25 = () =>
+        {
+            this.CONFIG.roof["element-name"] = "Swivel Sliding pergola Q25"
+            console.log("this.CONFIG.roof.element-name:", this.CONFIG.roof["element-name"]);
+        }
+
+        this.functionsCONFIG.setRoofPergolaQ27 = () =>
+        {
+            this.CONFIG.roof["element-name"] = "Bioclimatic pergola Q27"
+            console.log("this.CONFIG.roof.element-name:", this.CONFIG.roof["element-name"]);
+        }
+        this.functionsCONFIG.removeRoofAccessories = () =>
+        {
+            this.CONFIG.roof["accessory01-name"] = "None"
+            console.log("this.CONFIG.roof.accessory01-name:", this.CONFIG.roof["accessory01-name"]);
+
+        }
+        this.functionsCONFIG.addRoofAccessories = () =>
+        {
+            this.CONFIG.roof["accessory01-name"] = "Sunshade Dazzoni"
+            console.log("this.CONFIG.roof.accessory01-name:", this.CONFIG.roof["accessory01-name"]);
+
+        }
+    }
+
+    debugCONFIG()
+    {
+        this.setFunctionsCONFIG()
+
+        if (this.debug.active)
+        {
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setQ01').name('Q01')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setQ02').name('Q02')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setRoofSolidPanels').name('SolidPanels')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setRoofMirrorGlass').name('MirrorGlass')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setRoofPergolaQ25').name('PergolaQ25')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'setRoofPergolaQ27').name('PergolaQ27')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'removeRoofAccessories').name('None')
+            this.debug.CONFIGfolder.add(this.functionsCONFIG, 'addRoofAccessories').name('Sunshade Dazzoni')
+        }
+    }
+
+    setMASTER()
+    {
+
+        this.functionsMASTER = {}
+
+        this.functionsMASTER.build = () =>
+        {
+
+            /**
+             * Size
+             */
+            if (this.CONFIG.size['element-name'] === 'Q01')
+            {
+                this.world.qudrix01.instance.scale.set(1, 1, 1,)
+                this.world.qudrix02.instance.scale.set(0, 0, 0,)
+            }
+            if (this.CONFIG.size['element-name'] === 'Q02')
+            {
+                this.world.qudrix01.instance.scale.set(0, 0, 0,)
+                this.world.qudrix02.instance.scale.set(1, 1, 1,)
+            }
+
+            /**
+             * Roof
+             */
+
+            if (this.CONFIG.roof["element-name"] === "Solid Panels")
+            {
+                this.world.qudrix01.roof.functions.addRoofSolidPanels()
+                this.world.qudrix02.roof.functions.addRoofSolidPanels()
+            }
+            if (this.CONFIG.roof["element-name"] === "Mirror Glass")
+            {
+                this.world.qudrix01.roof.functions.addRoofMirrorGlass()
+                this.world.qudrix02.roof.functions.addRoofMirrorGlass()
+            }
+            if (this.CONFIG.roof["element-name"] === "Swivel Sliding pergola Q25")
+            {
+                this.world.qudrix01.roof.functions.addRoofPergolaQ25()
+                this.world.qudrix02.roof.functions.addRoofPergolaQ25()
+            }
+            if (this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+            {
+                this.world.qudrix01.roof.functions.addRoofPergolaQ27()
+                this.world.qudrix02.roof.functions.addRoofPergolaQ27()
+            }
+            if (this.CONFIG.roof["accessory01-name"] === "None")
+            {
+                this.world.qudrix01.roof.functions.removeAccessories()
+                this.world.qudrix02.roof.functions.removeAccessories()
+            }
+            if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
+                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27" )
+            {
+                this.world.qudrix01.roof.functions.addAccessories()
+                this.world.qudrix02.roof.functions.addAccessories()
+            }
+
+
+        }
+
+    }
+
+    debugMASTER()
+    {
+
+        this.setMASTER()
+
+        if (this.debug.active)
+        {
+            this.debug.MASTERfolder.add(this.functionsMASTER, 'build')
+        }
+
+    }
+
     setFunctionsRoof()
     {
         this.functionsRoof = {}
@@ -79,20 +224,14 @@ export default class DebugWorld
             this.qudrix01.roof.functions.addRoofSolidPanels()
             this.qudrix02.roof.functions.addRoofSolidPanels()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["element-name"] = "Solid Panels"
-            console.log(this.CONFIG.roof["element-name"]);
+            // this.debugCamera.functions.roof()
         }
         this.functionsRoof.addRoofMirrorGlass = () =>
         {
             this.qudrix01.roof.functions.addRoofMirrorGlass()
             this.qudrix02.roof.functions.addRoofMirrorGlass()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["element-name"] = "Mirror Glass"
-            console.log(this.CONFIG.roof["element-name"]);
+            // this.debugCamera.functions.roof()
 
         }
         this.functionsRoof.addRoofPergolaQ25 = () =>
@@ -100,10 +239,7 @@ export default class DebugWorld
             this.qudrix01.roof.functions.addRoofPergolaQ25()
             this.qudrix02.roof.functions.addRoofPergolaQ25()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["element-name"] = "Swivel Sliding pergola Q25"
-            console.log(this.CONFIG.roof["element-name"]);
+            // this.debugCamera.functions.roof()
 
         }
         this.functionsRoof.addRoofPergolaQ27 = () =>
@@ -111,10 +247,7 @@ export default class DebugWorld
             this.qudrix01.roof.functions.addRoofPergolaQ27()
             this.qudrix02.roof.functions.addRoofPergolaQ27()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["element-name"] = "Bioclimatic pergola Q27"
-            console.log(this.CONFIG.roof["element-name"]);
+            // this.debugCamera.functions.roof()
 
         }
         this.functionsRoof.removeAccessories = () =>
@@ -122,10 +255,7 @@ export default class DebugWorld
             this.qudrix01.roof.functions.removeAccessories()
             this.qudrix02.roof.functions.removeAccessories()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["accessory01-name"] = "None"
-            console.log(this.CONFIG.roof["accessory01-name"]);
+            // this.debugCamera.functions.roof()
 
         }
         this.functionsRoof.addAccessories = () =>
@@ -133,10 +263,7 @@ export default class DebugWorld
             this.qudrix01.roof.functions.addAccessories()
             this.qudrix02.roof.functions.addAccessories()
 
-            this.debugCamera.functions.roof()
-
-            this.CONFIG.roof["accessory01-name"] = "Sunshade Dazzoni"
-            console.log(this.CONFIG.roof["accessory01-name"]);
+            // this.debugCamera.functions.roof()
 
         }
     }
@@ -150,7 +277,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addSliderDoor()
             this.qudrix02.side01.functions.addSliderDoor()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Slider Door"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -160,7 +287,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addSolidPanels()
             this.qudrix02.side01.functions.addSolidPanels()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Solid Panels"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -170,7 +297,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addGlassWindow()
             this.qudrix02.side01.functions.addGlassWindow()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Glass Window"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -180,7 +307,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addGuillotineWindow()
             this.qudrix02.side01.functions.addGuillotineWindow()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Guillotine Q2 Window"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -190,7 +317,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addPortalDoor()
             this.qudrix02.side01.functions.addPortalDoor()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Portal Door"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -200,7 +327,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addAccordionDoor()
             this.qudrix02.side01.functions.addAccordionDoor()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Accordion Door"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -210,7 +337,7 @@ export default class DebugWorld
             this.qudrix01.side01.functions.addSmartGlassWindow()
             this.qudrix02.side01.functions.addSmartGlassWindow()
 
-            this.debugCamera.functions.side01()
+            // this.debugCamera.functions.side01()
 
             this.CONFIG.sides['side-01']["element-name"] = "Smart Glass Window"
             console.log(this.CONFIG.sides['side-01']["element-name"]);
@@ -227,7 +354,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addSliderDoor()
             this.qudrix02.side02.functions.addSliderDoor()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Slider Door"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -237,7 +364,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addSolidPanels()
             this.qudrix02.side02.functions.addSolidPanels()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Solid Panels"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -247,7 +374,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addGlassWindow()
             this.qudrix02.side02.functions.addGlassWindow()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Glass Window"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -257,7 +384,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addGuillotineWindow()
             this.qudrix02.side02.functions.addGuillotineWindow()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Guillotine Q2 Window"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -267,7 +394,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addPortalDoor()
             this.qudrix02.side02.functions.addPortalDoor()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Portal Door"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -277,7 +404,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addAccordionDoor()
             this.qudrix02.side02.functions.addAccordionDoor()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Accordion Door"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -287,7 +414,7 @@ export default class DebugWorld
             this.qudrix01.side02.functions.addSmartGlassWindow()
             this.qudrix02.side02.functions.addSmartGlassWindow()
 
-            this.debugCamera.functions.side02()
+            // this.debugCamera.functions.side02()
 
             this.CONFIG.sides['side-02']["element-name"] = "Smart Glass Window"
             console.log(this.CONFIG.sides['side-02']["element-name"]);
@@ -486,6 +613,7 @@ export default class DebugWorld
 
 
 
+
     debugSizes()
     {
         this.setFunctionSizes()
@@ -652,6 +780,8 @@ export default class DebugWorld
             })
         }
     }
+
+
 
 
 }

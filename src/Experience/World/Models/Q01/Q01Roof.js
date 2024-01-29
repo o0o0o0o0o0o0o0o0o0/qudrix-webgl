@@ -221,6 +221,8 @@ export default class Roof
 
             this.animation.play(this.actionPergolaQ27, 1.5)
             this.debug.pergolaQ27Accessories.open()
+
+
         }
 
         this.functions.removeAccessories = () =>
