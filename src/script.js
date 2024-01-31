@@ -12,12 +12,8 @@ const canvas = document.querySelector('canvas.webgl')
  * Experience class
  */
 
-// const experience = new Experience(canvas)
-let experience = null
 
-// experience.manager.loadingManager.onLoad = () => {
-//     experience.world.debugWorld.functionsMASTER.build()
-// }
+let experience = null
 
 async function getData(url) {
     const response = await fetch(url, {
@@ -42,30 +38,8 @@ getData('http://localhost:3000/config01').then(data => {
 
 })
 
-setTimeout(() => {
-    getData('http://localhost:3000/config02').then(data => {
-        // console.log(`config02: ${JSON.stringify(data)}`)
-        experience.world.debugWorld.functionsMASTER.build(data)
-    })
-}, 5000)
 
 
-
-// experience.manager.loadingManager.onLoad = () => {
-
-//     getData('http://localhost:3000/config01').then(data => {
-//         // console.log(`config01: ${JSON.stringify(data)}`)
-//         const experience = new Experience(canvas, data)
-//         experience.world.debugWorld.functionsMASTER.build(data)
-//     })
-// }
-
-// setTimeout(() => {
-//     getData('http://localhost:3000/config02').then(data => {
-//         // console.log(`config02: ${JSON.stringify(data)}`)
-//         experience.world.debugWorld.functionsMASTER.build(data)
-//     })
-// }, 5000)
 
 
 
