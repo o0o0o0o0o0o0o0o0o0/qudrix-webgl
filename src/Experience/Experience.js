@@ -16,7 +16,7 @@ let instance = null
 
 export default class Experience
 {
-    constructor(canvas)
+    constructor(canvas, data)
     {
 
         // Singleton
@@ -28,6 +28,9 @@ export default class Experience
 
         this.canvas = canvas
 
+        this.CONFIG = data
+        // console.log(this.CONFIG);
+
         this.debug = new Debug()
         this.manager = new Manager()
 
@@ -38,7 +41,7 @@ export default class Experience
         this.time = new Time()
         this.scene = new THREE.Scene()
 
-        this.world = new World()
+        this.world = new World( this.CONFIG)
         this.camera = this.world.camera
         // this.camera = new Camera()  
         this.renderer = new Renderer()

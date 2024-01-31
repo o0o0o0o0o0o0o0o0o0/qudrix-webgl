@@ -25,7 +25,7 @@ export default class Manager
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
                 const progressRatio = itemsLoaded / itemsTotal
-                console.log(progressRatio.toFixed(2) * 100 + "%")
+                // console.log(progressRatio.toFixed(2) * 100 + "%")
             }
 
             // () =>

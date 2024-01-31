@@ -12,15 +12,15 @@ import Qudrix02 from './Models/Qudrix02';
 
 import DebugWorld from '../Utils/DebugWorld';
 
-import data from '../../CONFIG.json'
-// const CONFIG = data
+import data01 from '../../CONFIG.json'
 
 let instance = null
 
 export default class World
 {
-    constructor()
+    constructor(data)
     {
+
         // Singleton
         if (instance)
         {
@@ -29,6 +29,7 @@ export default class World
         instance = this
 
         this.CONFIG = data
+        // console.log(this.CONFIG);
 
         this.experience = new Experience()
         this.materials = this.experience.materials
@@ -77,6 +78,7 @@ export default class World
          * Debug world elemetns
          */
         this.debugWorld = new DebugWorld(this.camera.instance)
+        
 
     }
 

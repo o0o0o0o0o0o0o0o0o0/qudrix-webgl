@@ -155,8 +155,10 @@ export default class DebugWorld
 
         this.functionsMASTER = {}
 
-        this.functionsMASTER.build = () =>
+        this.functionsMASTER.build = (data) =>
         {
+            this.CONFIG = data
+            // console.log(this.CONFIG);
 
             /**
              * Size
