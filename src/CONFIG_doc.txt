@@ -4,7 +4,7 @@
     },
   
     "roof": {
-      "element-name": "MirrorGlass" // "Solid Panels", "Mirror Glass", "Bioclimatic pergola Q27", "Swivel Sliding pergola Q25"
+      "element-name": "MirrorGlass" // "Solid Panels", "Mirror Glass", "Swivel Sliding pergola Q25", "Bioclimatic pergola Q27"
 
       "accessory01-name": "Sunshade Dazzoni" // "None", "Sunshade Dazzoni"
     },
