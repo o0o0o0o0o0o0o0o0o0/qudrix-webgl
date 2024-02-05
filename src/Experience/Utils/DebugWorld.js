@@ -22,6 +22,7 @@ export default class DebugWorld
         this.world = new World()
         this.CONFIG = this.world.CONFIG
 
+
         this.buildingGroup = this.world.buildingGroup
         this.areaLightKey = this.world.lights.areaLight.key
         this.areaLightTop = this.world.lights.areaLight.top
@@ -29,6 +30,11 @@ export default class DebugWorld
 
         this.qudrix01 = this.world.qudrix01
         this.qudrix02 = this.world.qudrix02
+
+        /**
+         * Set MASTER Function
+         */
+        this.setMASTER(this.CONFIG)
 
         // Debug
 
@@ -39,10 +45,13 @@ export default class DebugWorld
         this.debugCamera.start()
 
         // this.debugCamera(camera)
+
         this.debugCONFIG()
-        this.debugMASTER()
+
+        // this.debugMASTER(this.CONFIG)
+
         this.debugSizes()
-        this.debugRoof()
+        // this.debugRoof()
         // this.debugSide01()
         // this.debugSide02()
         // this.debugSide03()
@@ -64,20 +73,13 @@ export default class DebugWorld
         this.functionsSizes = {}
         this.functionsSizes.setQ01 = () =>
         {
-
-            this.qudrix01.instance.scale.set(1, 1, 1)
-            this.qudrix02.instance.scale.set(0, 0, 0)
-
-
-
+            this.CONFIG.size["element-name"] = "Q01"
+            this.functionsMASTER.build()
         }
         this.functionsSizes.setQ02 = () =>
         {
-            this.qudrix01.instance.scale.set(0, 0, 0)
-            this.qudrix02.instance.scale.set(1, 1, 1)
-
             this.CONFIG.size["element-name"] = "Q02"
-            console.log(this.CONFIG.size["element-name"]);
+            this.functionsMASTER.build()
         }
     }
 
@@ -150,15 +152,14 @@ export default class DebugWorld
         }
     }
 
-    setMASTER()
+    setMASTER(data)
     {
 
         this.functionsMASTER = {}
 
-        this.functionsMASTER.build = (data) =>
+        this.functionsMASTER.build = () =>
         {
             this.CONFIG = data
-            // console.log(this.CONFIG);
 
             /**
              * Size
@@ -218,7 +219,7 @@ export default class DebugWorld
     debugMASTER()
     {
 
-        this.setMASTER()
+        this.setMASTER(data)
 
         if (this.debug.active)
         {

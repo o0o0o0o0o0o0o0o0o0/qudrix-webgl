@@ -12,8 +12,6 @@ import Qudrix02 from './Models/Qudrix02';
 
 import DebugWorld from '../Utils/DebugWorld';
 
-import data01 from '../../CONFIG.json'
-
 let instance = null
 
 export default class World
@@ -29,7 +27,6 @@ export default class World
         instance = this
 
         this.CONFIG = data
-        // console.log(this.CONFIG);
 
         this.experience = new Experience()
         this.materials = this.experience.materials

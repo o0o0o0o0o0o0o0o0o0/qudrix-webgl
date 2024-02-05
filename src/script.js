@@ -3,6 +3,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import Experience from './Experience/Experience'
 
+import dataJSON from './CONFIG.json'
+
 /**
  * Canvas
  */
@@ -27,16 +29,23 @@ async function getData(url) {
     
 }
 
-getData('http://localhost:3000/config01').then(data => {
-    // console.log(`config01: ${JSON.stringify(data)}`)
-    experience = new Experience(canvas, data)
+// getData('http://localhost:3000/config01').then(data => {
+//     // console.log(`config01: ${JSON.stringify(data)}`)
+//     experience = new Experience(canvas, data)
 
-    experience.manager.loadingManager.onLoad = () => {
+//     experience.manager.loadingManager.onLoad = () => {
 
-        experience.world.debugWorld.functionsMASTER.build(data)
-    }
+//         experience.world.debugWorld.functionsMASTER.build(data)
+//     }
 
-})
+// })
+
+experience = new Experience(canvas, dataJSON)
+
+experience.manager.loadingManager.onLoad = () => {
+
+    experience.world.debugWorld.functionsMASTER.build(dataJSON)
+}
 
 
 
