@@ -16,12 +16,12 @@ export default class Side01
     constructor(CONFIG)
     {
         this.experience = new Experience()
-         
+
         this.time = this.experience.time
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-                 this.manager = this.experience.manager
+        this.manager = this.experience.manager
         this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
@@ -37,13 +37,16 @@ export default class Side01
         this.portalDoor = new THREE.Group()
         this.guillotineWindow = new THREE.Group()
         this.accordionDoor = new THREE.Group()
+        this.mosquito = new THREE.Group()
+        this.automaticSunscreen = new THREE.Group()
 
         this.zOffset = 0.42
         this.sliderDoor.position.z += this.zOffset
         this.portalDoor.position.z += this.zOffset
         this.guillotineWindow.position.z += this.zOffset
         this.accordionDoor.position.z += this.zOffset
-  
+        this.automaticSunscreen.position.z += this.zOffset
+
 
 
         this.instance.add(
@@ -54,6 +57,8 @@ export default class Side01
             this.portalDoor,
             this.guillotineWindow,
             this.accordionDoor,
+            this.mosquito,
+            this.automaticSunscreen
         )
 
         /**
@@ -68,11 +73,13 @@ export default class Side01
          * Load Sides
          */
         this.loadWalls(CONFIG)
-        // this.loadGlassWindow(CONFIG)
+        this.loadGlassWindow(CONFIG)
         this.loadSliderDoor(CONFIG)
         this.loadPortalDoor(CONFIG)
         this.loadGuillotineWindow(CONFIG)
         this.loadAccordionDoor(CONFIG)
+        this.loadAutomaticSunscreen(CONFIG)
+        this.loadMosquito(CONFIG)
 
         /**
          * Set functions
@@ -80,6 +87,27 @@ export default class Side01
         this.setFunctions()
 
 
+    }
+
+    loadGlassWindow(CONFIG)
+    {
+        this.loader.gltf.load(
+            '/3D/Q02/Animation/glass_window_02_edit.gltf',
+            (gltf) =>
+            {
+                const metal01 = gltf.scene.children[0]
+                const metal02 = gltf.scene.children[1]
+                const glass = gltf.scene.children[2]
+                this.glassWindow.add(metal01, metal02, glass)
+
+                metal01.material = this.materials.wallBlack
+                metal02.material = this.materials.wallBlack
+                glass.material = this.materials.glassWindow
+
+                if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                else { this.glassWindow.scale.set(0, 0, 0) }
+            }
+        )
     }
 
     loadWalls(CONFIG)
@@ -90,7 +118,6 @@ export default class Side01
             {
                 // console.log(gltf);
                 const children = [...gltf.scene.children[0].children]
-   
 
                 for (const child of children)
                 {
@@ -99,32 +126,12 @@ export default class Side01
                      * Add Sides
                      */
 
-                    // if (child.name === 'sides_glass_window')
-                    // {
-                    //     this.glassWindow.add(child)
-                    //     child.children[0].material = new THREE.MeshBasicMaterial({color: 'red'})
-                    //     child.children[1].material = new THREE.MeshBasicMaterial({color: 'blue'})
-                    //     console.log(child.children[1]);
-
-                    //     // this.glassWindow.scale.set(0, 0, 0)
-
-                    //     child.children[0].material = this.materials.glass
-
-                    //     child.castShadow = true
-                    //     child.receiveShadow = true
-
-                    //     if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
-                    //     else { this.glassWindow.scale.set(0, 0, 0) }
-                    // }
-
-                    
-
                     if (child.name === 'sides_solid_panel_01')
                     {
                         this.solidWall.add(child)
 
                         child.children[0].material = this.materials.wallBlack
-        
+
                         child.castShadow = true
                         child.receiveShadow = true
 
@@ -146,36 +153,6 @@ export default class Side01
                     }
 
                 }
-            }
-        )
-    }
-
-    loadGlassWindow(CONFIG)
-    {
-        this.loader.gltf.load(
-            '/3D/Q02/Animation/qudrix-webgl_q2_glassWindow.gltf',
-            (gltf) =>
-            {
-                // this.glassWindow.add(gltf.scene)
-
-                const glass = gltf.scene.children[0].children[0]
-                const metal = gltf.scene.children[0].children[1]
-
-                // console.log(gltf.scene.children[0].children[0]);
-
-                this.glassWindow.add(
-                    glass,
-                    metal
-                )
-
-                glass.material = this.materials.glassWindow
-                metal.material = this.materials.wallBlack
-
-                if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
-                else { this.glassWindow.scale.set(0, 0, 0) }
-
-
-
             }
         )
     }
@@ -223,7 +200,7 @@ export default class Side01
                     }
                 })
 
-          
+
                 this.mixerSliderDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionSliderDoor = this.mixerSliderDoor.clipAction(gltf.animations[0])
 
@@ -282,7 +259,7 @@ export default class Side01
                     // }
                 })
 
-              
+
 
                 this.mixerPortalDoor = new THREE.AnimationMixer(gltf.scene)
                 this.actionPortalDoor = this.mixerPortalDoor.clipAction(gltf.animations[0])
@@ -307,11 +284,11 @@ export default class Side01
 
                 // this.guillotineWindow.rotation.x = Math.PI 
 
-               
+
 
                 gltf.scene.traverse((child) =>
                 {
-                 
+
                     if (child.isMesh && child.material.name === 'glass 003.002')
                     {
                         child.material = this.materials.glassWindow
@@ -395,6 +372,73 @@ export default class Side01
 
             }
         )
+    }
+
+    loadAutomaticSunscreen(CONFIG)
+    {
+        {
+            this.loader.gltf.load(
+                '/3D/Q02/Animation/qudrix-webgl_q2_automatic_sunscreen.gltf',
+                (gltf) =>
+                {
+
+                    gltf.scene.children[0].children[0].material = this.materials.sunscreen
+                    gltf.scene.children[0].children[1].material = this.materials.wallBlack
+                    this.automaticSunscreen.add(gltf.scene)
+                    this.automaticSunscreen.position.x = -0.05
+
+                    // this.mixerAutomaticSunscreen = new THREE.AnimationMixer(gltf.scene)
+                    // this.actionAutomaticSunscreen = this.mixerAutomaticSunscreen.clipAction(gltf.animations[0])
+
+                    // this.animation.play(this.actionAutomaticSunscreen, 1.5)
+
+                    this.statusAutomaticSunscreen = true
+
+                    if (CONFIG.sides['side-01']['accessory01-name'] === "Automatic sunscreen")
+                    {
+                        this.automaticSunscreen.scale.set(1, 1, 1)
+                        this.statusAutomaticSunscreen = true
+                    }
+                    else
+                    {
+                        this.automaticSunscreen.scale.set(0, 0, 0)
+                        this.statusAutomaticSunscreen = false
+                    }
+                })
+        }
+    }
+
+    loadMosquito(CONFIG)
+    {
+        this.loader.gltf.load(
+            '/3D/Q02/Animation/qudrix-webgl_q2_mosquito.gltf',
+            (gltf) =>
+            {
+
+                gltf.scene.children[1].children[0].material = this.materials.sunscreen
+                gltf.scene.children[1].children[1].material = this.materials.wallBlack
+
+                this.mosquito.add(gltf.scene)
+                this.mosquito.position.x = -0.05
+
+                // this.mixerMosquito = new THREE.AnimationMixer(gltf.scene)
+                // this.actionMosquito = this.mixerMosquito.clipAction(gltf.animations[0])
+
+                // this.animation.play(this.actionMosquito, 1.5)
+
+                this.statusMosquito = true
+
+                if (CONFIG.sides['side-01']["accessory02-name"] === "Mosquito Net")
+                {
+                    this.mosquito.scale.set(1, 1, 1)
+                    this.statusMosquito = true
+                }
+                else
+                {
+                    this.mosquito.scale.set(0, 0, 0)
+                    this.statusMosquito = false
+                }
+            })
     }
 
     setFunctions()
@@ -490,6 +534,28 @@ export default class Side01
             this.smartGlassWindow.scale.set(1, 1, 1)
         }
 
+        this.functions.addAutomaticSunscreen = () =>
+        {
+           
+            this.automaticSunscreen.scale.set(1, 1, 1)
+            this.mosquito.scale.set(0, 0, 0)
+
+            // this.animation.play(this.actionAutomaticSunscreen, 1.5)
+
+
+        }
+
+        this.functions.addMosquito = () =>
+        {
+            this.automaticSunscreen.scale.set(0, 0, 0)
+            this.mosquito.scale.set(1, 1, 1)
+        }
+
+        this.functions.removeAccessories = () => {
+            this.automaticSunscreen.scale.set(0, 0, 0)
+            this.mosquito.scale.set(0, 0, 0)
+        }
+
     }
 
 
@@ -511,5 +577,13 @@ export default class Side01
         {
             this.mixerAccordionDoor.update(this.time.delta * 0.0005)
         }
+        // if (this.mixerMosquito)
+        // {
+        //     this.mixerMosquito.update(this.time.delta * 0.0005)
+        // }
+        // if (this.mixerAutomaticSunscreen)
+        // {
+        //     this.mixerAutomaticSunscreen.update(this.time.delta * 0.0005)
+        // }
     }
 }

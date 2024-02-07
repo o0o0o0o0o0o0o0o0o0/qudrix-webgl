@@ -25,10 +25,12 @@ export default class Debug
             this.pergolaQ27Accessories = this.ui.addFolder('pergolaQ27 Accessories').close().show()
             this.sidesFolder = this.ui.addFolder('Sides').open().show()
             this.side01Folder = this.sidesFolder.addFolder('Side 01').open().show()
-            this.side02Folder = this.sidesFolder.addFolder('Side 02').open().show()
+            this.side02Folder = this.sidesFolder.addFolder('Side 02').close().show()
             this.side03Folder = this.sidesFolder.addFolder('Side 03').close().show()
             this.side04Folder = this.sidesFolder.addFolder('Side 04').close().show()
+
             this.attachmentFolder = this.ui.addFolder('attachment').close().show()
+            this.lightsFolder = this.ui.addFolder('lights').open().show()
             this.colorFolder = this.ui.addFolder('color').open().show()
 
         }

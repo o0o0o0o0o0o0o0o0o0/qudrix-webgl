@@ -13,6 +13,7 @@ import Side02 from './Q01/Q01Side02'
 import Side03 from './Q01/Q01Side03'
 import Side04 from './Q01/Q01Side04'
 import Attachment from './Q01/Q01Attachment'
+import Lights from './Q01/Q01Lights'
 
 // import data from '../../../CONFIG.json'
 // const CONFIG = data
@@ -92,6 +93,12 @@ export default class Qudrix01
         this.instance.add(this.attachment.instance)
 
         /**
+         * Lights
+         */
+        this.lights = new Lights(CONFIG)
+        this.instance.add(this.lights.instance)
+
+        /**
          * Color 
          */
 
@@ -112,8 +119,6 @@ export default class Qudrix01
 
     }
 
-
-
     roofDebug()
     {
         this.roof.setFunctions()
@@ -129,68 +134,6 @@ export default class Qudrix01
         }
     }
 
-    sidesDebug()
-    {
-
-        this.side01.setFunctions()
-        this.side02.setFunctions()
-        this.side03.setFunctions()
-        this.side04.setFunctions()
-
-        if (this.debug.active)
-        {
-            // Side01
-            this.debug.side01Folder.add(this.side01.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side01Folder.add(this.side01.functions, 'addSolidPanels').name('SolidPanels')
-            this.debug.side01Folder.add(this.side01.functions, 'addGlassWindow').name('GlassWindow')
-            this.debug.side01Folder.add(this.side01.functions, 'addGuillotineWindow').name('GuillotineWindow')
-            this.debug.side01Folder.add(this.side01.functions, 'addPortalDoor').name('PortalDoor')
-            this.debug.side01Folder.add(this.side01.functions, 'addAccordionDoor').name('AccordionDoor')
-            this.debug.side01Folder.add(this.side01.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
-
-            // Side02
-            this.debug.side02Folder.add(this.side02.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side02Folder.add(this.side02.functions, 'addSolidPanels').name('SolidPanels')
-            this.debug.side02Folder.add(this.side02.functions, 'addGlassWindow').name('GlassWindow')
-            this.debug.side02Folder.add(this.side02.functions, 'addGuillotineWindow').name('GuillotineWindow')
-            this.debug.side02Folder.add(this.side02.functions, 'addPortalDoor').name('PortalDoor')
-            this.debug.side02Folder.add(this.side02.functions, 'addAccordionDoor').name('AccordionDoor')
-            this.debug.side02Folder.add(this.side02.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
-
-            // Side03
-            this.debug.side03Folder.add(this.side03.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side03Folder.add(this.side03.functions, 'addSolidPanels').name('SolidPanels')
-            this.debug.side03Folder.add(this.side03.functions, 'addGlassWindow').name('GlassWindow')
-            this.debug.side03Folder.add(this.side03.functions, 'addGuillotineWindow').name('GuillotineWindow')
-            this.debug.side03Folder.add(this.side03.functions, 'addPortalDoor').name('PortalDoor')
-            this.debug.side03Folder.add(this.side03.functions, 'addAccordionDoor').name('AccordionDoor')
-            this.debug.side03Folder.add(this.side03.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
-
-            // Side04
-            this.debug.side04Folder.add(this.side04.functions, 'addSliderDoor').name('SliderDoor')
-            this.debug.side04Folder.add(this.side04.functions, 'addSolidPanels').name('SolidPanels')
-            this.debug.side04Folder.add(this.side04.functions, 'addGlassWindow').name('GlassWindow')
-            this.debug.side04Folder.add(this.side04.functions, 'addGuillotineWindow').name('GuillotineWindow')
-            this.debug.side04Folder.add(this.side04.functions, 'addPortalDoor').name('PortalDoor')
-            this.debug.side04Folder.add(this.side04.functions, 'addAccordionDoor').name('AccordionDoor')
-            this.debug.side04Folder.add(this.side04.functions, 'addSmartGlassWindow').name('SmartGlassWindow')
-
-        }
-    }
-
-    attachmentDebug()
-    {
-        this.attachment.setFunctions()
-
-
-        if (this.debug.active)
-        {
-            // Attachment
-            this.debug.attachmentFolder.add(this.attachment.functions, 'addAutomaticAwing').name('AutomaticAwing')
-            this.debug.attachmentFolder.add(this.attachment.functions, 'addBioclimacticPergola').name('BioclimacticPergola')
-            this.debug.attachmentFolder.add(this.attachment.functions, 'removeAttachment').name('removeAttachment')
-        }
-    }
 
     colorDebug()
     {

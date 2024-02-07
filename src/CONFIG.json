@@ -1,6 +1,6 @@
 {
     "size": {
-      "element-name": "Q01"
+      "element-name": "Q02"
     },
   
     "roof": {
@@ -11,19 +11,35 @@
   
     "sides": {
       "side-01": {
-        "element-name": "Smart Glass Window"
+        "element-name": "Accordion Door",
+
+        "accessory01-name": "None",
+
+        "accessory02-name": "Mosquito Net"
       },
   
       "side-02": {
-        "element-name": "Slider Door"
+        "element-name": "Slider Door",
+
+        "accessory01-name": "None",
+
+        "accessory02-name": "None"
       },
   
       "side-03": {
-        "element-name": "Solid Panels"
+        "element-name": "Solid Panels",
+
+        "accessory01-name": "None",
+
+        "accessory02-name": "None"
       },
   
       "side-04": {
-        "element-name": "Solid Panels"
+        "element-name": "Solid Panels",
+
+        "accessory01-name": "None",
+
+        "accessory02-name": "None"
       }
     },
   
@@ -32,7 +48,7 @@
     },
   
     "light": {
-      "element-name": ""
+      "element-name": "None"
     },
   
     "floor": {

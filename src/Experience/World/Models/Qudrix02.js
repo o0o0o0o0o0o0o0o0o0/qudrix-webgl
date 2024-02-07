@@ -13,6 +13,7 @@ import Side02 from './Q02/Q02Side02'
 import Side03 from './Q02/Q02Side03'
 import Side04 from './Q02/Q02Side04'
 import Attachment from './Q02/Q02Attachment'
+import Lights from './Q02/Q02Lights'
 
 let instance = null
 
@@ -31,7 +32,7 @@ export default class Qudrix02
         this.experience = new Experience()
 
         this.time = this.experience.time
-                this.manager = this.experience.manager
+        this.manager = this.experience.manager
         this.loader = new Loaders(this.manager.loadingManager)
 
         this.materials = this.experience.materials
@@ -59,7 +60,7 @@ export default class Qudrix02
          */
         this.roof = new Roof(CONFIG)
         this.instance.add(this.roof.instance)
- 
+
 
         /**
          * Sides
@@ -88,6 +89,12 @@ export default class Qudrix02
          */
         this.attachment = new Attachment(CONFIG)
         this.instance.add(this.attachment.instance)
+
+        /**
+         * Lights
+         */
+        this.lights = new Lights(CONFIG)
+        this.instance.add(this.lights.instance)
 
         /**
          * Color 

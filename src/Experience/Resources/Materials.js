@@ -18,6 +18,14 @@ export default class Materials
             side: THREE.DoubleSide
         })
 
+        this.sunscreen = new THREE.MeshStandardMaterial({
+            color: 0x31960B, //0x161616
+            metalness: 0,
+            roughness: 0.45,
+            // transparent: true,
+            // opacity: 0.9
+        })
+
         this.roofWhite = new THREE.MeshStandardMaterial({
             color: 0x6E6E6E, 
             metalness: 0.0,
@@ -34,7 +42,7 @@ export default class Materials
             transparent: true,
             // emissive: new THREE.Color(0x0C1414),
             opacity: 0.2,
-            side: THREE.BackSide,
+            side: THREE.DoubleSide,
             envMap: this.textures.bricksColor,
             envMapIntensity: 1,
             ior: 1.5,
@@ -48,10 +56,10 @@ export default class Materials
             metalness: 0.7,
             roughness: 0.5,
             transmission: 1,
-            thickness: 2,
+            // thickness: 0,
             transparent: true,
             // emissive: new THREE.Color(0x0C1414),
-            opacity: 0.5,
+            opacity: 0.3,
             side: THREE.DoubleSide,
             // envMap: this.textures.bricksColor,
             // envMapIntensity: 1,

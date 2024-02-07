@@ -4,6 +4,8 @@ import gsap from 'gsap'
 import Experience from '../Experience'
 import World from '../World/World'
 
+
+
 import DebugCamera from './DebugCamera'
 
 // import Camera from '../Camera'
@@ -56,7 +58,8 @@ export default class DebugWorld
         this.debugSide02()
         this.debugSide03()
         this.debugSide04()
-        // this.debugAttachment()
+        this.debugAttachment()
+        this.debugLights()
 
         // this.experience.manager.loadingManager.onLoad = () => {
         //     this.functionsMASTER.build()
@@ -250,6 +253,25 @@ export default class DebugWorld
                 this.world.qudrix02.side01.functions.addSmartGlassWindow()
             }
 
+            if (this.CONFIG.sides['side-01']["accessory01-name"] === "Automatic Sunscreen")
+            {
+                this.world.qudrix01.side01.functions.addAutomaticSunscreen()
+                this.world.qudrix02.side01.functions.addAutomaticSunscreen()
+            }
+
+            if (this.CONFIG.sides['side-01']["accessory02-name"] === "Mosquito net")
+            {
+                this.world.qudrix01.side01.functions.addMosquito()
+                this.world.qudrix02.side01.functions.addMosquito()
+            }
+
+            if (this.CONFIG.sides['side-01']["accessory01-name"] === "None" &&
+                this.CONFIG.sides['side-01']["accessory02-name"] === "None") 
+            {
+                this.world.qudrix01.side01.functions.removeAccessories()
+                this.world.qudrix02.side01.functions.removeAccessories()
+            }
+
             /**
              * Side-02
              */
@@ -365,6 +387,44 @@ export default class DebugWorld
             {
                 this.world.qudrix01.side04.functions.addSmartGlassWindow()
                 this.world.qudrix02.side04.functions.addSmartGlassWindow()
+            }
+
+            /**
+            * Attachment
+            */
+            if (this.CONFIG.attachment["element-name"] === "None")
+            {
+                this.world.qudrix01.attachment.functions.removeAttachment()
+                this.world.qudrix02.attachment.functions.removeAttachment()
+            }
+            if (this.CONFIG.attachment["element-name"] === "Automatic Awing")
+            {
+                this.world.qudrix01.attachment.functions.addAutomaticAwing()
+                this.world.qudrix02.attachment.functions.addAutomaticAwing()
+            }
+            if (this.CONFIG.attachment["element-name"] === "Bioclimatic pergola Q27")
+            {
+                this.world.qudrix01.attachment.functions.addBioclimacticPergola()
+                this.world.qudrix02.attachment.functions.addBioclimacticPergola()
+            }
+
+            /**
+             * Lights
+             */
+            if (this.CONFIG.light['element-name'] === 'LED')
+            {
+                this.world.qudrix01.lights.functions.addLED()
+                this.world.qudrix02.lights.functions.addLED()
+            }
+            if (this.CONFIG.light['element-name'] === 'RGB')
+            {
+                this.world.qudrix01.lights.functions.addRGB()
+                this.world.qudrix02.lights.functions.addRGB()
+            }
+            if (this.CONFIG.light['element-name'] === 'None')
+            {
+                this.world.qudrix01.lights.functions.removeLight()
+                this.world.qudrix02.lights.functions.removeLight()
             }
 
 
@@ -494,7 +554,34 @@ export default class DebugWorld
             this.functionsMASTER.build()
 
             // this.debugCamera.functions.side01()
+        }
 
+        this.functionsSide01.addAutomaticSunscreen = () =>
+        {
+            this.CONFIG.sides['side-01']["accessory01-name"] = "Automatic Sunscreen"
+            this.CONFIG.sides['side-01']["accessory02-name"] = "None"
+
+
+            console.log(this.CONFIG.sides['side-01']["accessory01-name"]);
+
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide01.addMosquito = () =>
+        {
+
+            this.CONFIG.sides['side-01']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-01']["accessory02-name"] = "Mosquito net"
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide01.removeAccessories = () =>
+        {
+            this.CONFIG.sides['side-01']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-01']["accessory02-name"] = "None"
+            this.functionsMASTER.build()
         }
 
     }
@@ -694,33 +781,49 @@ export default class DebugWorld
         this.functionsAttachment = {}
         this.functionsAttachment.addAutomaticAwing = () =>
         {
-            this.qudrix01.attachment.functions.addAutomaticAwing()
-            this.qudrix02.attachment.functions.addAutomaticAwing()
-
-            this.debugCamera.functions.default()
-
             this.CONFIG.attachment["element-name"] = "Automatic Awing"
-            console.log(this.CONFIG.attachment["element-name"]);
+            this.functionsMASTER.build()
+
+            // this.debugCamera.functions.default()
+
+
         }
         this.functionsAttachment.addBioclimacticPergola = () =>
         {
-            this.qudrix01.attachment.functions.addBioclimacticPergola()
-            this.qudrix02.attachment.functions.addBioclimacticPergola()
-
-            this.debugCamera.functions.default()
-
             this.CONFIG.attachment["element-name"] = "Bioclimatic pergola Q27"
-            console.log(this.CONFIG.attachment["element-name"]);
+            this.functionsMASTER.build()
+
+            // this.debugCamera.functions.default()
+
         }
         this.functionsAttachment.removeAttachment = () =>
         {
-            this.qudrix01.attachment.functions.removeAttachment()
-            this.qudrix02.attachment.functions.removeAttachment()
-
-            this.debugCamera.functions.default()
-
             this.CONFIG.attachment["element-name"] = "None"
-            console.log(this.CONFIG.attachment["element-name"]);
+            this.functionsMASTER.build()
+
+            // this.debugCamera.functions.default()
+
+
+        }
+    }
+
+    setFunctionLights()
+    {
+        this.functionsLights = {}
+        this.functionsLights.addLED = () =>
+        {
+            this.CONFIG.light['element-name'] = 'LED'
+            this.functionsMASTER.build()
+        }
+        this.functionsLights.addRGB = () =>
+        {
+            this.CONFIG.light['element-name'] = 'RGB'
+            this.functionsMASTER.build()
+        }
+        this.functionsLights.removeLight = () =>
+        {
+            this.CONFIG.light['element-name'] = 'None'
+            this.functionsMASTER.build()
         }
     }
 
@@ -768,6 +871,9 @@ export default class DebugWorld
             this.debug.side01Folder.add(this.functionsSide01, 'addPortalDoor').name('PortalDoor')
             this.debug.side01Folder.add(this.functionsSide01, 'addAccordionDoor').name('AccordionDoor')
             this.debug.side01Folder.add(this.functionsSide01, 'addSmartGlassWindow').name('SmartGlassWindow')
+            this.debug.side01Folder.add(this.functionsSide01, 'addAutomaticSunscreen').name('addAutomaticSunscreen')
+            this.debug.side01Folder.add(this.functionsSide01, 'addMosquito').name('addMosquito')
+            this.debug.side01Folder.add(this.functionsSide01, 'removeAccessories').name('removeAccessories')
         }
 
     }
@@ -836,6 +942,18 @@ export default class DebugWorld
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addAutomaticAwing').name('AutomaticAwing')
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addBioclimacticPergola').name('BioclimacticPergola')
             this.debug.attachmentFolder.add(this.functionsAttachment, 'removeAttachment').name('removeAttachment')
+        }
+    }
+
+    debugLights()
+    {
+        this.setFunctionLights()
+
+        if (this.debug.active)
+        {
+            this.debug.lightsFolder.add(this.functionsLights, 'addLED').name('LED')
+            this.debug.lightsFolder.add(this.functionsLights, 'addRGB').name('RGB')
+            this.debug.lightsFolder.add(this.functionsLights, 'removeLight').name('None')
         }
     }
 

@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import Loaders from '../../../Utils/Loaders'
-import Materials from '../../../Resources/Materials'
 
 import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
@@ -24,7 +23,6 @@ export default class Attachment
         this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
-        // this.staticModel = new StaticModel(CONFIG)
         this.qudrix01 = new Qudrix01()
 
         /**

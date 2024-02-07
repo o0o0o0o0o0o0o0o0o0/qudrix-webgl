@@ -1,9 +1,12 @@
 import * as THREE from 'three'
+import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js'
+
 import Loaders from '../../../Utils/Loaders'
 import Materials from '../../../Resources/Materials'
 
 import Experience from '../../../Experience'
 import Animation from '../../../Utils/Animation'
+import AreaLight from '../../Lights/AreaLight'
 
 export default class StaticModel
 {
@@ -15,9 +18,9 @@ export default class StaticModel
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         
-         this.loader = new Loaders(this.manager.loadingManager)
-        
+
+        this.loader = new Loaders(this.manager.loadingManager)
+
         this.materials = this.experience.materials
 
         this.instance = new THREE.Group()
@@ -48,6 +51,8 @@ export default class StaticModel
 
         this.loadStaticModel(CONFIG)
     }
+
+
 
     loadStaticModel(CONFIG)
     {
@@ -163,7 +168,8 @@ export default class StaticModel
                     // Material attachment
                     gltf.scene.traverse((object) =>
                     {
-                        if (object.isMesh) {
+                        if (object.isMesh)
+                        {
                             object.receiveShadow = true
                             object.castShadow = true
                         }
@@ -173,7 +179,6 @@ export default class StaticModel
                             object.material = this.materials.wallBlack
                         }
                     })
-
 
                 }
             }

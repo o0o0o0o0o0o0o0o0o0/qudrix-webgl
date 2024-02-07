@@ -12,6 +12,10 @@
     "sides": {
       "side-01": {
         "element-name": "Panel Wall" // "Slider Door", "Portal door", "Accordion Door", "Glass Window", "Solid Panels", "Guillotine Q2 Window", "Smart Glass Window"
+        
+        "accessory1-name": "Automatic sunscreen", // "Automatic sunscreen", "None"
+
+        "accessory2-name": "Mosquito net", // "Mosquito net", "None"
       },
   
       "side-02": {

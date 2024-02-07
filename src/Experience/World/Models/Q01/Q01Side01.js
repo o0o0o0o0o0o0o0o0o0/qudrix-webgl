@@ -21,7 +21,7 @@ export default class Side01
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-                this.manager = this.experience.manager
+        this.manager = this.experience.manager
         this.loader = new Loaders(this.manager.loadingManager)
         this.materials = this.experience.materials
 
@@ -37,6 +37,8 @@ export default class Side01
         this.portalDoor = new THREE.Group()
         this.guillotineWindow = new THREE.Group()
         this.accordionDoor = new THREE.Group()
+        this.mosquito = new THREE.Group()
+        this.automaticSunscreen = new THREE.Group()
 
 
         this.instance.add(
@@ -47,6 +49,8 @@ export default class Side01
             this.portalDoor,
             this.guillotineWindow,
             this.accordionDoor,
+            this.mosquito,
+            this.automaticSunscreen
         )
 
         /**
@@ -66,11 +70,13 @@ export default class Side01
         this.loadPortalDoor(CONFIG)
         this.loadGuillotineWindow(CONFIG)
         this.loadAccordionDoor(CONFIG)
+        this.loadMosquito(CONFIG)
+        this.loadAutomaticSunscreen(CONFIG)
 
         /**
          * Set functions
          */
-        this.setFunctions()
+        this.setFunctions(CONFIG)
 
 
     }
@@ -90,27 +96,6 @@ export default class Side01
                     /**
                      * Add Sides
                      */
-
-
-                    // if (child.name === 'sides_glass_window')
-                    // {
-                    //     this.glassWindow.add(child)
-                    //     child.children[0].material = new THREE.MeshBasicMaterial({color: 'red'})
-                    //     child.children[1].material = new THREE.MeshBasicMaterial({color: 'blue'})
-                    //     console.log(child.children[1]);
-
-                    //     // this.glassWindow.scale.set(0, 0, 0)
-
-                    //     child.children[0].material = this.materials.glass
-
-                    //     child.castShadow = true
-                    //     child.receiveShadow = true
-
-                    //     if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
-                    //     else { this.glassWindow.scale.set(0, 0, 0) }
-                    // }
-
-
 
                     if (child.name === 'sides_solid_panel_01')
                     {
@@ -166,8 +151,6 @@ export default class Side01
 
                 if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
                 else { this.glassWindow.scale.set(0, 0, 0) }
-
-
 
             }
         )
@@ -389,7 +372,74 @@ export default class Side01
         )
     }
 
-    setFunctions()
+    loadAutomaticSunscreen(CONFIG)
+    {
+        {
+            this.loader.gltf.load(
+                '/3D/Q01/Animation/qudrix-webgl_q1_automatic_sunscreen.gltf',
+                (gltf) =>
+                {
+                    gltf.scene.children[0].children[0].material = this.materials.sunscreen
+                    gltf.scene.children[0].children[1].material = this.materials.wallBlack
+                    this.automaticSunscreen.add(gltf.scene)
+                    this.automaticSunscreen.position.x = -0.05
+
+                    this.mixerAutomaticSunscreen = new THREE.AnimationMixer(gltf.scene)
+                    this.actionAutomaticSunscreen = this.mixerAutomaticSunscreen.clipAction(gltf.animations[0])
+
+                    this.animation.play(this.actionAutomaticSunscreen, 1.5)
+
+                    this.statusAutomaticSunscreen = true
+
+                    if (CONFIG.sides['side-01']['accessory01-name'] === "Automatic sunscreen")
+                    {
+                        this.automaticSunscreen.scale.set(1, 1, 1)
+                        this.statusAutomaticSunscreen = true
+                    }
+                    else
+                    {
+                        this.automaticSunscreen.scale.set(0, 0, 0)
+                        this.statusAutomaticSunscreen = false
+                    }
+                })
+        }
+    }
+
+    loadMosquito(CONFIG)
+    {
+        this.loader.gltf.load(
+            '/3D/Q01/Animation/qudrix-webgl_q1_mosquito_02.gltf',
+            (gltf) =>
+            {
+
+                gltf.scene.children[0].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
+                gltf.scene.children[0].children[1].children[1].material = this.materials.sunscreen
+
+                this.mosquito.add(gltf.scene)
+                this.mosquito.position.x = -0.05
+
+                this.mixerMosquito = new THREE.AnimationMixer(gltf.scene)
+                this.actionMosquito = this.mixerMosquito.clipAction(gltf.animations[0])
+
+                this.animation.play(this.actionMosquito, 1.5)
+
+                if (CONFIG.sides['side-01']['accessory02-name'] === "Mosquito net")
+                {
+                    this.mosquito.scale.set(1, 1, 1)
+                    this.statusMosquito = true
+                }
+                else
+                {
+                    this.mosquito.scale.set(0, 0, 0)
+                    this.statusMosquito = false
+                }
+            })
+    }
+
+
+
+    setFunctions(CONFIG)
     {
         this.functions = {}
 
@@ -482,6 +532,28 @@ export default class Side01
             this.smartGlassWindow.scale.set(1, 1, 1)
         }
 
+        this.functions.addAutomaticSunscreen = () =>
+        {
+           
+            this.automaticSunscreen.scale.set(1, 1, 1)
+            this.mosquito.scale.set(0, 0, 0)
+
+            this.animation.play(this.actionAutomaticSunscreen, 1.5)
+
+
+        }
+
+        this.functions.addMosquito = () =>
+        {
+            this.automaticSunscreen.scale.set(0, 0, 0)
+            this.mosquito.scale.set(1, 1, 1)
+        }
+
+        this.functions.removeAccessories = () => {
+            this.automaticSunscreen.scale.set(0, 0, 0)
+            this.mosquito.scale.set(0, 0, 0)
+        }
+
     }
 
 
@@ -502,6 +574,14 @@ export default class Side01
         if (this.mixerAccordionDoor)
         {
             this.mixerAccordionDoor.update(this.time.delta * 0.0005)
+        }
+        if (this.mixerMosquito)
+        {
+            // this.mixerMosquito.update(this.time.delta * 0.0005)
+        }
+        if (this.mixerAutomaticSunscreen)
+        {
+            this.mixerAutomaticSunscreen.update(this.time.delta * 0.0005)
         }
     }
 }

@@ -15,9 +15,9 @@ export default class StaticModel
         this.animation = new Animation()
         this.debug = this.experience.debug
 
-         
-         this.loader = new Loaders(this.manager.loadingManager)
-        
+
+        this.loader = new Loaders(this.manager.loadingManager)
+
         this.materials = this.experience.materials
 
         this.instance = new THREE.Group()
@@ -48,6 +48,7 @@ export default class StaticModel
 
         this.loadStaticModel(CONFIG)
     }
+
 
     loadStaticModel(CONFIG)
     {
@@ -120,16 +121,18 @@ export default class StaticModel
                      * Add Sides
                      */
 
-                    if (child.name === 'sides_glass_window')
-                    {
-                        this.glassWindow.add(child)
-                        this.glassWindow.scale.set(1, 1, 1)
+                    // if (child.name === 'sides_glass_window')
+                    // {
+                        // console.log('sides_glass_window', child.children[0]);
+                        // this.smartGlassWindow.add(child.children[1])
+                        // this.smartGlassWindow.add(child.children[0])
+                        // this.glassWindow.scale.set(1, 1, 1)
 
-                        child.children[0].material = this.materials.glassWindow
+                        // child.children[0].material = this.materials.glassWindow
 
-                        child.castShadow = true
-                        child.receiveShadow = true
-                    }
+                        // child.castShadow = true
+                        // child.receiveShadow = true
+                    // }
 
                     if (child.name === 'sides_solid_panel_01')
                     {
@@ -161,7 +164,8 @@ export default class StaticModel
                     // Material attachment
                     gltf.scene.traverse((object) =>
                     {
-                        if (object.isMesh) {
+                        if (object.isMesh)
+                        {
                             object.receiveShadow = true
                             object.castShadow = true
                         }
