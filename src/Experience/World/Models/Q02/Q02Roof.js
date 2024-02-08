@@ -123,7 +123,7 @@ export default class Roof
                 {
                     if (obj.isMesh)
                     {
-                        obj.material = this.materials.roofWhite
+                        obj.material = this.materials.roofWhitePergola27
 
                         obj.castShadow = true
                         obj.receiveShadow = true

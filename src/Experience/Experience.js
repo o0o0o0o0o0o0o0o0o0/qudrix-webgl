@@ -47,7 +47,7 @@ export default class Experience
         // this.camera = this.world.camera
 
         this.axesHelper = new THREE.AxesHelper(5)
-        this.scene.add(this.axesHelper)
+        // this.scene.add(this.axesHelper)
 
         this.setEnvMap()
 

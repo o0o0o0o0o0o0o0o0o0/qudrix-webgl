@@ -102,7 +102,7 @@ export default class Qudrix01
          * Color 
          */
 
-        this.colorDebug()
+        // this.colorDebug()
     }
 
     loadGround(CONFIG)

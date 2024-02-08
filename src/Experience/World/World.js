@@ -68,7 +68,7 @@ export default class World
 
         // Add models
         this.buildingGroup.add(
-            this.cube.instance,
+            // this.cube.instance,
             this.qudrix01.instance,
             this.qudrix02.instance,
         )

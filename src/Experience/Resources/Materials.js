@@ -19,7 +19,16 @@ export default class Materials
             color: 0x161616, //0x161616
             metalness: 0,
             roughness: 0.45,
-            side: THREE.DoubleSide
+            side: THREE.DoubleSide,
+            name: 'wallBlack'
+        })
+
+        this.wallWhite = new THREE.MeshStandardMaterial({
+            color: 0x595959, //0x161616
+            metalness: 0,
+            roughness: 0.45,
+            side: THREE.DoubleSide,
+            name: 'wallWhite'
         })
 
         this.mirrorGlass = new THREE.MeshPhysicalMaterial({
@@ -94,7 +103,19 @@ export default class Materials
             metalness: 0.0,
             roughness: 0.45,
             side: THREE.DoubleSide,
-            name: 'roofWhite'
+            name: 'roofWhite',
+            transparent: false,
+            opacity: 0.15
+        })
+
+        this.roofWhitePergola27 = new THREE.MeshStandardMaterial({
+            color: 0x6E6E6E,
+            metalness: 0.0,
+            roughness: 0.45,
+            side: THREE.DoubleSide,
+            name: 'roofWhite',
+            transparent: false,
+            opacity: 0.15
         })
 
         this.glass = new THREE.MeshPhysicalMaterial({

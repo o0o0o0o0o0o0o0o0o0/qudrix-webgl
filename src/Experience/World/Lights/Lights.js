@@ -14,10 +14,10 @@ export default class Lights
         this.areaLight = new AreaLight()
 
         this.setAmbient()
-        // this.debugAmbient()
+        this.debugAmbient()
 
         this.setDirLight()
-        this.debugDirLight()
+        // this.debugDirLight()
 
 
 
@@ -34,6 +34,7 @@ export default class Lights
         if (this.debug.active)
         {
             this.debug.ambientLightFolder.add(this.ambient, 'intensity', 0, 20, 0.001).name('ambient.intensity')
+            // this.debug.ambientLightFolder.add(this.ambient, 'color').name('ambient.color')
 
         }
     }

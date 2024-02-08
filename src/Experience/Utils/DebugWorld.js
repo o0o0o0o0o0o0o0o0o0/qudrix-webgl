@@ -44,7 +44,7 @@ export default class DebugWorld
 
         this.debugCamera = new DebugCamera(camera)
 
-        this.debugCamera.start()
+        // this.debugCamera.start()
 
         // this.debugCamera(camera)
 
@@ -60,6 +60,7 @@ export default class DebugWorld
         this.debugSide04()
         this.debugAttachment()
         this.debugLights()
+        this.debugColor()
 
         // this.experience.manager.loadingManager.onLoad = () => {
         //     this.functionsMASTER.build()
@@ -188,7 +189,7 @@ export default class DebugWorld
                 this.world.qudrix02.roof.functions.addRoofSolidPanels()
 
                 // correct area light
-                this.world.lights.areaLight.key.intensity = 6
+                this.world.lights.areaLight.top.intensity = 6
             }
             if (this.CONFIG.roof["element-name"] === "Mirror Glass")
             {
@@ -196,7 +197,7 @@ export default class DebugWorld
                 this.world.qudrix02.roof.functions.addRoofMirrorGlass()
 
                 // correct area light
-                this.world.lights.areaLight.key.intensity = 0
+                this.world.lights.areaLight.top.intensity = 0
             }
             if (this.CONFIG.roof["element-name"] === "Swivel Sliding pergola Q25")
             {
@@ -204,7 +205,7 @@ export default class DebugWorld
                 this.world.qudrix02.roof.functions.addRoofPergolaQ25()
 
                 // correct area light
-                this.world.lights.areaLight.key.intensity = 6
+                this.world.lights.areaLight.top.intensity = 6
             }
             if (this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
             {
@@ -212,7 +213,7 @@ export default class DebugWorld
                 this.world.qudrix02.roof.functions.addRoofPergolaQ27()
 
                 // correct area light
-                this.world.lights.areaLight.key.intensity = 6
+                this.world.lights.areaLight.top.intensity = 6
             }
             if (this.CONFIG.roof["accessory01-name"] === "None")
             {
@@ -224,7 +225,26 @@ export default class DebugWorld
             {
                 this.world.qudrix01.roof.functions.addAccessories()
                 this.world.qudrix02.roof.functions.addAccessories()
+
+                // this.materials.roofWhite.wireframe = true
             }
+
+            // Opacity Roof Accessory
+            if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
+                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+            {
+                this.world.qudrix01.roof.functions.addAccessories()
+                this.world.qudrix02.roof.functions.addAccessories()
+
+                this.materials.roofWhitePergola27.color = new THREE.Color('black')
+                this.materials.roofWhitePergola27.transparent = true
+            
+            } else {
+                this.materials.roofWhitePergola27.color = new THREE.Color(0x6E6E6E)
+                this.materials.roofWhitePergola27.transparent = false
+            }
+
+            //0x6E6E6E
 
             /**
              * Side-01
@@ -839,6 +859,48 @@ export default class DebugWorld
         }
     }
 
+    setFunctionsColor()
+    {
+        this.functionsColor = {}
+        this.functionsColor.white = () =>
+        {
+            this.experience.scene.traverse((mesh) =>
+            {
+                if (mesh.isMesh && mesh.material.name === 'wallBlack')
+                {
+                    // mesh.material.color = new THREE.Color(0x808080)
+                    mesh.material = this.materials.wallWhite
+                    this.world.lights.ambient.intensity = 1
+                }
+            })
+        }
+        this.functionsColor.black = () =>
+        {
+            this.experience.scene.traverse((mesh) =>
+            {
+                if (mesh.isMesh && mesh.material.name === 'wallWhite')
+                {
+                    // mesh.material.color = new THREE.Color(0x161616)
+                    mesh.material = this.materials.wallBlack
+                    this.world.lights.ambient.intensity = 0.1
+                }
+            })
+        }
+
+    }
+
+    debugColor()
+    {
+        this.setFunctionsColor()
+
+        if (this.debug.active)
+        {
+            this.debug.colorFolder.add(this.debugCamera.functions, 'default').name('color camera anlge')
+            this.debug.colorFolder.add(this.functionsColor, 'white').name('white')
+            this.debug.colorFolder.add(this.functionsColor, 'black').name('black')
+        }
+    }
+
 
 
 
@@ -848,6 +910,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.sizeFolder.add(this.debugCamera.functions, 'sizes').name('sizes camera anlge')
             this.debug.sizeFolder.add(this.functionsSizes, 'setQ01').name('Q01')
             this.debug.sizeFolder.add(this.functionsSizes, 'setQ02').name('Q02')
         }
@@ -860,6 +923,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.roofFolder.add(this.debugCamera.functions, 'roof').name('roof camera anlge')
             this.debug.roofFolder.add(this.functionsRoof, 'addRoofSolidPanels').name('SolidPanels')
             this.debug.roofFolder.add(this.functionsRoof, 'addRoofMirrorGlass').name('MirrorGlass')
             this.debug.roofFolder.add(this.functionsRoof, 'addRoofPergolaQ25').name('PergolaQ25')
@@ -876,6 +940,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.side01Folder.add(this.debugCamera.functions, 'side01').name('side01 camera anlge')
             this.debug.side01Folder.add(this.functionsSide01, 'addSliderDoor').name('SliderDoor')
             this.debug.side01Folder.add(this.functionsSide01, 'addSolidPanels').name('SolidPanels')
             this.debug.side01Folder.add(this.functionsSide01, 'addGlassWindow').name('GlassWindow')
@@ -896,6 +961,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.side02Folder.add(this.debugCamera.functions, 'side02').name('side02 camera anlge')
             this.debug.side02Folder.add(this.functionsSide02, 'addSliderDoor').name('SliderDoor')
             this.debug.side02Folder.add(this.functionsSide02, 'addSolidPanels').name('SolidPanels')
             this.debug.side02Folder.add(this.functionsSide02, 'addGlassWindow').name('GlassWindow')
@@ -913,6 +979,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.side03Folder.add(this.debugCamera.functions, 'side03').name('side03 camera anlge')
             this.debug.side03Folder.add(this.functionsSide03, 'addSliderDoor').name('SliderDoor')
             this.debug.side03Folder.add(this.functionsSide03, 'addSolidPanels').name('SolidPanels')
             this.debug.side03Folder.add(this.functionsSide03, 'addGlassWindow').name('GlassWindow')
@@ -930,6 +997,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.side04Folder.add(this.debugCamera.functions, 'side04').name('side04 camera anlge')
             this.debug.side04Folder.add(this.functionsSide04, 'addSliderDoor').name('SliderDoor')
             this.debug.side04Folder.add(this.functionsSide04, 'addSolidPanels').name('SolidPanels')
             this.debug.side04Folder.add(this.functionsSide04, 'addGlassWindow').name('GlassWindow')
@@ -950,6 +1018,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.attachmentFolder.add(this.debugCamera.functions, 'sizes').name('attachment camera anlge')
             // Attachment
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addAutomaticAwing').name('AutomaticAwing')
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addBioclimacticPergola').name('BioclimacticPergola')
@@ -963,6 +1032,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
+            this.debug.lightsFolder.add(this.debugCamera.functions, 'sizes').name('lights camera anlge')
             this.debug.lightsFolder.add(this.functionsLights, 'addLED').name('LED')
             this.debug.lightsFolder.add(this.functionsLights, 'addRGB').name('RGB')
             this.debug.lightsFolder.add(this.functionsLights, 'removeLight').name('None')

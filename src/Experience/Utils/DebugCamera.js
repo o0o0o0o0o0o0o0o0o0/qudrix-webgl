@@ -37,7 +37,7 @@ export default class DebugCamera
 
         this.functions.default = () =>
         {
-            this.duration = 0.75
+            this.duration = 1.5
             this.positionY = 0
             this.scaleXYZ = 1
 
@@ -60,7 +60,7 @@ export default class DebugCamera
 
         this.functions.sizes = () =>
         {
-            this.duration = 0.75
+            this.duration = 1.5
             this.positionY = 0
             this.scaleXYZ = 1
 
@@ -82,7 +82,7 @@ export default class DebugCamera
         }
 
         this.functions.roof = () => {
-            this.duration = 0.75
+            this.duration = 1.5
             this.positionY = -10
             this.scaleXYZ = 4
 
@@ -111,7 +111,7 @@ export default class DebugCamera
             gsap
                 .to(this.camera.position, {
                     x: 13.497,
-                    y: 1,
+                    y: 2,
                     z: 0.22,
                     ease: this.ease,
                     duration: this.duration
@@ -135,7 +135,7 @@ export default class DebugCamera
             gsap
                 .to(this.camera.position, {
                     x: 0,
-                    y: 1,
+                    y: 2,
                     z: 13.5,
                     ease: this.ease,
                     duration: this.duration
@@ -159,7 +159,7 @@ export default class DebugCamera
             gsap
                 .to(this.camera.position, {
                     x: -13.497,
-                    y: 1,
+                    y: 2,
                     z: 0.22,
                     ease: this.ease,
                     duration: this.duration
@@ -183,7 +183,7 @@ export default class DebugCamera
             gsap
                 .to(this.camera.position, {
                     x: 0.399,
-                    y: 1,
+                    y: 2,
                     z: -13.5,
                     ease: this.ease,
                     duration: this.duration
