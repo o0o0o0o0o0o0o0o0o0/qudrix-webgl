@@ -92,8 +92,8 @@ export default class Roof
                     {
                         obj.material = this.materials.roofWhite
 
-                        obj.castShadow = true
-                        obj.receiveShadow = true
+                        obj.castShadow = false
+                        obj.receiveShadow = false
                     }
                 })
 
@@ -157,8 +157,8 @@ export default class Roof
                 {
                     if (obj.isMesh)
                     {
-                        obj.castShadow = true
-                        obj.receiveShadow = true
+                        obj.castShadow = false
+                        obj.receiveShadow = false
                     }
                 })
 

@@ -19,7 +19,7 @@ export default class AreaLight {
         this.key.rotation.y = 0
         this.key.rotation.z = 0
         this.key.color = new THREE.Color(0xffffff)
-        this.key.intensity = 3.5
+        this.key.intensity = 13
         this.key.width = 15
         this.key.height = 15
         this.keyHelper = new RectAreaLightHelper(this.key)

@@ -33,17 +33,30 @@ export default class Textures
             '../../envMap/02/nz.png',
         ])
 
-        this.bg = this.loaders.textures.load('../../textures/Bake/env.png')
+        this.environmentMapSidesGlass = this.loaders.textures.load('../../envMap/03/py.png')
+        this.environmentMapSidesGlass.repeat.x = 1
+        this.environmentMapSidesGlass.repeat.y = 0.2
+        this.environmentMapSidesGlass.wrapS = THREE.RepeatWrapping
+        this.environmentMapSidesGlass.wrapT = THREE.RepeatWrapping
+
+        this.gridMosquito = this.loaders.textures.load('../../textures/Mosquito/grid.png')
+        this.gridMosquito.repeat.x = 4
+        this.gridMosquito.repeat.y = 1
+        this.gridMosquito.wrapS = THREE.RepeatWrapping
+        this.gridMosquito.wrapT = THREE.RepeatWrapping
+
 
         // Ground
         this.groundBakeQ01 = this.loaders.textures.load('../../textures/Bake/Q01_base.png')
         this.groundAttachmentBakeQ01 = this.loaders.textures.load('../../textures/Bake/Q01_attach.png')
         this.groundBakeQ02 = this.loaders.textures.load('../../textures/Bake/Q02_base.png')
         this.groundAttachmentBakeQ02 = this.loaders.textures.load('../../textures/Bake/Q02_attach.png')
+        this.bg = this.loaders.textures.load('../../textures/Bake/env.png')
+
 
         // Bricks
         const bricks_x = 0.7
-        const bricks_y = 0.7
+        const bricks_y = 0.2
         this.bricksColor = this.loaders.textures.load('../../textures/Bricks061_1K-JPG/Bricks061_1K-JPG_Color.jpg')
         this.bricksColor.repeat.x = bricks_x
         this.bricksColor.repeat.y = bricks_y
@@ -100,8 +113,8 @@ export default class Textures
         this.paintedBricksRoughness.wrapT = THREE.RepeatWrapping
 
         // Painted Plaster
-        const paintedPlaster_x = 1
-        const paintedPlaster_y = 1
+        const paintedPlaster_x = 2
+        const paintedPlaster_y = 2
         this.paintedPlasterColor = this.loaders.textures.load('../../textures/PaintedPlaster001_1K-JPG/PaintedPlaster001_1K-JPG_Color.jpg')
         this.paintedPlasterColor.repeat.x = paintedPlaster_x
         this.paintedPlasterColor.repeat.y = paintedPlaster_y

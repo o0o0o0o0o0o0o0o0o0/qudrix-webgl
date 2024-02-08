@@ -186,21 +186,33 @@ export default class DebugWorld
             {
                 this.world.qudrix01.roof.functions.addRoofSolidPanels()
                 this.world.qudrix02.roof.functions.addRoofSolidPanels()
+
+                // correct area light
+                this.world.lights.areaLight.key.intensity = 6
             }
             if (this.CONFIG.roof["element-name"] === "Mirror Glass")
             {
                 this.world.qudrix01.roof.functions.addRoofMirrorGlass()
                 this.world.qudrix02.roof.functions.addRoofMirrorGlass()
+
+                // correct area light
+                this.world.lights.areaLight.key.intensity = 0
             }
             if (this.CONFIG.roof["element-name"] === "Swivel Sliding pergola Q25")
             {
                 this.world.qudrix01.roof.functions.addRoofPergolaQ25()
                 this.world.qudrix02.roof.functions.addRoofPergolaQ25()
+
+                // correct area light
+                this.world.lights.areaLight.key.intensity = 6
             }
             if (this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
             {
                 this.world.qudrix01.roof.functions.addRoofPergolaQ27()
                 this.world.qudrix02.roof.functions.addRoofPergolaQ27()
+
+                // correct area light
+                this.world.lights.areaLight.key.intensity = 6
             }
             if (this.CONFIG.roof["accessory01-name"] === "None")
             {

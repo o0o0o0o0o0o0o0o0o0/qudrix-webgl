@@ -172,15 +172,15 @@ export default class Side01
                 gltf.scene.children[0].children[3].material = this.materials.wallBlack
 
                 gltf.scene.children[0].children[4].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[4].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[4].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[5].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[5].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[5].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[6].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[6].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[6].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[7].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[7].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[7].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[8].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[8].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[8].children[1].material = this.materials.sidesGlass
 
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
@@ -189,13 +189,13 @@ export default class Side01
                 {
                     if (child.isMesh)
                     {
-                        child.receiveShadow = true
-                        child.castShadow = true
+                        child.receiveShadow = false
+                        child.castShadow = false
                     }
 
                     if (child.isMesh && child.material.name === 'glass 001')
                     {
-                        child.material = this.materials.glass
+                        child.material = this.materials.sidesGlass
 
                     }
                 })
@@ -227,11 +227,11 @@ export default class Side01
                 // part01 frame
                 gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
                 // part01 frame
-                gltf.scene.children[0].children[1].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[1].children[1].material = this.materials.sidesGlass
                 // part02 frame
                 gltf.scene.children[0].children[2].children[0].material = this.materials.wallBlack
                 // part02 frame
-                gltf.scene.children[0].children[2].children[1].material = this.materials.glassWindow
+                gltf.scene.children[0].children[2].children[1].material = this.materials.sidesGlass
 
 
                 // this.portalDoor.add(
@@ -336,7 +336,7 @@ export default class Side01
 
                     if (child.isMesh && child.material.name === 'Glass.004')
                     {
-                        child.material = this.materials.glassWindow
+                        child.material = this.materials.sidesGlass
 
                     }
                     if (child.isMesh && child.material.name === 'Metal 002.004')

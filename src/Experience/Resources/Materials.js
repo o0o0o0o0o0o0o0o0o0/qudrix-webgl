@@ -26,30 +26,66 @@ export default class Materials
             metalness: 1,
             roughness: 0.0,
             transparent: true,
-            opacity: 1,
+            opacity: 0.9,
             side: THREE.FrontSide,
-            ior: 4,
+            ior: 1.5,
+            // normalMap: this.textures.paintedPlasterNormalGL,
+            // normalScale: new THREE.Vector2(0.2, 0.2)
         })
         this.mirrorGlass.envMap = this.textures.environmentMap02
         this.mirrorGlass.envMapIntensity = 1
 
-        if (this.debug.active)
-        {
-            this.debug.materialFolder.add(this.mirrorGlass, 'metalness', 0, 1, 0.01).name('mirrorGlass.metalness')
-            this.debug.materialFolder.add(this.mirrorGlass, 'roughness', 0, 1, 0.01).name('mirrorGlass.roughness')
-            this.debug.materialFolder.add(this.mirrorGlass, 'opacity', 0, 1, 0.01).name('mirrorGlass.opacity')
-            this.debug.materialFolder.add(this.mirrorGlass, 'envMapIntensity', 0, 1, 0.01).name('mirrorGlass.envMapIntensity')
-            this.debug.materialFolder.add(this.mirrorGlass, 'ior', 0, 10, 0.01).name('mirrorGlass.ior')
-        }
+        this.sidesGlass = new THREE.MeshPhysicalMaterial({
+            color: new THREE.Color('white'),
+            map: this.textures.environmentMapSidesGlass,
+            metalness: 1,
+            roughness: 1,
+            transmission: 0,
+            thickness: 0,
+            transparent: true,
+            // emissive: new THREE.Color(0x0C1414),
+            opacity: 0.24,
+            side: THREE.DoubleSide,
+            envMap: this.textures.environmentMapSidesGlass,
+            envMapIntensity: 1,
+            ior: 1,
+            clearcoat: 1,
+            clearcoatRoughness: 0,
+            normalMap: this.textures.paintedPlasterNormalGL,
+            normalScale: new THREE.Vector2(1, 1)
+        })
+
+        // this.sidesGlass = new THREE.MeshStandardMaterial({
+        //     color: 0x161616, //0x161616
+        //     metalness: 0,
+        //     roughness: 0.45,
+        //     side: THREE.DoubleSide,
+        //     transparent: true,
+        //     opacity: 0
+        // })
+
+
+        // if (this.debug.active)
+        // {
+        //     this.debug.materialFolder.add(this.sidesGlass, 'metalness', 0, 1, 0.01).name('sidesGlass.metalness')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'roughness', 0, 1, 0.01).name('sidesGlass.roughness')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'opacity', 0, 1, 0.01).name('sidesGlass.opacity')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'envMapIntensity', 0, 10, 0.01).name('sidesGlass.envMapIntensity')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'ior', 0, 10, 0.01).name('sidesGlass.ior')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'transmission', 0, 10, 0.01).name('sidesGlass.transmission')
+        //     this.debug.materialFolder.add(this.sidesGlass, 'thickness', 0, 10, 0.01).name('sidesGlass.thickness')
+        // }
 
 
 
 
         this.sunscreen = new THREE.MeshStandardMaterial({
-            color: 0x31960B, //0x161616
+            color: 0x161616, //0x161616
+            map: this.textures.gridMosquito,
             metalness: 0,
             roughness: 0.45,
-            // transparent: true,
+            transparent: true,
+            // alphaMap: this.textures.gridMosquito,
             // opacity: 0.9
         })
 

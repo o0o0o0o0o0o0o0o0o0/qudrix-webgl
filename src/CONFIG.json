@@ -11,11 +11,11 @@
   
     "sides": {
       "side-01": {
-        "element-name": "Solid Panels",
+        "element-name": "Slider Door",
 
         "accessory01-name": "None",
 
-        "accessory02-name": "None"
+        "accessory02-name": "Mosquito net"
       },
   
       "side-02": {
@@ -44,7 +44,7 @@
     },
   
     "attachment": {
-      "element-name": "Automatic Awing"
+      "element-name": "None"
     },
   
     "light": {

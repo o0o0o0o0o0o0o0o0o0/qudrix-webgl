@@ -57,7 +57,7 @@ export default class World
             this.lights.areaLight.key,
             // this.lights.areaLight.keyHelper,
             this.lights.areaLight.top,
-            this.lights.areaLight.topHelper,
+            // this.lights.areaLight.topHelper,
             this.lights.areaLight.fill01,
             // this.lights.areaLight.fill01Helper,
             this.lights.areaLight.fill03,
@@ -85,6 +85,8 @@ export default class World
          * Debug world elemetns
          */
         this.debugWorld = new DebugWorld(this.camera.instance)
+
+
         
 
     }

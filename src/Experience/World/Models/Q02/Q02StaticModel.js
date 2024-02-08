@@ -69,8 +69,8 @@ export default class StaticModel
                     {
                         this.base.add(child)
 
-                        child.castShadow = true
-                        child.receiveShadow = true
+                        child.castShadow = false
+                        child.receiveShadow = false
 
                         // console.log(child.material);
                         child.material = this.materials.wallBlack
@@ -98,8 +98,8 @@ export default class StaticModel
                         this.roofSolidMesh.copy(child)
                         this.roofSolidMesh.material = this.materials.roofWhite
                         this.roofSolidPanels.add(this.roofSolidMesh)
-                        this.roofSolidMesh.castShadow = true
-                        this.roofSolidMesh.receiveShadow = true
+                        this.roofSolidMesh.castShadow = false
+                        this.roofSolidMesh.receiveShadow = false
 
                         // Check CONFIG
                         // if (CONFIG.roof['element-name'] === 'Solid Panels') { this.roofSolidPanels.scale.set(1, 1, 1) }
@@ -107,10 +107,10 @@ export default class StaticModel
 
                         // Mirror
                         this.roofMirrorMesh.copy(child)
-                        this.roofMirrorMesh.material = this.materials.glassWindow
+                        this.roofMirrorMesh.material = this.materials.mirrorGlass
                         this.roofMirrorGlass.add(this.roofMirrorMesh)
-                        this.roofMirrorGlass.castShadow = true
-                        this.roofMirrorGlass.receiveShadow = true
+                        this.roofMirrorGlass.castShadow = false
+                        this.roofMirrorGlass.receiveShadow = false
                         // Check CONFIG
                         // if (CONFIG.roof['element-name'] === 'Mirror Glass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
                         // else { this.roofMirrorGlass.scale.set(0, 0, 0) }
@@ -121,34 +121,21 @@ export default class StaticModel
                      * Add Sides
                      */
 
-                    // if (child.name === 'sides_glass_window')
-                    // {
-                        // console.log('sides_glass_window', child.children[0]);
-                        // this.smartGlassWindow.add(child.children[1])
-                        // this.smartGlassWindow.add(child.children[0])
-                        // this.glassWindow.scale.set(1, 1, 1)
-
-                        // child.children[0].material = this.materials.glassWindow
-
-                        // child.castShadow = true
-                        // child.receiveShadow = true
-                    // }
-
                     if (child.name === 'sides_solid_panel_01')
                     {
                         this.solidWall.add(child)
                         this.solidWall.scale.set(0, 0, 0)
-                        child.castShadow = true
-                        child.receiveShadow = true
+                        child.castShadow = false
+                        child.receiveShadow = false
                     }
 
                     if (child.name === 'sides_solid_panels_02')
                     {
                         this.smartGlassWindow.add(child)
                         this.smartGlassWindow.scale.set(0, 0, 0)
-                        child.castShadow = true
-                        child.receiveShadow = true
-                        child.children[1].material = this.materials.glassWindow
+                        child.castShadow = false
+                        child.receiveShadow = false
+                        child.children[1].material = this.materials.sidesGlass
                     }
 
                     /**
