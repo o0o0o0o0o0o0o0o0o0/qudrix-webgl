@@ -49,11 +49,21 @@ export default class World
             this.lights.directional,
             // this.lights.directionalHelper,
             // this.lights.directionalCameraShadowHelper,
+            this.lights.directionalFill,
+            // this.lights.directionalFillHelper,
             this.lights.ambient,
+
+            //  AREALIGHTS
             this.lights.areaLight.key,
-            this.lights.areaLight.keyHelper,
+            // this.lights.areaLight.keyHelper,
             this.lights.areaLight.top,
             this.lights.areaLight.topHelper,
+            this.lights.areaLight.fill01,
+            // this.lights.areaLight.fill01Helper,
+            this.lights.areaLight.fill03,
+            // this.lights.areaLight.fill03Helper,
+            this.lights.areaLight.fill04,
+            // this.lights.areaLight.fill04Helper,
         )
 
         // Add models

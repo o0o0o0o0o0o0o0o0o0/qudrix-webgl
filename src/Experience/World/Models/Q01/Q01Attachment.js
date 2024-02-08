@@ -68,8 +68,8 @@ export default class Attachment
                     if (obj.isMesh)
                     {
 
-                        obj.castShadow = true
-                        obj.receiveShadow = true
+                        obj.castShadow = false
+                        obj.receiveShadow = false
 
                         if (obj.material.name === 'Golden silk fabric')
                         {

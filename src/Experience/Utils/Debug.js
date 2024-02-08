@@ -14,8 +14,9 @@ export default class Debug
 
             this.MASTERfolder = this.ui.addFolder('MASTER').open().hide()
             this.CONFIGfolder = this.ui.addFolder('CONFIG').open().hide()
-            this.cameraFolder = this.ui.addFolder('camera').open().show()
-            this.rendererFolder = this.ui.addFolder('renderer').open().show()
+            this.materialFolder = this.ui.addFolder('material').open().show()
+            this.cameraFolder = this.ui.addFolder('camera').open().hide()
+            this.rendererFolder = this.ui.addFolder('renderer').open().hide()
             this.ambientLightFolder = this.ui.addFolder('ambient').open().hide()
             this.directionalLightFolder = this.ui.addFolder('directional').open().hide()
             this.areaLightFolder = this.ui.addFolder('areaLight').open().hide()

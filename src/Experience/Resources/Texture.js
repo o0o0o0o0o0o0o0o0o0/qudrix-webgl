@@ -11,6 +11,7 @@ export default class Textures
 
         this.experience = new Experience()
         this.manager = this.experience.manager
+
         
         this.loaders = new Loaders(this.manager.loadingManager)
 
@@ -23,23 +24,22 @@ export default class Textures
             '../../envMap/01/nz.png',
         ])
 
-        this.bg = this.loaders.textures.load('../../textures/scene_00000.png')
+        this.environmentMap02 = this.loaders.cube.load([
+            '../../envMap/02/px.png',
+            '../../envMap/02/nx.png',
+            '../../envMap/02/py.png',
+            '../../envMap/02/ny.png',
+            '../../envMap/02/pz.png',
+            '../../envMap/02/nz.png',
+        ])
+
+        this.bg = this.loaders.textures.load('../../textures/Bake/env.png')
 
         // Ground
-        this.groundBakeQ01 = this.loaders.textures.load('../../textures/Ground/plane02_no_attachment_00000.png')
-        this.groundAttachmentBakeQ01 = this.loaders.textures.load('../../textures/Ground/plane02_00000.png')
-        this.groundBakeQ02 = this.loaders.textures.load('../../textures/Ground/Q02_00000.png')
-        this.groundAttachmentBakeQ02 = this.loaders.textures.load('../../textures/Ground/Q02_attach_00000.png')
-
-        // Cube
-        this.cubeBake = this.loaders.textures.load('../../textures/Base/cube_0000.png')
-        this.cubeBake.colorSpace = THREE.SRGBColorSpace
-
-        // Base
-        this.baseQ1Black = this.loaders.textures.load('../../textures/Base/base_v02_00000.png')
-        // this.baseQ1Black.colorSpace = THREE.ACESFilmicToneMapping
-        this.baseQ1Black.colorSpace = THREE.SRGBColorSpace
-        // this.baseQ1Black.colorSpace = THREE.LinearSRGBColorSpace
+        this.groundBakeQ01 = this.loaders.textures.load('../../textures/Bake/Q01_base.png')
+        this.groundAttachmentBakeQ01 = this.loaders.textures.load('../../textures/Bake/Q01_attach.png')
+        this.groundBakeQ02 = this.loaders.textures.load('../../textures/Bake/Q02_base.png')
+        this.groundAttachmentBakeQ02 = this.loaders.textures.load('../../textures/Bake/Q02_attach.png')
 
         // Bricks
         const bricks_x = 0.7

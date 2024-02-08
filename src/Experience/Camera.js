@@ -22,7 +22,7 @@ export default class Camera
 
         this.number = 8
         this.aspect = this.sizes.width / this.sizes.height
-        this.instance = new THREE.OrthographicCamera(-this.number * this.aspect, this.number * this.aspect, this.number, -this.number, 0.1, 10000)
+        this.instance = new THREE.OrthographicCamera(-this.number * this.aspect, this.number * this.aspect, this.number, -this.number, 0.01, 100000)
         // this.instance.zoom = 10
         this.instance.position.set(
             14,

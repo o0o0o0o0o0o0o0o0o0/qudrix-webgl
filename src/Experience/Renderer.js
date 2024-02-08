@@ -28,7 +28,11 @@ export default class Renderer
         this.instance.setPixelRatio(Math.min(this.sizes.pixelRation, 2))
 
         this.instance.shadowMap.enabled = true
-        
+        // this.instance.shadowMap.type = THREE.PCFSoftShadowMap
+        // this.instance.shadowMap.type = THREE.BasicShadowMap
+        this.instance.shadowMap.type = THREE.PCFShadowMap
+        // this.instance.shadowMap.type = THREE.VSMShadowMap
+
         this.instance.toneMapping = THREE.ACESFilmicToneMapping
 
     }

@@ -74,7 +74,7 @@ export default class StaticModel
 
                         // console.log(child.material);
                         child.material = this.materials.wallBlack
-                        // child.material = this.materials.baseQ1Black
+
                     }
 
                     /**
