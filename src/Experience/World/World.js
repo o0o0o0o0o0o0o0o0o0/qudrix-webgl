@@ -35,7 +35,7 @@ export default class World
 
         this.lights = new Lights()
         this.camera = new Camera()
- 
+
 
         this.cube = new Cube()
         this.qudrix01 = new Qudrix01(this.CONFIG)
@@ -44,15 +44,19 @@ export default class World
         this.buildingGroup = new THREE.Group()
         this.scene.add(this.buildingGroup)
 
-        // Add lights
-        this.buildingGroup.add(
+        this.scene.add(
             this.lights.directional,
             // this.lights.directionalHelper,
             // this.lights.directionalCameraShadowHelper,
+            
+            this.lights.ambient,
+        )
+
+        // Add lights
+        this.buildingGroup.add(
             this.lights.directionalFill,
             // this.lights.directionalFillHelper,
-            this.lights.ambient,
-
+         
             //  AREALIGHTS
             this.lights.areaLight.key,
             // this.lights.areaLight.keyHelper,
@@ -78,8 +82,8 @@ export default class World
         else { this.qudrix02.instance.scale.set(0, 0, 0) }
 
         this.setBG()
-        this.setShadowCatcher()
-        this.debugShadowCatcher()
+        // this.setShadowCatcher()
+        // this.debugShadowCatcher()
 
         /**
          * Debug world elemetns
@@ -87,7 +91,7 @@ export default class World
         this.debugWorld = new DebugWorld(this.camera.instance)
 
 
-        
+
 
     }
 

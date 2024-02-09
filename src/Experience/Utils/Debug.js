@@ -30,7 +30,7 @@ export default class Debug
             this.side03Folder = this.sidesFolder.addFolder('Side 03').close().show()
             this.side04Folder = this.sidesFolder.addFolder('Side 04').close().show()
 
-            this.attachmentFolder = this.ui.addFolder('attachment').close().show()
+            this.attachmentFolder = this.ui.addFolder('attachment').open().show()
             this.lightsFolder = this.ui.addFolder('lights').close().show()
             this.colorFolder = this.ui.addFolder('color').close().show()
 

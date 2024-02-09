@@ -61,8 +61,8 @@ export default class Camera
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
         this.controls.maxPolarAngle = Math.PI / 2.01
-        this.controls.minDistance = 5
-        this.controls.maxDistance = 21
+        // this.controls.minDistance = 5
+        // this.controls.maxDistance = 21
         this.controls.mouseButtons = {
             LEFT: THREE.MOUSE.ROTATE,
             MIDDLE: null, //THREE.MOUSE.DOLLY

@@ -40,6 +40,24 @@ export default class Experience
         this.time = new Time()
         this.scene = new THREE.Scene()
 
+        // this.cubeMaterial = new THREE.MeshPhongMaterial({ color: 'grey' })
+        // this.cubeMaterial.roughness = 0.0
+        // this.cubeMaterial.metalness = 1.0
+        // // this.cubeMaterial.envMap = this.textures.environmentMap
+        // // this.cubeMaterial.envMapIntensity = 1.0
+        // this.cube = new THREE.Mesh(
+        //     new THREE.BoxGeometry(5, 5, 5),
+        //     this.cubeMaterial
+        // )
+
+        // if (this.debug.active) {
+        //     this.debug.materialFolder.add(this.cubeMaterial, 'roughness', 0, 1, 0.01).name('Roughness')
+        //     this.debug.materialFolder.add(this.cubeMaterial, 'metalness', 0, 1, 0.01).name('Metalness')
+        //     // this.debug.materialFolder.add(this.cubeMaterial, 'envMapIntensity', 0, 10, 0.01).name('EnvMapIntensity')
+        // }
+        // this.cube.position.y = 4
+        // this.scene.add(this.cube)
+
         this.world = new World(this.CONFIG)
         this.camera = this.world.camera
         // this.camera = new Camera()  
@@ -67,7 +85,8 @@ export default class Experience
     {
         // this.scene.background = this.textures.environmentMap
         this.scene.background = new THREE.Color(0x888988)
-        this.scene.environment = this.textures.bg
+        // this.scene.environment = this.textures.bg
+        this.scene.environment = this.textures.environmentMap
 
         this.scene.backgroundBlurriness = 0
         this.scene.backgroundIntensity = 2
@@ -86,7 +105,6 @@ export default class Experience
         this.renderer.update()
     }
 }
-
 
 
 

@@ -40,6 +40,8 @@ export default class Side01
         this.mosquito = new THREE.Group()
         this.automaticSunscreen = new THREE.Group()
 
+ 
+
 
         this.instance.add(
             this.glassWindow,
@@ -119,6 +121,9 @@ export default class Side01
                         child.children[0].material = this.materials.sidesGlass
                         child.children[1].material = this.materials.sidesGlass
 
+                        child.children[0].renderOrder = 1
+                        child.children[1].renderOrder = 1
+
                         if (CONFIG.sides['side-01']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
                         else { this.smartGlassWindow.scale.set(0, 0, 0) }
                     }
@@ -138,6 +143,8 @@ export default class Side01
 
                 const glass = gltf.scene.children[0].children[0]
                 const metal = gltf.scene.children[0].children[1]
+
+                glass.renderOrder = 1
 
                 // console.log(gltf.scene.children[0].children[0]);
 
@@ -164,8 +171,6 @@ export default class Side01
             {
                 this.sliderDoor.add(gltf.scene)
 
-
-
                 gltf.scene.children[0].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[1].material = this.materials.wallBlack
                 gltf.scene.children[0].children[2].material = this.materials.wallBlack
@@ -179,6 +184,11 @@ export default class Side01
                 gltf.scene.children[0].children[6].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[7].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[7].children[1].material = this.materials.sidesGlass
+
+                gltf.scene.children[0].children[4].children[1].renderOrder = 1
+                gltf.scene.children[0].children[5].children[1].renderOrder = 1
+                gltf.scene.children[0].children[6].children[1].renderOrder = 1
+                gltf.scene.children[0].children[7].children[1].renderOrder = 1
 
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
@@ -226,10 +236,12 @@ export default class Side01
                 gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
                 // part01 frame
                 gltf.scene.children[0].children[1].children[1].material = this.materials.sidesGlass
+                gltf.scene.children[0].children[1].children[1].renderOrder = 1
                 // part02 frame
                 gltf.scene.children[0].children[2].children[0].material = this.materials.wallBlack
                 // part02 frame
                 gltf.scene.children[0].children[2].children[1].material = this.materials.sidesGlass
+                gltf.scene.children[0].children[2].children[1].renderOrder = 1
 
 
                 // this.portalDoor.add(
@@ -290,6 +302,7 @@ export default class Side01
                     if (child.isMesh && child.material.name === 'glass 003')
                     {
                         child.material = this.materials.sidesGlass
+                        child.renderOrder = 1
                     }
                     if (child.isMesh && child.material.name === 'Metal для всех 001')
                     {

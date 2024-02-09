@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import Loaders from '../../Utils/Loaders'
-import Materials from '../../Resources/Materials'
 
 
 import Experience from '../../Experience'
@@ -33,6 +32,7 @@ export default class Qudrix01
         instance = this
 
         this.experience = new Experience()
+        this.materials = this.experience.materials
 
         this.time = this.experience.time
 
@@ -75,6 +75,7 @@ export default class Qudrix01
         this.side03 = new Side03(CONFIG)
         this.side04 = new Side04(CONFIG)
         this.sides.add(
+            // this.side01.mosquito,
             this.side01.instance,
             this.side02.instance,
             this.side03.instance,
@@ -85,6 +86,16 @@ export default class Qudrix01
         this.side02.instance.rotation.y = - Math.PI / 2
         this.side03.instance.rotation.y = Math.PI
         this.side04.instance.rotation.y = Math.PI / 2
+
+        // this.planeTest = new THREE.Mesh(
+        //     new THREE.PlaneGeometry(3, 3, 1, 1),
+        //     this.materials.sidesGlass
+        // )
+        // this.planeTest.position.x = 1.5
+        // this.planeTest.position.y = 1.2
+        // this.planeTest.rotation.y = -1.57
+        // this.instance.add(this.planeTest)
+        // this.planeTest.renderOrder = 1
 
         /**
          * Attachment

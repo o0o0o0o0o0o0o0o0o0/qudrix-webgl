@@ -39,6 +39,7 @@ export default class DebugCamera
         {
             this.duration = 1.5
             this.positionY = 0
+            this.positionZ = 0
             this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
@@ -55,13 +56,14 @@ export default class DebugCamera
                 ease: this.ease,
                 duration: this.duration
             })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.sizes = () =>
         {
             this.duration = 1.5
             this.positionY = 0
+            this.positionZ = 0
             this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
@@ -78,12 +80,14 @@ export default class DebugCamera
                 ease: this.ease,
                 duration: this.duration
             })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
-        this.functions.roof = () => {
+        this.functions.roof = () =>
+        {
             this.duration = 1.5
             this.positionY = -10
+            this.positionZ = 0
             this.scaleXYZ = 4
 
             gsap.to(this.camera.position, {
@@ -100,19 +104,20 @@ export default class DebugCamera
                 ease: this.ease,
                 duration: this.duration
             })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side01 = () =>
         {
-            this.duration = 1
+            this.duration = 1.5
             this.positionY = -2.75
+            this.positionZ = 0
             this.scaleXYZ = 2.5
             gsap
                 .to(this.camera.position, {
                     x: 13.497,
                     y: 2,
-                    z: 0.22,
+                    z: 0.22 - 2,
                     ease: this.ease,
                     duration: this.duration
                 })
@@ -124,17 +129,18 @@ export default class DebugCamera
                     ease: this.ease,
                     duration: this.duration
                 })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side02 = () =>
         {
-            this.duration = 1
+            this.duration = 1.5
             this.positionY = -2.75
+            this.positionZ = 0
             this.scaleXYZ = 2.5
             gsap
                 .to(this.camera.position, {
-                    x: 0,
+                    x: 0 + 2,
                     y: 2,
                     z: 13.5,
                     ease: this.ease,
@@ -148,19 +154,20 @@ export default class DebugCamera
                     ease: this.ease,
                     duration: this.duration
                 })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side03 = () =>
         {
-            this.duration = 1
+            this.duration = 1.5
             this.positionY = -2.75
+            this.positionZ = 0
             this.scaleXYZ = 2.5
             gsap
                 .to(this.camera.position, {
                     x: -13.497,
                     y: 2,
-                    z: 0.22,
+                    z: 0.22 + 2,
                     ease: this.ease,
                     duration: this.duration
                 })
@@ -172,17 +179,18 @@ export default class DebugCamera
                     ease: this.ease,
                     duration: this.duration
                 })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side04 = () =>
         {
-            this.duration = 1
+            this.duration = 1.5
             this.positionY = -2.75
+            this.positionZ = 0
             this.scaleXYZ = 2.5
             gsap
                 .to(this.camera.position, {
-                    x: 0.399,
+                    x: 0.399 - 2,
                     y: 2,
                     z: -13.5,
                     ease: this.ease,
@@ -196,7 +204,31 @@ export default class DebugCamera
                     ease: this.ease,
                     duration: this.duration
                 })
-            this.scaleBuildingAndLights(this.positionY, this.scaleXYZ)
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
+        }
+
+        this.functions.attachment = () =>
+        {
+            this.duration = 1.5
+            this.positionY = -6
+            this.positionZ = -8.5
+            this.scaleXYZ = 3
+
+            gsap.to(this.camera.position, {
+                x: 14,
+                y: 9.5,
+                z: 10,
+                ease: this.ease,
+                duration: this.duration
+            })
+            gsap.to(this.camera.rotation, {
+                x: -0.7,
+                y: 0.8,
+                z: 0.56,
+                ease: this.ease,
+                duration: this.duration
+            })
+            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
 
@@ -218,11 +250,17 @@ export default class DebugCamera
         }
     }
 
-    scaleBuildingAndLights(positionY, scaleXYZ)
+    scaleBuildingAndLights(positionY, positionZ, scaleXYZ)
     {
         gsap
             .to(this.buildingGroup.position, {
                 y: this.positionY,
+                ease: this.ease,
+                duration: this.duration
+            })
+        gsap
+            .to(this.buildingGroup.position, {
+                z: positionZ,
                 ease: this.ease,
                 duration: this.duration
             })

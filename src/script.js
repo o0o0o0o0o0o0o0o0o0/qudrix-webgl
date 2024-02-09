@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Experience from './Experience/Experience'
 
 import dataJSON from './CONFIG.json'
+// import dataJSONbefore from './CONFIGbefore.json'
 
 /**
  * Canvas

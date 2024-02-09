@@ -1,4 +1,7 @@
 import * as THREE from 'three'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { SAOPass } from 'three/examples/jsm/postprocessing/SAOPass.js'
 
 import Experience from "./Experience";
 
@@ -47,6 +50,7 @@ export default class Renderer
 
     update()
     {
+
         this.instance.render(this.scene, this.camera.instance)
     }
 }

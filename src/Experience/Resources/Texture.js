@@ -23,6 +23,10 @@ export default class Textures
             '../../envMap/01/pz.png',
             '../../envMap/01/nz.png',
         ])
+        this.environmentMap.repeat.x = 1
+        this.environmentMap.repeat.y = 1
+        this.environmentMap.wrapS = THREE.RepeatWrapping
+        this.environmentMap.wrapT = THREE.RepeatWrapping
 
         this.environmentMap02 = this.loaders.cube.load([
             '../../envMap/02/px.png',
@@ -44,6 +48,8 @@ export default class Textures
         this.gridMosquito.repeat.y = 1
         this.gridMosquito.wrapS = THREE.RepeatWrapping
         this.gridMosquito.wrapT = THREE.RepeatWrapping
+
+        this.matcap = this.loaders.textures.load('../../textures/Matcap/PXGwhite.jpg')
 
 
         // Ground

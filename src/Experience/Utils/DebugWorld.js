@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import Experience from '../Experience'
 import World from '../World/World'
 
+import databefore from '../../CONFIGbefore.json'
 
 
 import DebugCamera from './DebugCamera'
@@ -23,7 +24,7 @@ export default class DebugWorld
 
         this.world = new World()
         this.CONFIG = this.world.CONFIG
-
+        this.CONFIGbefore = databefore
 
         this.buildingGroup = this.world.buildingGroup
         this.areaLightKey = this.world.lights.areaLight.key
@@ -36,6 +37,7 @@ export default class DebugWorld
         /**
          * Set MASTER Function
          */
+        this.status = 'roof' // what we change
         this.setMASTER(this.CONFIG)
 
         // Debug
@@ -71,6 +73,8 @@ export default class DebugWorld
 
 
     }
+
+
 
     setFunctionSizes()
     {
@@ -156,309 +160,418 @@ export default class DebugWorld
         }
     }
 
-    setMASTER(data)
+    setStatusForMaster()
+    {
+        for (const [key, value] of Object.entries(this.CONFIG))
+        {
+            if (key === 'size')
+            {
+                if (value['element-name'] !== this.CONFIGbefore.size['element-name'])
+                {
+                    this.status = 'size'
+                }
+            }
+            if (key === 'roof')
+            {
+                if (value['element-name'] !== this.CONFIGbefore.roof['element-name'])
+                {
+                    this.status = 'roof'
+                }
+
+                if (value["accessory01-name"] !== this.CONFIGbefore.roof["accessory01-name"])
+                {
+                    this.status = 'roofAccessory01'
+                }
+            }
+            if (key === 'sides')
+            {
+                if (value['side-01']['element-name'] !== this.CONFIGbefore.sides['side-01']['element-name'])
+                {
+                    this.status = 'side-01'
+                }
+                if (value['side-02']['element-name'] !== this.CONFIGbefore.sides['side-02']['element-name'])
+                {
+                    this.status = 'side-02'
+                }
+                if (value['side-03']['element-name'] !== this.CONFIGbefore.sides['side-03']['element-name'])
+                {
+                    this.status = 'side-03'
+                }
+                if (value['side-04']['element-name'] !== this.CONFIGbefore.sides['side-04']['element-name'])
+                {
+                    this.status = 'side-04'
+                }
+            }
+            if (key === 'sides')
+            {
+                if (value['side-01']["accessory01-name"] !== this.CONFIGbefore.sides['side-01']['accessory01-name'] ||
+                    value['side-01']["accessory02-name"] !== this.CONFIGbefore.sides['side-01']['accessory02-name'])
+                {
+                    this.status = 'side-01Accessory'
+                }
+            }
+            if (key === 'attachment')
+            {
+                if (value['element-name'] !== this.CONFIGbefore.attachment['element-name'])
+                {
+                    this.status = 'attachment'
+                }
+            }
+            if (key === 'light')
+            {
+                if (value['element-name'] !== this.CONFIGbefore.light['element-name'])
+                {
+                    this.status = 'light'
+                }
+            }
+        }
+        this.CONFIGbefore = JSON.parse(JSON.stringify(this.CONFIG))
+    }
+
+
+    setMASTER()
     {
 
         this.functionsMASTER = {}
 
         this.functionsMASTER.build = () =>
         {
-            this.CONFIG = data
+            // this.CONFIG = data
+
+            // console.log(this.CONFIG.roof, this.CONFIGbefore.roof);
+
+            this.setStatusForMaster()
 
             /**
              * Size
              */
-            if (this.CONFIG.size['element-name'] === 'Q01')
+            if (this.status === 'size')
             {
-                this.world.qudrix01.instance.scale.set(1, 1, 1,)
-                this.world.qudrix02.instance.scale.set(0, 0, 0,)
-            }
-            if (this.CONFIG.size['element-name'] === 'Q02')
-            {
-                this.world.qudrix01.instance.scale.set(0, 0, 0,)
-                this.world.qudrix02.instance.scale.set(1, 1, 1,)
+                if (this.CONFIG.size['element-name'] === 'Q01')
+                {
+                    this.world.qudrix01.instance.scale.set(1, 1, 1,)
+                    this.world.qudrix02.instance.scale.set(0, 0, 0,)
+                }
+                if (this.CONFIG.size['element-name'] === 'Q02')
+                {
+                    this.world.qudrix01.instance.scale.set(0, 0, 0,)
+                    this.world.qudrix02.instance.scale.set(1, 1, 1,)
+                }
             }
 
             /**
              * Roof
              */
-
-            if (this.CONFIG.roof["element-name"] === "Solid Panels")
+            if (this.status === 'roof')
             {
-                this.world.qudrix01.roof.functions.addRoofSolidPanels()
-                this.world.qudrix02.roof.functions.addRoofSolidPanels()
+                if (this.CONFIG.roof["element-name"] === "Solid Panels")
+                {
+                    this.world.qudrix01.roof.functions.addRoofSolidPanels()
+                    this.world.qudrix02.roof.functions.addRoofSolidPanels()
 
-                // correct area light
-                this.world.lights.areaLight.top.intensity = 6
-            }
-            if (this.CONFIG.roof["element-name"] === "Mirror Glass")
-            {
-                this.world.qudrix01.roof.functions.addRoofMirrorGlass()
-                this.world.qudrix02.roof.functions.addRoofMirrorGlass()
+                    // correct area light
+                    this.world.lights.areaLight.top.intensity = 6
+                }
+                if (this.CONFIG.roof["element-name"] === "Mirror Glass")
+                {
+                    this.world.qudrix01.roof.functions.addRoofMirrorGlass()
+                    this.world.qudrix02.roof.functions.addRoofMirrorGlass()
 
-                // correct area light
-                this.world.lights.areaLight.top.intensity = 0
-            }
-            if (this.CONFIG.roof["element-name"] === "Swivel Sliding pergola Q25")
-            {
-                this.world.qudrix01.roof.functions.addRoofPergolaQ25()
-                this.world.qudrix02.roof.functions.addRoofPergolaQ25()
+                    // correct area light
+                    this.world.lights.areaLight.top.intensity = 0
+                }
+                if (this.CONFIG.roof["element-name"] === "Swivel Sliding pergola Q25")
+                {
+                    this.world.qudrix01.roof.functions.addRoofPergolaQ25()
+                    this.world.qudrix02.roof.functions.addRoofPergolaQ25()
 
-                // correct area light
-                this.world.lights.areaLight.top.intensity = 6
-            }
-            if (this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
-            {
-                this.world.qudrix01.roof.functions.addRoofPergolaQ27()
-                this.world.qudrix02.roof.functions.addRoofPergolaQ27()
+                    // correct area light
+                    this.world.lights.areaLight.top.intensity = 6
+                }
+                if (this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+                {
+                    this.world.qudrix01.roof.functions.addRoofPergolaQ27()
+                    this.world.qudrix02.roof.functions.addRoofPergolaQ27()
 
-                // correct area light
-                this.world.lights.areaLight.top.intensity = 6
-            }
-            if (this.CONFIG.roof["accessory01-name"] === "None")
-            {
-                this.world.qudrix01.roof.functions.removeAccessories()
-                this.world.qudrix02.roof.functions.removeAccessories()
-            }
-            if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
-                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
-            {
-                this.world.qudrix01.roof.functions.addAccessories()
-                this.world.qudrix02.roof.functions.addAccessories()
-
-                // this.materials.roofWhite.wireframe = true
+                    // correct area light
+                    this.world.lights.areaLight.top.intensity = 6
+                }
             }
 
-            // Opacity Roof Accessory
-            if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
-                this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+            if (this.status === 'roofAccessory01')
             {
-                this.world.qudrix01.roof.functions.addAccessories()
-                this.world.qudrix02.roof.functions.addAccessories()
+                if (this.CONFIG.roof["accessory01-name"] === "None")
+                {
+                    this.world.qudrix01.roof.functions.removeAccessories()
+                    this.world.qudrix02.roof.functions.removeAccessories()
+                }
+                if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
+                    this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+                {
+                    this.world.qudrix01.roof.functions.addAccessories()
+                    this.world.qudrix02.roof.functions.addAccessories()
 
-                this.materials.roofWhitePergola27.color = new THREE.Color('black')
-                this.materials.roofWhitePergola27.transparent = true
-            
-            } else {
-                this.materials.roofWhitePergola27.color = new THREE.Color(0x6E6E6E)
-                this.materials.roofWhitePergola27.transparent = false
+                    // this.materials.roofWhite.wireframe = true
+                }
+
+                // Opacity Roof Accessory
+                if (this.CONFIG.roof["accessory01-name"] === "Sunshade Dazzoni" &&
+                    this.CONFIG.roof["element-name"] === "Bioclimatic pergola Q27")
+                {
+                    this.world.qudrix01.roof.functions.addAccessories()
+                    this.world.qudrix02.roof.functions.addAccessories()
+
+                    this.materials.roofWhitePergola27.color = new THREE.Color('black')
+                    this.materials.roofWhitePergola27.transparent = true
+
+                } else
+                {
+                    this.materials.roofWhitePergola27.color = new THREE.Color(0x6E6E6E)
+                    this.materials.roofWhitePergola27.transparent = false
+                }
             }
-
-            //0x6E6E6E
 
             /**
              * Side-01
              */
-            if (this.CONFIG.sides['side-01']["element-name"] === "Slider Door")
+            if (this.status === 'side-01')
             {
-                this.world.qudrix01.side01.functions.addSliderDoor()
-                this.world.qudrix02.side01.functions.addSliderDoor()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Solid Panels")
-            {
-                this.world.qudrix01.side01.functions.addSolidPanels()
-                this.world.qudrix02.side01.functions.addSolidPanels()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Glass Window")
-            {
-                this.world.qudrix01.side01.functions.addGlassWindow()
-                this.world.qudrix02.side01.functions.addGlassWindow()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Guillotine Q2 Window")
-            {
-                this.world.qudrix01.side01.functions.addGuillotineWindow()
-                this.world.qudrix02.side01.functions.addGuillotineWindow()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Portal Door")
-            {
-                this.world.qudrix01.side01.functions.addPortalDoor()
-                this.world.qudrix02.side01.functions.addPortalDoor()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Accordion Door")
-            {
-                this.world.qudrix01.side01.functions.addAccordionDoor()
-                this.world.qudrix02.side01.functions.addAccordionDoor()
-            }
-            if (this.CONFIG.sides['side-01']["element-name"] === "Smart Glass Window")
-            {
-                this.world.qudrix01.side01.functions.addSmartGlassWindow()
-                this.world.qudrix02.side01.functions.addSmartGlassWindow()
+
+                if (this.CONFIG.sides['side-01']["element-name"] === "Slider Door")
+                {
+                    this.world.qudrix01.side01.functions.addSliderDoor()
+                    this.world.qudrix02.side01.functions.addSliderDoor()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Solid Panels")
+                {
+                    this.world.qudrix01.side01.functions.addSolidPanels()
+                    this.world.qudrix02.side01.functions.addSolidPanels()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Glass Window")
+                {
+                    this.world.qudrix01.side01.functions.addGlassWindow()
+                    this.world.qudrix02.side01.functions.addGlassWindow()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Guillotine Q2 Window")
+                {
+                    this.world.qudrix01.side01.functions.addGuillotineWindow()
+                    this.world.qudrix02.side01.functions.addGuillotineWindow()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Portal Door")
+                {
+                    this.world.qudrix01.side01.functions.addPortalDoor()
+                    this.world.qudrix02.side01.functions.addPortalDoor()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Accordion Door")
+                {
+                    this.world.qudrix01.side01.functions.addAccordionDoor()
+                    this.world.qudrix02.side01.functions.addAccordionDoor()
+                }
+                if (this.CONFIG.sides['side-01']["element-name"] === "Smart Glass Window")
+                {
+                    this.world.qudrix01.side01.functions.addSmartGlassWindow()
+                    this.world.qudrix02.side01.functions.addSmartGlassWindow()
+                }
             }
 
-            if (this.CONFIG.sides['side-01']["accessory01-name"] === "Automatic Sunscreen")
+            if (this.status === 'side-01Accessory')
             {
-                this.world.qudrix01.side01.functions.addAutomaticSunscreen()
-                this.world.qudrix02.side01.functions.addAutomaticSunscreen()
-            }
+                if (this.CONFIG.sides['side-01']["accessory01-name"] === "Automatic Sunscreen")
+                {
+                    this.world.qudrix01.side01.functions.addAutomaticSunscreen()
+                    this.world.qudrix02.side01.functions.addAutomaticSunscreen()
+                }
 
-            if (this.CONFIG.sides['side-01']["accessory02-name"] === "Mosquito net")
-            {
-                this.world.qudrix01.side01.functions.addMosquito()
-                this.world.qudrix02.side01.functions.addMosquito()
-            }
+                if (this.CONFIG.sides['side-01']["accessory02-name"] === "Mosquito net")
+                {
+                    this.world.qudrix01.side01.functions.addMosquito()
+                    this.world.qudrix02.side01.functions.addMosquito()
+                }
 
-            if (this.CONFIG.sides['side-01']["accessory01-name"] === "None" &&
-                this.CONFIG.sides['side-01']["accessory02-name"] === "None") 
-            {
-                this.world.qudrix01.side01.functions.removeAccessories()
-                this.world.qudrix02.side01.functions.removeAccessories()
+                if (this.CONFIG.sides['side-01']["accessory01-name"] === "None" &&
+                    this.CONFIG.sides['side-01']["accessory02-name"] === "None") 
+                {
+                    this.world.qudrix01.side01.functions.removeAccessories()
+                    this.world.qudrix02.side01.functions.removeAccessories()
+                }
             }
 
             /**
              * Side-02
              */
-            if (this.CONFIG.sides['side-02']["element-name"] === "Slider Door")
+            if (this.status === 'side-02')
             {
-                this.world.qudrix01.side02.functions.addSliderDoor()
-                this.world.qudrix02.side02.functions.addSliderDoor()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Solid Panels")
-            {
-                this.world.qudrix01.side02.functions.addSolidPanels()
-                this.world.qudrix02.side02.functions.addSolidPanels()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Glass Window")
-            {
-                this.world.qudrix01.side02.functions.addGlassWindow()
-                this.world.qudrix02.side02.functions.addGlassWindow()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Guillotine Q2 Window")
-            {
-                this.world.qudrix01.side02.functions.addGuillotineWindow()
-                this.world.qudrix02.side02.functions.addGuillotineWindow()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Portal Door")
-            {
-                this.world.qudrix01.side02.functions.addPortalDoor()
-                this.world.qudrix02.side02.functions.addPortalDoor()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Accordion Door")
-            {
-                this.world.qudrix01.side02.functions.addAccordionDoor()
-                this.world.qudrix02.side02.functions.addAccordionDoor()
-            }
-            if (this.CONFIG.sides['side-02']["element-name"] === "Smart Glass Window")
-            {
-                this.world.qudrix01.side02.functions.addSmartGlassWindow()
-                this.world.qudrix02.side02.functions.addSmartGlassWindow()
+
+                if (this.CONFIG.sides['side-02']["element-name"] === "Slider Door")
+                {
+                    this.world.qudrix01.side02.functions.addSliderDoor()
+                    this.world.qudrix02.side02.functions.addSliderDoor()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Solid Panels")
+                {
+                    this.world.qudrix01.side02.functions.addSolidPanels()
+                    this.world.qudrix02.side02.functions.addSolidPanels()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Glass Window")
+                {
+                    this.world.qudrix01.side02.functions.addGlassWindow()
+                    this.world.qudrix02.side02.functions.addGlassWindow()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Guillotine Q2 Window")
+                {
+                    this.world.qudrix01.side02.functions.addGuillotineWindow()
+                    this.world.qudrix02.side02.functions.addGuillotineWindow()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Portal Door")
+                {
+                    this.world.qudrix01.side02.functions.addPortalDoor()
+                    this.world.qudrix02.side02.functions.addPortalDoor()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Accordion Door")
+                {
+                    this.world.qudrix01.side02.functions.addAccordionDoor()
+                    this.world.qudrix02.side02.functions.addAccordionDoor()
+                }
+                if (this.CONFIG.sides['side-02']["element-name"] === "Smart Glass Window")
+                {
+                    this.world.qudrix01.side02.functions.addSmartGlassWindow()
+                    this.world.qudrix02.side02.functions.addSmartGlassWindow()
+                }
+
             }
 
             /**
              * Side-03
              */
-            if (this.CONFIG.sides['side-03']["element-name"] === "Slider Door")
+            if (this.status === 'side-03')
             {
-                this.world.qudrix01.side03.functions.addSliderDoor()
-                this.world.qudrix02.side03.functions.addSliderDoor()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Solid Panels")
-            {
-                this.world.qudrix01.side03.functions.addSolidPanels()
-                this.world.qudrix02.side03.functions.addSolidPanels()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Glass Window")
-            {
-                this.world.qudrix01.side03.functions.addGlassWindow()
-                this.world.qudrix02.side03.functions.addGlassWindow()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Guillotine Q2 Window")
-            {
-                this.world.qudrix01.side03.functions.addGuillotineWindow()
-                this.world.qudrix02.side03.functions.addGuillotineWindow()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Portal Door")
-            {
-                this.world.qudrix01.side03.functions.addPortalDoor()
-                this.world.qudrix02.side03.functions.addPortalDoor()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Accordion Door")
-            {
-                this.world.qudrix01.side03.functions.addAccordionDoor()
-                this.world.qudrix02.side03.functions.addAccordionDoor()
-            }
-            if (this.CONFIG.sides['side-03']["element-name"] === "Smart Glass Window")
-            {
-                this.world.qudrix01.side03.functions.addSmartGlassWindow()
-                this.world.qudrix02.side03.functions.addSmartGlassWindow()
+
+                if (this.CONFIG.sides['side-03']["element-name"] === "Slider Door")
+                {
+                    this.world.qudrix01.side03.functions.addSliderDoor()
+                    this.world.qudrix02.side03.functions.addSliderDoor()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Solid Panels")
+                {
+                    this.world.qudrix01.side03.functions.addSolidPanels()
+                    this.world.qudrix02.side03.functions.addSolidPanels()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Glass Window")
+                {
+                    this.world.qudrix01.side03.functions.addGlassWindow()
+                    this.world.qudrix02.side03.functions.addGlassWindow()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Guillotine Q2 Window")
+                {
+                    this.world.qudrix01.side03.functions.addGuillotineWindow()
+                    this.world.qudrix02.side03.functions.addGuillotineWindow()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Portal Door")
+                {
+                    this.world.qudrix01.side03.functions.addPortalDoor()
+                    this.world.qudrix02.side03.functions.addPortalDoor()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Accordion Door")
+                {
+                    this.world.qudrix01.side03.functions.addAccordionDoor()
+                    this.world.qudrix02.side03.functions.addAccordionDoor()
+                }
+                if (this.CONFIG.sides['side-03']["element-name"] === "Smart Glass Window")
+                {
+                    this.world.qudrix01.side03.functions.addSmartGlassWindow()
+                    this.world.qudrix02.side03.functions.addSmartGlassWindow()
+                }
+
             }
 
             /**
-            * Side-04
-            */
-            if (this.CONFIG.sides['side-04']["element-name"] === "Slider Door")
+             * Side-04
+             */
+            if (this.status === 'side-04')
             {
-                this.world.qudrix01.side04.functions.addSliderDoor()
-                this.world.qudrix02.side04.functions.addSliderDoor()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Solid Panels")
-            {
-                this.world.qudrix01.side04.functions.addSolidPanels()
-                this.world.qudrix02.side04.functions.addSolidPanels()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Glass Window")
-            {
-                this.world.qudrix01.side04.functions.addGlassWindow()
-                this.world.qudrix02.side04.functions.addGlassWindow()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Guillotine Q2 Window")
-            {
-                this.world.qudrix01.side04.functions.addGuillotineWindow()
-                this.world.qudrix02.side04.functions.addGuillotineWindow()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Portal Door")
-            {
-                this.world.qudrix01.side04.functions.addPortalDoor()
-                this.world.qudrix02.side04.functions.addPortalDoor()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Accordion Door")
-            {
-                this.world.qudrix01.side04.functions.addAccordionDoor()
-                this.world.qudrix02.side04.functions.addAccordionDoor()
-            }
-            if (this.CONFIG.sides['side-04']["element-name"] === "Smart Glass Window")
-            {
-                this.world.qudrix01.side04.functions.addSmartGlassWindow()
-                this.world.qudrix02.side04.functions.addSmartGlassWindow()
+
+                if (this.CONFIG.sides['side-04']["element-name"] === "Slider Door")
+                {
+                    this.world.qudrix01.side04.functions.addSliderDoor()
+                    this.world.qudrix02.side04.functions.addSliderDoor()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Solid Panels")
+                {
+                    this.world.qudrix01.side04.functions.addSolidPanels()
+                    this.world.qudrix02.side04.functions.addSolidPanels()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Glass Window")
+                {
+                    this.world.qudrix01.side04.functions.addGlassWindow()
+                    this.world.qudrix02.side04.functions.addGlassWindow()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Guillotine Q2 Window")
+                {
+                    this.world.qudrix01.side04.functions.addGuillotineWindow()
+                    this.world.qudrix02.side04.functions.addGuillotineWindow()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Portal Door")
+                {
+                    this.world.qudrix01.side04.functions.addPortalDoor()
+                    this.world.qudrix02.side04.functions.addPortalDoor()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Accordion Door")
+                {
+                    this.world.qudrix01.side04.functions.addAccordionDoor()
+                    this.world.qudrix02.side04.functions.addAccordionDoor()
+                }
+                if (this.CONFIG.sides['side-04']["element-name"] === "Smart Glass Window")
+                {
+                    this.world.qudrix01.side04.functions.addSmartGlassWindow()
+                    this.world.qudrix02.side04.functions.addSmartGlassWindow()
+                }
+
             }
 
             /**
             * Attachment
             */
-            if (this.CONFIG.attachment["element-name"] === "None")
+            if (this.status === 'attachment')
             {
-                this.world.qudrix01.attachment.functions.removeAttachment()
-                this.world.qudrix02.attachment.functions.removeAttachment()
+                if (this.CONFIG.attachment["element-name"] === "None")
+                {
+                    this.world.qudrix01.attachment.functions.removeAttachment()
+                    this.world.qudrix02.attachment.functions.removeAttachment()
+                }
+                if (this.CONFIG.attachment["element-name"] === "Automatic Awing")
+                {
+                    this.world.qudrix01.attachment.functions.addAutomaticAwing()
+                    this.world.qudrix02.attachment.functions.addAutomaticAwing()
+                }
+                if (this.CONFIG.attachment["element-name"] === "Bioclimatic pergola Q27")
+                {
+                    this.world.qudrix01.attachment.functions.addBioclimacticPergola()
+                    this.world.qudrix02.attachment.functions.addBioclimacticPergola()
+                }
             }
-            if (this.CONFIG.attachment["element-name"] === "Automatic Awing")
-            {
-                this.world.qudrix01.attachment.functions.addAutomaticAwing()
-                this.world.qudrix02.attachment.functions.addAutomaticAwing()
-            }
-            if (this.CONFIG.attachment["element-name"] === "Bioclimatic pergola Q27")
-            {
-                this.world.qudrix01.attachment.functions.addBioclimacticPergola()
-                this.world.qudrix02.attachment.functions.addBioclimacticPergola()
-            }
+
 
             /**
              * Lights
              */
-            if (this.CONFIG.light['element-name'] === 'LED')
+            if (this.status === 'light')
             {
-                this.world.qudrix01.lights.functions.addLED()
-                this.world.qudrix02.lights.functions.addLED()
+                if (this.CONFIG.light['element-name'] === 'LED')
+                {
+                    this.world.qudrix01.lights.functions.addLED()
+                    this.world.qudrix02.lights.functions.addLED()
+                }
+                if (this.CONFIG.light['element-name'] === 'RGB')
+                {
+                    this.world.qudrix01.lights.functions.addRGB()
+                    this.world.qudrix02.lights.functions.addRGB()
+                }
+                if (this.CONFIG.light['element-name'] === 'None')
+                {
+                    this.world.qudrix01.lights.functions.removeLight()
+                    this.world.qudrix02.lights.functions.removeLight()
+                }
             }
-            if (this.CONFIG.light['element-name'] === 'RGB')
-            {
-                this.world.qudrix01.lights.functions.addRGB()
-                this.world.qudrix02.lights.functions.addRGB()
-            }
-            if (this.CONFIG.light['element-name'] === 'None')
-            {
-                this.world.qudrix01.lights.functions.removeLight()
-                this.world.qudrix02.lights.functions.removeLight()
-            }
-
 
         }
 
@@ -1018,7 +1131,7 @@ export default class DebugWorld
 
         if (this.debug.active)
         {
-            this.debug.attachmentFolder.add(this.debugCamera.functions, 'sizes').name('attachment camera anlge')
+            this.debug.attachmentFolder.add(this.debugCamera.functions, 'attachment').name('attachment camera anlge')
             // Attachment
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addAutomaticAwing').name('AutomaticAwing')
             this.debug.attachmentFolder.add(this.functionsAttachment, 'addBioclimacticPergola').name('BioclimacticPergola')
@@ -1098,4 +1211,45 @@ export default class DebugWorld
 
 
 }
+
+
+function findDifference(object1, object2)
+{
+    let difference = {};
+
+    for (let key in object1)
+    {
+        if (object2.hasOwnProperty(key))
+        {
+            if (typeof object1[key] === 'object' && object1[key] !== null && !Array.isArray(object1[key]))
+            {
+                let diff = findDifference(object1[key], object2[key]);
+                if (Object.keys(diff).length > 0)
+                {
+                    difference[key] = diff;
+                }
+            } else if (object1[key] !== object2[key])
+            {
+                difference[key] = { 'original': object1[key], 'changed': object2[key] };
+            }
+        } else
+        {
+            difference[key] = { 'original': object1[key], 'changed': undefined };
+        }
+    }
+
+    for (let key in object2)
+    {
+        if (!object1.hasOwnProperty(key))
+        {
+            difference[key] = { 'original': undefined, 'changed': object2[key] };
+        }
+    }
+
+    return difference;
+}
+
+
+
+
 

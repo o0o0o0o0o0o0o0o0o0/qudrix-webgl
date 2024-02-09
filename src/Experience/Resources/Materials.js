@@ -25,11 +25,17 @@ export default class Materials
 
         this.wallWhite = new THREE.MeshStandardMaterial({
             color: 0x595959, //0x161616
-            metalness: 0,
-            roughness: 0.45,
+            metalness: 0.43,
+            roughness: 0.46,
+            envMapIntensity: 2,
             side: THREE.DoubleSide,
             name: 'wallWhite'
         })
+        this.wallWhite.envMap = this.textures.environmentMap02
+
+
+
+
 
         this.mirrorGlass = new THREE.MeshPhysicalMaterial({
             metalness: 1,
@@ -74,16 +80,7 @@ export default class Materials
         // })
 
 
-        // if (this.debug.active)
-        // {
-        //     this.debug.materialFolder.add(this.sidesGlass, 'metalness', 0, 1, 0.01).name('sidesGlass.metalness')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'roughness', 0, 1, 0.01).name('sidesGlass.roughness')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'opacity', 0, 1, 0.01).name('sidesGlass.opacity')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'envMapIntensity', 0, 10, 0.01).name('sidesGlass.envMapIntensity')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'ior', 0, 10, 0.01).name('sidesGlass.ior')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'transmission', 0, 10, 0.01).name('sidesGlass.transmission')
-        //     this.debug.materialFolder.add(this.sidesGlass, 'thickness', 0, 10, 0.01).name('sidesGlass.thickness')
-        // }
+
 
 
 

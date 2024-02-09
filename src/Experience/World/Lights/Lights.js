@@ -17,7 +17,7 @@ export default class Lights
         this.debugAmbient()
 
         this.setDirLight()
-        // this.debugDirLight()
+        this.debugDirLight()
 
 
 

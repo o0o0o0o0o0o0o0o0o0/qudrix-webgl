@@ -1,0 +1,57 @@
+{
+  "size": {
+    "element-name": "Q01"
+  },
+
+  "roof": {
+    "element-name": "Bioclimatic pergola Q27",
+
+    "accessory01-name": "None" 
+  },
+
+  "sides": {
+    "side-01": {
+      "element-name": "Slider Door",
+
+      "accessory01-name": "None",
+
+      "accessory02-name": "Mosquito net"
+    },
+
+    "side-02": {
+      "element-name": "Solid Panels",
+
+      "accessory01-name": "None",
+
+      "accessory02-name": "None"
+    },
+
+    "side-03": {
+      "element-name": "Solid Panels",
+
+      "accessory01-name": "None",
+
+      "accessory02-name": "None"
+    },
+
+    "side-04": {
+      "element-name": "Solid Panels",
+
+      "accessory01-name": "None",
+
+      "accessory02-name": "None"
+    }
+  },
+
+  "attachment": {
+    "element-name": "Bioclimatic pergola Q27"
+  },
+
+  "light": {
+    "element-name": "None"
+  },
+
+  "floor": {
+    "element-name": "Laminate"
+  }
+}
