@@ -34,9 +34,6 @@ export default class Materials
         this.wallWhite.envMap = this.textures.environmentMap02
 
 
-
-
-
         this.mirrorGlass = new THREE.MeshPhysicalMaterial({
             metalness: 1,
             roughness: 0.0,
@@ -47,8 +44,8 @@ export default class Materials
             // normalMap: this.textures.paintedPlasterNormalGL,
             // normalScale: new THREE.Vector2(0.2, 0.2)
         })
-        this.mirrorGlass.envMap = this.textures.environmentMap02
-        this.mirrorGlass.envMapIntensity = 1
+        // this.mirrorGlass.envMap = this.textures.environmentMap02
+        // this.mirrorGlass.envMapIntensity = 1
 
         this.sidesGlass = new THREE.MeshPhysicalMaterial({
             color: new THREE.Color('white'),

@@ -115,6 +115,8 @@ export default class Roof
             {
                 this.roofPergolaQ27.add(gltf.scene)
 
+                this.roofPergolaQ27.scale.set(0, 0, 0)
+
                 gltf.scene.traverse((obj) =>
                 {
                     if (obj.isMesh)

@@ -97,7 +97,7 @@ export default class Side02
                 metal02.material = this.materials.wallBlack
                 glass.material = this.materials.glassWindow
 
-                if (CONFIG.sides['side-01']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
+                if (CONFIG.sides['side-02']['element-name'] === "Glass Window") { this.glassWindow.scale.set(1, 1, 1) }
                 else { this.glassWindow.scale.set(0, 0, 0) }
             }
         )

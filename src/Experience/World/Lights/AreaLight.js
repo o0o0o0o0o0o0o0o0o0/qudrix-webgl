@@ -32,7 +32,7 @@ export default class AreaLight {
         this.top.rotation.y = 0
         this.top.rotation.z = 0
         this.top.color = new THREE.Color(0xffffff)
-        this.top.intensity = 6
+        this.top.intensity = 0 //6
         this.top.width = 10
         this.top.height = 10
         this.topHelper = new RectAreaLightHelper(this.top)

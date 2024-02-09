@@ -112,6 +112,7 @@ export default class StaticModel
                         this.roofMirrorGlass.add(this.roofMirrorMesh)
                         this.roofMirrorGlass.castShadow = false
                         this.roofMirrorGlass.receiveShadow = false
+                        this.roofMirrorGlass.renderOrder = 1
                         // Check CONFIG
                         // if (CONFIG.roof['element-name'] === 'Mirror Glass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
                         // else { this.roofMirrorGlass.scale.set(0, 0, 0) }

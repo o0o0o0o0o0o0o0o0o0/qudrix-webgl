@@ -4,7 +4,7 @@
   },
 
   "roof": {
-    "element-name": "Bioclimatic pergola Q27",
+    "element-name": "MirrorGlass",
 
     "accessory01-name": "None" 
   },
@@ -15,11 +15,11 @@
 
       "accessory01-name": "None",
 
-      "accessory02-name": "Mosquito net"
+      "accessory02-name": "None"
     },
 
     "side-02": {
-      "element-name": "Solid Panels",
+      "element-name": "Glass Window",
 
       "accessory01-name": "None",
 
@@ -44,7 +44,7 @@
   },
 
   "attachment": {
-    "element-name": "Bioclimatic pergola Q27"
+    "element-name": "None"
   },
 
   "light": {
