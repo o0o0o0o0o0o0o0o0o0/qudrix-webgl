@@ -21,6 +21,7 @@ export default class Lights
 
         this.setPointLight()
 
+        this.hemisphereLight = new THREE.HemisphereLight(0xff0000, 0x0000ff, 1)
 
 
     }

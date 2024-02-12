@@ -50,6 +50,7 @@ export default class World
             // this.lights.directionalCameraShadowHelper,
             
             this.lights.ambient,
+            this.lights.hemisphereLight,
         )
 
         // Add lights

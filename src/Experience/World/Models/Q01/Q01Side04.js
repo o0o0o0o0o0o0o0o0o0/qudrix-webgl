@@ -40,6 +40,8 @@ export default class Side04
         this.mosquito = new THREE.Group()
         this.automaticSunscreen = new THREE.Group()
 
+ 
+
 
         this.instance.add(
             this.glassWindow,
@@ -128,6 +130,9 @@ export default class Side04
                         child.children[0].material = this.materials.sidesGlass
                         child.children[1].material = this.materials.sidesGlass
 
+                        // child.children[0].renderOrder = 1
+                        // child.children[1].renderOrder = 1
+
                         if (CONFIG.sides['side-04']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
                         else { this.smartGlassWindow.scale.set(0, 0, 0) }
                     }
@@ -147,6 +152,8 @@ export default class Side04
 
                 const glass = gltf.scene.children[0].children[0]
                 const metal = gltf.scene.children[0].children[1]
+
+                glass.renderOrder = 1
 
                 // console.log(gltf.scene.children[0].children[0]);
 
@@ -173,8 +180,6 @@ export default class Side04
             {
                 this.sliderDoor.add(gltf.scene)
 
-
-
                 gltf.scene.children[0].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[1].material = this.materials.wallBlack
                 gltf.scene.children[0].children[2].material = this.materials.wallBlack
@@ -188,6 +193,11 @@ export default class Side04
                 gltf.scene.children[0].children[6].children[1].material = this.materials.sidesGlass
                 gltf.scene.children[0].children[7].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[7].children[1].material = this.materials.sidesGlass
+
+                gltf.scene.children[0].children[4].children[1].renderOrder = 1
+                gltf.scene.children[0].children[5].children[1].renderOrder = 1
+                gltf.scene.children[0].children[6].children[1].renderOrder = 1
+                gltf.scene.children[0].children[7].children[1].renderOrder = 1
 
                 // this.sliderDoor.rotation.y = Math.PI / -2
 
@@ -235,10 +245,12 @@ export default class Side04
                 gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
                 // part01 frame
                 gltf.scene.children[0].children[1].children[1].material = this.materials.sidesGlass
+                gltf.scene.children[0].children[1].children[1].renderOrder = 1
                 // part02 frame
                 gltf.scene.children[0].children[2].children[0].material = this.materials.wallBlack
                 // part02 frame
                 gltf.scene.children[0].children[2].children[1].material = this.materials.sidesGlass
+                gltf.scene.children[0].children[2].children[1].renderOrder = 1
 
 
                 // this.portalDoor.add(
@@ -299,6 +311,7 @@ export default class Side04
                     if (child.isMesh && child.material.name === 'glass 003')
                     {
                         child.material = this.materials.sidesGlass
+                        child.renderOrder = 1
                     }
                     if (child.isMesh && child.material.name === 'Metal для всех 001')
                     {
@@ -343,7 +356,7 @@ export default class Side04
 
                     if (child.isMesh && child.material.name === 'Glass')
                     {
-                        child.material = this.materials.sidesGlass
+                        child.material = this.materials.accordionDoorGlass
 
                     }
                     if (child.isMesh && child.material.name === 'Metal 002')
@@ -391,7 +404,10 @@ export default class Side04
                     gltf.scene.children[0].children[0].material = this.materials.sunscreen
                     gltf.scene.children[0].children[1].material = this.materials.wallBlack
                     this.automaticSunscreen.add(gltf.scene)
-                    this.automaticSunscreen.position.x = -0.05
+                    this.automaticSunscreen.position.x = -0.06
+
+                    gltf.scene.children[0].children[0].renderOrder = 2
+                    gltf.scene.children[0].children[1].renderOrder = 2
 
                     this.mixerAutomaticSunscreen = new THREE.AnimationMixer(gltf.scene)
                     this.actionAutomaticSunscreen = this.mixerAutomaticSunscreen.clipAction(gltf.animations[0])
@@ -399,6 +415,7 @@ export default class Side04
                     this.animation.play(this.actionAutomaticSunscreen, 1.5)
 
                     this.statusAutomaticSunscreen = true
+                    
 
                     if (CONFIG.sides['side-04']['accessory01-name'] === "Automatic sunscreen")
                     {
@@ -423,10 +440,12 @@ export default class Side04
 
                 gltf.scene.children[0].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[1].children[1].material = this.materials.sunscreen
+                gltf.scene.children[0].children[1].children[1].material = this.materials.mosquito
 
-                this.mosquito.add(gltf.scene)
-                this.mosquito.position.x = -0.05
+                this.mosquito.add(
+                    gltf.scene,
+                )
+                this.mosquito.position.x = -0.15
 
                 this.mixerMosquito = new THREE.AnimationMixer(gltf.scene)
                 this.actionMosquito = this.mixerMosquito.clipAction(gltf.animations[0])

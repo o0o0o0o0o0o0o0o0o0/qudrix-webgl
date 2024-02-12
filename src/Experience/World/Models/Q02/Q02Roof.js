@@ -85,6 +85,7 @@ export default class Roof
             (gltf) =>
             {
                 this.roofPergolaQ25.add(gltf.scene)
+                this.roofPergolaQ25.scale.set(0, 0, 0)
 
                 gltf.scene.traverse((obj) =>
                 {
@@ -100,6 +101,7 @@ export default class Roof
                 this.mixerPergolaQ25 = new THREE.AnimationMixer(gltf.scene)
                 this.actionPergolaQ25 = this.mixerPergolaQ25.clipAction(gltf.animations[0])
                 this.animation.reverse(this.actionPergolaQ25, 1.5)
+
 
 
 
@@ -287,57 +289,3 @@ export default class Roof
 
 
 
-
-
-// loadQudrix02(CONFIG)
-// {
-//     this.loader.gltf.load(
-//         '/3D/Q02/qudrix-webgl_q2.glb',
-//         (gltf) =>
-//         {
-//             // console.log(gltf);
-//             const children = [...gltf.scene.children]
-
-//             for (const child of children)
-//             {
-//                 /**
-//                  * Add Roof
-//                  */
-
-//                 // Add roof solid panel + add roof mirror glass
-//                 if (child.name === 'roof_fixed_aluminium_slats')
-//                 {
-//                     const material = child.material
-//                     this.roofSolidMesh = new THREE.Mesh(
-//                         new THREE.PlaneGeometry(1, 1, 1, 1),
-//                         material
-//                     )
-//                     this.roofMirrorMesh = new THREE.Mesh(
-//                         new THREE.PlaneGeometry(1, 1, 1, 1),
-//                         material
-//                     )
-
-//                     // Solid
-//                     this.roofSolidMesh.copy(child)
-//                     this.roofSolidPanels.add(this.roofSolidMesh)
-//                     this.roofSolidMesh.castShadow = true
-//                     this.roofSolidMesh.receiveShadow = true
-//                     // Check CONFIG
-//                     if (CONFIG.roof['element-name'] === 'SolidPanels') { this.roofSolidPanels.scale.set(1, 1, 1) }
-//                     else { this.roofSolidPanels.scale.set(0, 0, 0) }
-
-//                     // Mirror
-//                     this.roofMirrorMesh.copy(child)
-//                     this.roofMirrorMesh.material = this.materials.glass
-//                     this.roofMirrorGlass.add(this.roofMirrorMesh)
-//                     this.roofMirrorGlass.castShadow = true
-//                     this.roofMirrorGlass.receiveShadow = true
-//                     // Check CONFIG
-//                     if (CONFIG.roof['element-name'] === 'MirrorGlass') { this.roofMirrorGlass.scale.set(1, 1, 1) }
-//                     else { this.roofMirrorGlass.scale.set(0, 0, 0) }
-
-//                 }
-//             }
-//         }
-//     )
-// }

@@ -12,7 +12,6 @@ import Side02 from './Q01/Q01Side02'
 import Side03 from './Q01/Q01Side03'
 import Side04 from './Q01/Q01Side04'
 import Attachment from './Q01/Q01Attachment'
-import Lights from './Q01/Q01Lights'
 
 // import data from '../../../CONFIG.json'
 // const CONFIG = data
@@ -103,11 +102,6 @@ export default class Qudrix01
         this.attachment = new Attachment(CONFIG)
         this.instance.add(this.attachment.instance)
 
-        /**
-         * Lights
-         */
-        this.lights = new Lights(CONFIG)
-        this.instance.add(this.lights.instance)
 
         /**
          * Color 

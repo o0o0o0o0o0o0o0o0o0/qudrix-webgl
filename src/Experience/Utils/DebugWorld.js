@@ -209,6 +209,24 @@ export default class DebugWorld
                 {
                     this.status = 'side-01Accessory'
                 }
+
+                if (value['side-02']["accessory01-name"] !== this.CONFIGbefore.sides['side-02']['accessory01-name'] ||
+                    value['side-02']["accessory02-name"] !== this.CONFIGbefore.sides['side-02']['accessory02-name'])
+                {
+                    this.status = 'side-02Accessory'
+                }
+
+                if (value['side-03']["accessory01-name"] !== this.CONFIGbefore.sides['side-03']['accessory01-name'] ||
+                    value['side-03']["accessory02-name"] !== this.CONFIGbefore.sides['side-03']['accessory02-name'])
+                {
+                    this.status = 'side-03Accessory'
+                }
+
+                if (value['side-04']["accessory01-name"] !== this.CONFIGbefore.sides['side-04']['accessory01-name'] ||
+                    value['side-04']["accessory02-name"] !== this.CONFIGbefore.sides['side-04']['accessory02-name'])
+                {
+                    this.status = 'side-04Accessory'
+                }
             }
             if (key === 'attachment')
             {
@@ -440,6 +458,28 @@ export default class DebugWorld
 
             }
 
+            if (this.status === 'side-02Accessory')
+            {
+                if (this.CONFIG.sides['side-02']["accessory01-name"] === "Automatic Sunscreen")
+                {
+                    this.world.qudrix01.side02.functions.addAutomaticSunscreen()
+                    // this.world.qudrix02.side02.functions.addAutomaticSunscreen()
+                }
+
+                if (this.CONFIG.sides['side-02']["accessory02-name"] === "Mosquito net")
+                {
+                    this.world.qudrix01.side02.functions.addMosquito()
+                    // this.world.qudrix02.side02.functions.addMosquito()
+                }
+
+                if (this.CONFIG.sides['side-02']["accessory01-name"] === "None" &&
+                    this.CONFIG.sides['side-02']["accessory02-name"] === "None") 
+                {
+                    this.world.qudrix01.side02.functions.removeAccessories()
+                    // this.world.qudrix02.side02.functions.removeAccessories()
+                }
+            }
+
             /**
              * Side-03
              */
@@ -484,6 +524,29 @@ export default class DebugWorld
 
             }
 
+            if (this.status === 'side-03Accessory')
+            {
+                if (this.CONFIG.sides['side-03']["accessory01-name"] === "Automatic Sunscreen")
+                {
+                    this.world.qudrix01.side03.functions.addAutomaticSunscreen()
+                    // this.world.qudrix02.side03.functions.addAutomaticSunscreen()
+                }
+
+                if (this.CONFIG.sides['side-03']["accessory02-name"] === "Mosquito net")
+                {
+                    this.world.qudrix01.side03.functions.addMosquito()
+                    // this.world.qudrix02.side03.functions.addMosquito()
+                }
+
+                if (this.CONFIG.sides['side-03']["accessory01-name"] === "None" &&
+                    this.CONFIG.sides['side-03']["accessory02-name"] === "None") 
+                {
+                    this.world.qudrix01.side03.functions.removeAccessories()
+                    // this.world.qudrix02.side03.functions.removeAccessories()
+                }
+            }
+
+
             /**
              * Side-04
              */
@@ -526,6 +589,28 @@ export default class DebugWorld
                     this.world.qudrix02.side04.functions.addSmartGlassWindow()
                 }
 
+            }
+
+            if (this.status === 'side-04Accessory')
+            {
+                if (this.CONFIG.sides['side-04']["accessory01-name"] === "Automatic Sunscreen")
+                {
+                    this.world.qudrix01.side04.functions.addAutomaticSunscreen()
+                    // this.world.qudrix02.side04.functions.addAutomaticSunscreen()
+                }
+
+                if (this.CONFIG.sides['side-04']["accessory02-name"] === "Mosquito net")
+                {
+                    this.world.qudrix01.side04.functions.addMosquito()
+                    // this.world.qudrix02.side04.functions.addMosquito()
+                }
+
+                if (this.CONFIG.sides['side-04']["accessory01-name"] === "None" &&
+                    this.CONFIG.sides['side-04']["accessory02-name"] === "None") 
+                {
+                    this.world.qudrix01.side04.functions.removeAccessories()
+                    // this.world.qudrix02.side04.functions.removeAccessories()
+                }
             }
 
             /**
@@ -707,7 +792,7 @@ export default class DebugWorld
             this.CONFIG.sides['side-01']["accessory02-name"] = "None"
 
 
-            console.log(this.CONFIG.sides['side-01']["accessory01-name"]);
+            // console.log(this.CONFIG.sides['side-01']["accessory01-name"]);
 
             this.functionsMASTER.build()
 
@@ -791,6 +876,34 @@ export default class DebugWorld
             // this.debugCamera.functions.side02()
 
         }
+        this.functionsSide02.addAutomaticSunscreen = () =>
+        {
+            this.CONFIG.sides['side-02']["accessory01-name"] = "Automatic Sunscreen"
+            this.CONFIG.sides['side-02']["accessory02-name"] = "None"
+
+
+            // console.log(this.CONFIG.sides['side-02']["accessory01-name"]);
+
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide02.addMosquito = () =>
+        {
+
+            this.CONFIG.sides['side-02']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-02']["accessory02-name"] = "Mosquito net"
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide02.removeAccessories = () =>
+        {
+            this.CONFIG.sides['side-02']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-02']["accessory02-name"] = "None"
+            this.functionsMASTER.build()
+        }
+
 
     }
 
@@ -854,6 +967,34 @@ export default class DebugWorld
             // this.debugCamera.functions.side03()
 
         }
+        this.functionsSide03.addAutomaticSunscreen = () =>
+        {
+            this.CONFIG.sides['side-03']["accessory01-name"] = "Automatic Sunscreen"
+            this.CONFIG.sides['side-03']["accessory02-name"] = "None"
+
+
+            // console.log(this.CONFIG.sides['side-03']["accessory01-name"]);
+
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide03.addMosquito = () =>
+        {
+
+            this.CONFIG.sides['side-03']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-03']["accessory02-name"] = "Mosquito net"
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide03.removeAccessories = () =>
+        {
+            this.CONFIG.sides['side-03']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-03']["accessory02-name"] = "None"
+            this.functionsMASTER.build()
+        }
+
 
     }
 
@@ -917,6 +1058,34 @@ export default class DebugWorld
             // this.debugCamera.functions.side04()
 
         }
+        this.functionsSide04.addAutomaticSunscreen = () =>
+        {
+            this.CONFIG.sides['side-04']["accessory01-name"] = "Automatic Sunscreen"
+            this.CONFIG.sides['side-04']["accessory02-name"] = "None"
+
+
+            // console.log(this.CONFIG.sides['side-04']["accessory01-name"]);
+
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide04.addMosquito = () =>
+        {
+
+            this.CONFIG.sides['side-04']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-04']["accessory02-name"] = "Mosquito net"
+            this.functionsMASTER.build()
+
+        }
+
+        this.functionsSide04.removeAccessories = () =>
+        {
+            this.CONFIG.sides['side-04']["accessory01-name"] = "None"
+            this.CONFIG.sides['side-04']["accessory02-name"] = "None"
+            this.functionsMASTER.build()
+        }
+
 
     }
 
@@ -1082,6 +1251,9 @@ export default class DebugWorld
             this.debug.side02Folder.add(this.functionsSide02, 'addPortalDoor').name('PortalDoor')
             this.debug.side02Folder.add(this.functionsSide02, 'addAccordionDoor').name('AccordionDoor')
             this.debug.side02Folder.add(this.functionsSide02, 'addSmartGlassWindow').name('SmartGlassWindow')
+            this.debug.side02Folder.add(this.functionsSide02, 'addAutomaticSunscreen').name('addAutomaticSunscreen')
+            this.debug.side02Folder.add(this.functionsSide02, 'addMosquito').name('addMosquito')
+            this.debug.side02Folder.add(this.functionsSide02, 'removeAccessories').name('removeAccessories')
         }
 
     }
@@ -1100,6 +1272,9 @@ export default class DebugWorld
             this.debug.side03Folder.add(this.functionsSide03, 'addPortalDoor').name('PortalDoor')
             this.debug.side03Folder.add(this.functionsSide03, 'addAccordionDoor').name('AccordionDoor')
             this.debug.side03Folder.add(this.functionsSide03, 'addSmartGlassWindow').name('SmartGlassWindow')
+            this.debug.side03Folder.add(this.functionsSide03, 'addAutomaticSunscreen').name('addAutomaticSunscreen')
+            this.debug.side03Folder.add(this.functionsSide03, 'addMosquito').name('addMosquito')
+            this.debug.side03Folder.add(this.functionsSide03, 'removeAccessories').name('removeAccessories')
         }
 
     }
@@ -1118,6 +1293,9 @@ export default class DebugWorld
             this.debug.side04Folder.add(this.functionsSide04, 'addPortalDoor').name('PortalDoor')
             this.debug.side04Folder.add(this.functionsSide04, 'addAccordionDoor').name('AccordionDoor')
             this.debug.side04Folder.add(this.functionsSide04, 'addSmartGlassWindow').name('SmartGlassWindow')
+            this.debug.side04Folder.add(this.functionsSide04, 'addAutomaticSunscreen').name('addAutomaticSunscreen')
+            this.debug.side04Folder.add(this.functionsSide04, 'addMosquito').name('addMosquito')
+            this.debug.side04Folder.add(this.functionsSide04, 'removeAccessories').name('removeAccessories')
         }
 
     }

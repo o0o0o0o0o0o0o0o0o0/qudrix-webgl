@@ -13,7 +13,6 @@ import Side02 from './Q02/Q02Side02'
 import Side03 from './Q02/Q02Side03'
 import Side04 from './Q02/Q02Side04'
 import Attachment from './Q02/Q02Attachment'
-import Lights from './Q02/Q02Lights'
 
 let instance = null
 
@@ -89,12 +88,6 @@ export default class Qudrix02
          */
         this.attachment = new Attachment(CONFIG)
         this.instance.add(this.attachment.instance)
-
-        /**
-         * Lights
-         */
-        this.lights = new Lights(CONFIG)
-        this.instance.add(this.lights.instance)
 
         /**
          * Color 

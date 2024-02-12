@@ -1,6 +1,10 @@
 import * as THREE from 'three'
+import * as POSTPROCESSING from "postprocessing"
+import { SSGIEffect, TRAAEffect, MotionBlurEffect, VelocityDepthNormalPass } from "realism-effects"
 
 import Experience from "./Experience";
+
+
 
 export default class Renderer
 {
@@ -35,6 +39,8 @@ export default class Renderer
 
         this.instance.toneMapping = THREE.ACESFilmicToneMapping
 
+
+
     }
 
     resize()
@@ -49,5 +55,6 @@ export default class Renderer
     {
 
         this.instance.render(this.scene, this.camera.instance)
+
     }
 }

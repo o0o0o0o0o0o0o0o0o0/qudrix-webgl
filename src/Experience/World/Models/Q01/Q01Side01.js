@@ -130,8 +130,8 @@ export default class Side01
                         child.children[0].material = this.materials.sidesGlass
                         child.children[1].material = this.materials.sidesGlass
 
-                        child.children[0].renderOrder = 1
-                        child.children[1].renderOrder = 1
+                        // child.children[0].renderOrder = 1
+                        // child.children[1].renderOrder = 1
 
                         if (CONFIG.sides['side-01']['element-name'] === "Smart Glass Window") { this.smartGlassWindow.scale.set(1, 1, 1) }
                         else { this.smartGlassWindow.scale.set(0, 0, 0) }
@@ -356,7 +356,7 @@ export default class Side01
 
                     if (child.isMesh && child.material.name === 'Glass')
                     {
-                        child.material = this.materials.sidesGlass
+                        child.material = this.materials.accordionDoorGlass
 
                     }
                     if (child.isMesh && child.material.name === 'Metal 002')
@@ -404,7 +404,10 @@ export default class Side01
                     gltf.scene.children[0].children[0].material = this.materials.sunscreen
                     gltf.scene.children[0].children[1].material = this.materials.wallBlack
                     this.automaticSunscreen.add(gltf.scene)
-                    this.automaticSunscreen.position.x = -0.05
+                    this.automaticSunscreen.position.x = -0.06
+
+                    gltf.scene.children[0].children[0].renderOrder = 2
+                    gltf.scene.children[0].children[1].renderOrder = 2
 
                     this.mixerAutomaticSunscreen = new THREE.AnimationMixer(gltf.scene)
                     this.actionAutomaticSunscreen = this.mixerAutomaticSunscreen.clipAction(gltf.animations[0])
@@ -412,6 +415,7 @@ export default class Side01
                     this.animation.play(this.actionAutomaticSunscreen, 1.5)
 
                     this.statusAutomaticSunscreen = true
+                    
 
                     if (CONFIG.sides['side-01']['accessory01-name'] === "Automatic sunscreen")
                     {
@@ -436,7 +440,7 @@ export default class Side01
 
                 gltf.scene.children[0].children[0].material = this.materials.wallBlack
                 gltf.scene.children[0].children[1].children[0].material = this.materials.wallBlack
-                gltf.scene.children[0].children[1].children[1].material = this.materials.sunscreen
+                gltf.scene.children[0].children[1].children[1].material = this.materials.mosquito
 
                 this.mosquito.add(
                     gltf.scene,

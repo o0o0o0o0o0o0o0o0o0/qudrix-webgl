@@ -23,25 +23,17 @@ export default class Materials
             name: 'wallBlack'
         })
 
-        // this.wallBlack = new THREE.MeshStandardMaterial({
-        //     color: 0x888888, //0x161616
-        //     metalness: 0.8,
-        //     roughness: 0.1,
-        //     envMapIntensity: 5,
-        //     side: THREE.DoubleSide,
-        //     name: 'wallBlack'
-        // })
-        // this.wallBlack.envMap = this.textures.environmentMap02
+   
+
 
         this.wallWhite = new THREE.MeshStandardMaterial({
-            color: 0x888888, //0x161616
+            color: 0x808080, //0x161616
             metalness: 0.8,
-            roughness: 0.1,
-            envMapIntensity: 5,
+            roughness: 0.4,
+            envMapIntensity: 2,
             side: THREE.DoubleSide,
-            name: 'wallWhite'
         })
-        this.wallWhite.envMap = this.textures.environmentMap02
+        this.wallWhite.envMap = this.textures.environmentMap_02
 
 
         this.mirrorGlass = new THREE.MeshPhysicalMaterial({
@@ -54,52 +46,68 @@ export default class Materials
             // normalMap: this.textures.paintedPlasterNormalGL,
             // normalScale: new THREE.Vector2(0.2, 0.2)
         })
-        // this.mirrorGlass.envMap = this.textures.environmentMap02
-        // this.mirrorGlass.envMapIntensity = 1
+        this.mirrorGlass.envMap = this.textures.environmentMap_04
+        this.mirrorGlass.envMapIntensity = 1
 
         this.sidesGlass = new THREE.MeshPhysicalMaterial({
             color: new THREE.Color('white'),
-            metalness: 0.8,
+            metalness: 1,
             roughness: 0,
             transmission: 1,
+            thickness: 5,
+            transparent: true,
+            // emissive: new THREE.Color(0x0C1414),
+            opacity: 0.5,
+            // side: THREE.DoubleSide,
+            envMap: this.textures.environmentMap_04,
+            envMapIntensity: 1.5,
+            ior: 3,
+            clearcoat: 1,
+            clearcoatRoughness: 0,
+            // normalMap: this.textures.paintedPlasterNormalGL,
+            // normalScale: new THREE.Vector2(1, 1)
+            depthWrite: false,
+        })
+
+        this.accordionDoorGlass = new THREE.MeshPhysicalMaterial({
+            color: new THREE.Color('white'),
+            metalness: 1,
+            roughness: 0.3,
+            transmission: 0,
             thickness: 0,
             transparent: true,
             // emissive: new THREE.Color(0x0C1414),
             opacity: 0.5,
             side: THREE.DoubleSide,
-            envMap: this.textures.environmentMap02,
-            envMapIntensity: 2,
+            envMap: this.textures.environmentMap_04,
+            envMapIntensity: 1,
             ior: 1.5,
-            // clearcoat: 1,
-            // clearcoatRoughness: 0,
+            clearcoat: 1,
+            clearcoatRoughness: 0,
             // normalMap: this.textures.paintedPlasterNormalGL,
-            // normalScale: new THREE.Vector2(1, 1)
+            // normalScale: new THREE.Vector2(1, 1),
+            depthWrite: false,
         })
 
-        // this.sidesGlass = new THREE.MeshStandardMaterial({
-        //     color: 0x161616, //0x161616
-        //     metalness: 0,
-        //     roughness: 0.45,
-        //     side: THREE.DoubleSide,
-        //     transparent: true,
-        //     opacity: 0
-        // })
 
+        this.sunscreen = new THREE.MeshBasicMaterial()
+        this.sunscreen.map = this.textures.mosquito
+        this.sunscreen.color = new THREE.Color(0x262626)
+        this.sunscreen.transparent = true
+        this.sunscreen.alphaMap = this.textures.mosquitoOpacity
+        this.sunscreen.format = THREE.RGBFormat
+        this.sunscreen.depthWrite = false
 
+        this.mosquito = new THREE.MeshBasicMaterial()
+        // this.mosquito.map = this.textures.mosquito
+        this.mosquito.color = new THREE.Color('darkgreen')
+        this.mosquito.transparent = true
+        this.mosquito.opacity = 0.5
+        // this.mosquito.alphaMap = this.textures.mosquitoOpacity
+        this.mosquito.depthWrite = false
 
+        // this.sunscreen.side = THREE.DoubleSide
 
-
-
-
-        this.sunscreen = new THREE.MeshStandardMaterial({
-            color: 0x161616, //0x161616
-            map: this.textures.gridMosquito,
-            metalness: 0,
-            roughness: 0.45,
-            transparent: true,
-            // alphaMap: this.textures.gridMosquito,
-            // opacity: 0.9
-        })
 
         this.roofWhite = new THREE.MeshStandardMaterial({
             color: 0x6E6E6E,
@@ -120,43 +128,6 @@ export default class Materials
             transparent: false,
             opacity: 0.15
         })
-
-        this.glass = new THREE.MeshPhysicalMaterial({
-            metalness: 1,
-            roughness: 0.1,
-            transmission: 50,
-            thickness: 5,
-            transparent: true,
-            // emissive: new THREE.Color(0x0C1414),
-            opacity: 0.2,
-            side: THREE.DoubleSide,
-            envMap: this.textures.bricksColor,
-            envMapIntensity: 1,
-            ior: 1.5,
-            normalMap: this.textures.paintedBricksNormalGL,
-            normalScale: new THREE.Vector2(10, 10)
-
-        })
-
-
-        this.glassWindow = new THREE.MeshPhysicalMaterial({
-            metalness: 0.7,
-            roughness: 0.5,
-            transmission: 1,
-            // thickness: 0,
-            transparent: true,
-            // emissive: new THREE.Color(0x0C1414),
-            opacity: 0.3,
-            side: THREE.DoubleSide,
-            // envMap: this.textures.bricksColor,
-            // envMapIntensity: 1,
-            ior: 5,
-            normalMap: this.textures.woodSidingNormalGL,
-            normalScale: new THREE.Vector2(0.4, 0.4)
-
-        })
-
-
 
         this.ground = new THREE.MeshBasicMaterial({
             map: this.textures.groundBakeQ01

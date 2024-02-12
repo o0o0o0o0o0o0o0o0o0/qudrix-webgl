@@ -130,7 +130,7 @@ export default class StaticModel
                         this.glassWindow.add(child)
                         this.glassWindow.scale.set(0, 0, 0)
 
-                        child.children[0].material = this.materials.glassWindow
+                        child.children[0].material = this.materials.sidesGlass
                         child.children[0].renderOrder = 1
                         // child.castShadow = true
                         // child.receiveShadow = true
@@ -150,7 +150,7 @@ export default class StaticModel
                         this.smartGlassWindow.scale.set(0, 0, 0)
                         // child.castShadow = true
                         // child.receiveShadow = true
-                        child.children[1].material = this.materials.glassWindow
+                        child.children[1].material = this.materials.sidesGlass
                         child.children[1].renderOrder = 1
 
                     }

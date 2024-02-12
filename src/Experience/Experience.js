@@ -86,7 +86,7 @@ export default class Experience
         // this.scene.background = this.textures.environmentMap
         this.scene.background = new THREE.Color(0x888988)
         // this.scene.environment = this.textures.bg
-        this.scene.environment = this.textures.environmentMap
+        this.scene.environment = this.textures.environmentMap_01
 
         this.scene.backgroundBlurriness = 0
         this.scene.backgroundIntensity = 2
