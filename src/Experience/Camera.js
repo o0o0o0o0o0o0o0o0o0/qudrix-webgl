@@ -12,18 +12,46 @@ export default class Camera
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
 
-        this.setInstance()
+        // this.setInstanceOrthographic()
+        this.setInstancePerspective()
         this.setControl()
         
     }
 
-    setInstance()
+    setInstancePerspective()
+    {
+
+        this.number = 8
+        this.aspect = this.sizes.width / this.sizes.height
+        // this.instance = new THREE.OrthographicCamera(-this.number * this.aspect, this.number * this.aspect, this.number, -this.number, 0.01, 100000)
+        this.instance = new THREE.PerspectiveCamera(10, this.aspect, 1, 1000)
+        // this.instance.zoom = 10
+        this.instance.position.set(
+            68.62,
+            42.68,
+            42
+        )
+        this.instance.rotation.set(
+            -0.7,
+            0.8,
+            0.56
+        )
+        this.scene.add(this.instance)
+
+        this.minZoom = 0.48
+        this.maxZoom = 2.1
+
+
+
+    }
+
+    setInstanceOrthographic()
     {
 
         this.number = 8
         this.aspect = this.sizes.width / this.sizes.height
         this.instance = new THREE.OrthographicCamera(-this.number * this.aspect, this.number * this.aspect, this.number, -this.number, 0.01, 100000)
-        // this.instance = new THREE.PerspectiveCamera(25, this.aspect, 1, 1000)
+        // this.instance = new THREE.PerspectiveCamera(7, this.aspect, 1, 1000)
         // this.instance.zoom = 10
         this.instance.position.set(
             14,
@@ -44,6 +72,7 @@ export default class Camera
 
     }
 
+
     setZoom()
     {
         if (this.instance.zoom <= this.minZoom)
@@ -61,8 +90,8 @@ export default class Camera
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
         this.controls.maxPolarAngle = Math.PI / 2.01
-        // this.controls.minDistance = 5
-        // this.controls.maxDistance = 21
+        this.controls.minDistance = 30
+        this.controls.maxDistance = 130
         this.controls.mouseButtons = {
             LEFT: THREE.MOUSE.ROTATE,
             MIDDLE: null, //THREE.MOUSE.DOLLY
@@ -95,7 +124,8 @@ export default class Camera
         this.controls.update()
         // console.log(
         //     this.instance.position,
-        //     this.instance.rotation
+        //     this.instance.rotation,
+        //     this.instance.fov
         // )
         this.setZoom()
 

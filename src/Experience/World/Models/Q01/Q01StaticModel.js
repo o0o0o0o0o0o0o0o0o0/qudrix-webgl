@@ -96,7 +96,7 @@ export default class StaticModel
                         )
                         this.roofMirrorMesh = new THREE.Mesh(
                             new THREE.PlaneGeometry(1, 1, 1, 1),
-                            material
+                            new THREE.MeshBasicMaterial()
                         )
 
                         // Solid
@@ -105,6 +105,8 @@ export default class StaticModel
                         this.roofSolidPanels.add(this.roofSolidMesh)
                         this.roofSolidMesh.castShadow = false
                         this.roofSolidMesh.receiveShadow = false
+
+                        this.roofSolidPanels.scale.set(0,0,0)
 
                         // Mirror
                         this.roofMirrorMesh.copy(child)

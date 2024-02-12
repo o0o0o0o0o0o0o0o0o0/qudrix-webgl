@@ -43,20 +43,20 @@ export default class DebugCamera
             this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
-                x: 14,
-                y: 9.5,
-                z: 10,
+                x: 68.62,
+                y: 42.68,
+                z: 42,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(this.camera.rotation, {
-                x: -0.7,
-                y: 0.8,
-                z: 0.56,
-                ease: this.ease,
-                duration: this.duration
-            })
-            this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
+            // gsap.to(this.camera.rotation, {
+            //     x: -0.7,
+            //     y: 0.8,
+            //     z: 0.56,
+            //     ease: this.ease,
+            //     duration: this.duration
+            // })
+            // this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.sizes = () =>
@@ -67,33 +67,33 @@ export default class DebugCamera
             this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
-                x: 14,
-                y: 9.5,
-                z: 10,
+                x: 68.62,
+                y: 42.68,
+                z: 42,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(this.camera.rotation, {
-                x: -0.7,
-                y: 0.8,
-                z: 0.56,
-                ease: this.ease,
-                duration: this.duration
-            })
+            // gsap.to(this.camera.rotation, {
+            //     x: -0.7,
+            //     y: 0.8,
+            //     z: 0.56,
+            //     ease: this.ease,
+            //     duration: this.duration
+            // })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.roof = () =>
         {
             this.duration = 1.5
-            this.positionY = -10
+            this.positionY = -1.5
             this.positionZ = 0
-            this.scaleXYZ = 4
+            this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
-                x: 14,
-                y: 9.5,
-                z: 10,
+                x: 25,
+                y: 15,
+                z: 16,
                 ease: this.ease,
                 duration: this.duration
             })
@@ -110,124 +110,131 @@ export default class DebugCamera
         this.functions.side01 = () =>
         {
             this.duration = 1.5
-            this.positionY = -2.75
+            this.positionY = -0.75
             this.positionZ = 0
-            this.scaleXYZ = 2.5
+            this.scaleXYZ = 1
             gsap
                 .to(this.camera.position, {
-                    x: 13.497,
-                    y: 2,
-                    z: 0.22 - 2,
+                    x: 31,
+                    y: 1,
+                    z: -5,
                     ease: this.ease,
                     duration: this.duration
                 })
-            gsap
-                .to(this.camera.rotation, {
-                    x: -1.8489,
-                    y: 1.493,
-                    z: 1.8497,
-                    ease: this.ease,
-                    duration: this.duration
-                })
+       
+            // gsap
+            //     .to(this.camera, {
+            //         fov: 100,
+            //         ease: this.ease,
+            //         duration: this.duration
+            //     })
+            // gsap
+            //     .to(this.camera.rotation, {
+            //         x: -1.8489,
+            //         y: 1.493,
+            //         z: 1.8497,
+            //         ease: this.ease,
+            //         duration: this.duration
+            //     })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side02 = () =>
         {
             this.duration = 1.5
-            this.positionY = -2.75
+            this.positionY = -0.75
             this.positionZ = 0
-            this.scaleXYZ = 2.5
+            this.scaleXYZ = 1
             gsap
                 .to(this.camera.position, {
-                    x: 0 + 2,
-                    y: 2,
-                    z: 13.5,
+                    x: 5,
+                    y: 1,
+                    z: 31,
                     ease: this.ease,
                     duration: this.duration
                 })
-            gsap
-                .to(this.camera.rotation, {
-                    x: 0.0785,
-                    y: 0.000,
-                    z: 0.000,
-                    ease: this.ease,
-                    duration: this.duration
-                })
+            // gsap
+            //     .to(this.camera.rotation, {
+            //         x: 0.0785,
+            //         y: 0.000,
+            //         z: 0.000,
+            //         ease: this.ease,
+            //         duration: this.duration
+            //     })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side03 = () =>
         {
             this.duration = 1.5
-            this.positionY = -2.75
+            this.positionY = -0.75
             this.positionZ = 0
-            this.scaleXYZ = 2.5
+            this.scaleXYZ = 1
             gsap
                 .to(this.camera.position, {
-                    x: -13.497,
-                    y: 2,
-                    z: 0.22 + 2,
+                    x: -31,
+                    y: 1,
+                    z: 5,
                     ease: this.ease,
                     duration: this.duration
                 })
-            gsap
-                .to(this.camera.rotation, {
-                    x: -1.356,
-                    y: -1.4942,
-                    z: -1.3557,
-                    ease: this.ease,
-                    duration: this.duration
-                })
+            // gsap
+            //     .to(this.camera.rotation, {
+            //         x: -1.356,
+            //         y: -1.4942,
+            //         z: -1.3557,
+            //         ease: this.ease,
+            //         duration: this.duration
+            //     })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.side04 = () =>
         {
             this.duration = 1.5
-            this.positionY = -2.75
+            this.positionY = -0.75
             this.positionZ = 0
-            this.scaleXYZ = 2.5
+            this.scaleXYZ = 1
             gsap
                 .to(this.camera.position, {
-                    x: 0.399 - 2,
-                    y: 2,
-                    z: -13.5,
+                    x: -5,
+                    y: 1,
+                    z: -31,
                     ease: this.ease,
                     duration: this.duration
                 })
-            gsap
-                .to(this.camera.rotation, {
-                    x: -3.0667,
-                    y: 0.0295,
-                    z: 3.139,
-                    ease: this.ease,
-                    duration: this.duration
-                })
+            // gsap
+            //     .to(this.camera.rotation, {
+            //         x: -3.0667,
+            //         y: 0.0295,
+            //         z: 3.139,
+            //         ease: this.ease,
+            //         duration: this.duration
+            //     })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 
         this.functions.attachment = () =>
         {
             this.duration = 1.5
-            this.positionY = -6
-            this.positionZ = -8.5
-            this.scaleXYZ = 3
+            this.positionY = -1.5
+            this.positionZ = -3
+            this.scaleXYZ = 1
 
             gsap.to(this.camera.position, {
-                x: 14,
-                y: 9.5,
-                z: 10,
+                x: 25,
+                y: 15,
+                z: 16,
                 ease: this.ease,
                 duration: this.duration
             })
-            gsap.to(this.camera.rotation, {
-                x: -0.7,
-                y: 0.8,
-                z: 0.56,
-                ease: this.ease,
-                duration: this.duration
-            })
+            // gsap.to(this.camera.rotation, {
+            //     x: -0.7,
+            //     y: 0.8,
+            //     z: 0.56,
+            //     ease: this.ease,
+            //     duration: this.duration
+            // })
             this.scaleBuildingAndLights(this.positionY, this.positionZ, this.scaleXYZ)
         }
 

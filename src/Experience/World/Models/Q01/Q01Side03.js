@@ -106,6 +106,15 @@ export default class Side03
                         // child.castShadow = true
                         // child.receiveShadow = true
 
+                        this.innerSide = new THREE.Mesh(
+                            new THREE.PlaneGeometry(2.8, 2.8, 1, 1),
+                            this.materials.wallBlack
+                        )
+                        this.innerSide.position.x = 1.5
+                        this.innerSide.position.y = 1.3
+                        this.innerSide.rotation.y = - Math.PI / 2
+                        this.solidWall.add(this.innerSide)
+
                         if (CONFIG.sides['side-03']['element-name'] === "Solid Panels") { this.solidWall.scale.set(1, 1, 1) }
                         else { this.solidWall.scale.set(0, 0, 0) }
                     }

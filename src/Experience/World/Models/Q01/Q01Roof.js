@@ -81,6 +81,7 @@ export default class Roof
             (gltf) =>
             {
                 this.roofPergolaQ25.add(gltf.scene)
+                this.roofPergolaQ25.scale.set(0,0,0)
 
                 gltf.scene.traverse((obj) =>
                 {

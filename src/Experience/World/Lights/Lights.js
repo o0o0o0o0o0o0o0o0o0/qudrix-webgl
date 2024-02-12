@@ -19,8 +19,15 @@ export default class Lights
         this.setDirLight()
         this.debugDirLight()
 
+        this.setPointLight()
 
 
+
+    }
+
+    setPointLight()
+    {
+        this.point = new THREE.PointLight(0xffffff, 0.8)
     }
 
     setAmbient()

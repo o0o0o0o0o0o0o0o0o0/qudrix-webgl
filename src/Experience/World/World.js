@@ -56,6 +56,7 @@ export default class World
         this.buildingGroup.add(
             this.lights.directionalFill,
             // this.lights.directionalFillHelper,
+            this.lights.point,
          
             //  AREALIGHTS
             this.lights.areaLight.key,
@@ -98,7 +99,7 @@ export default class World
     setBG()
     {
         this.sphere = new THREE.Mesh(
-            new THREE.SphereGeometry(30, 30, 16, 16),
+            new THREE.SphereGeometry(500, 500, 16, 16),
             this.materials.bg
         )
         this.scene.add(this.sphere)

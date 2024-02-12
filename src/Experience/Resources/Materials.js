@@ -23,11 +23,21 @@ export default class Materials
             name: 'wallBlack'
         })
 
+        // this.wallBlack = new THREE.MeshStandardMaterial({
+        //     color: 0x888888, //0x161616
+        //     metalness: 0.8,
+        //     roughness: 0.1,
+        //     envMapIntensity: 5,
+        //     side: THREE.DoubleSide,
+        //     name: 'wallBlack'
+        // })
+        // this.wallBlack.envMap = this.textures.environmentMap02
+
         this.wallWhite = new THREE.MeshStandardMaterial({
-            color: 0x595959, //0x161616
-            metalness: 0.43,
-            roughness: 0.46,
-            envMapIntensity: 2,
+            color: 0x888888, //0x161616
+            metalness: 0.8,
+            roughness: 0.1,
+            envMapIntensity: 5,
             side: THREE.DoubleSide,
             name: 'wallWhite'
         })
@@ -49,22 +59,21 @@ export default class Materials
 
         this.sidesGlass = new THREE.MeshPhysicalMaterial({
             color: new THREE.Color('white'),
-            map: this.textures.environmentMapSidesGlass,
-            metalness: 1,
-            roughness: 1,
-            transmission: 0,
+            metalness: 0.8,
+            roughness: 0,
+            transmission: 1,
             thickness: 0,
             transparent: true,
             // emissive: new THREE.Color(0x0C1414),
-            opacity: 0.24,
+            opacity: 0.5,
             side: THREE.DoubleSide,
-            envMap: this.textures.environmentMapSidesGlass,
-            envMapIntensity: 1,
-            ior: 1,
-            clearcoat: 1,
-            clearcoatRoughness: 0,
-            normalMap: this.textures.paintedPlasterNormalGL,
-            normalScale: new THREE.Vector2(1, 1)
+            envMap: this.textures.environmentMap02,
+            envMapIntensity: 2,
+            ior: 1.5,
+            // clearcoat: 1,
+            // clearcoatRoughness: 0,
+            // normalMap: this.textures.paintedPlasterNormalGL,
+            // normalScale: new THREE.Vector2(1, 1)
         })
 
         // this.sidesGlass = new THREE.MeshStandardMaterial({
